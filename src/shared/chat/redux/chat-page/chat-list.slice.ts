@@ -58,9 +58,10 @@ export const chatsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAllChats.fulfilled, (state, action) => {
-				const response = action.payload.data;
-				state.list = state.list.concat(response.data.map(fromChatDtoService));
-				state.total = response.total;
+				state.list = state.list.concat(
+					action.payload.data.map(fromChatDtoService)
+				);
+				state.total = action.payload.total;
 				state.hasMore = state.page * Limits.chatsPerPage < state.total;
 				state.isLoading = false;
 			})

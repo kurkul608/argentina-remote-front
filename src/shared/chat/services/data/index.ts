@@ -4,20 +4,25 @@ import { ChatSettings } from "shared/chat/types/chat-settings";
 import { IChatDto } from "shared/chat/types/chat-dto.interface";
 
 export interface AllChatsQuery {
+	[key: string]: number | boolean | undefined;
 	limit: number;
 	offset: number;
 	isHidden?: boolean;
 }
 
 export interface ChatChangeVisibleQuery {
+	[key: string]: boolean;
 	isHidden: boolean;
 }
 
 export const getChatsList = (token: string, query: AllChatsQuery) =>
-	get<ITableDataInterface<IChatDto>>("chats", token, query);
+	get<ITableDataInterface<IChatDto>>("chats", {
+		authToken: token,
+		extra: query,
+	});
 
 export const getChat = (id: string, token: string) =>
-	get<IChatDto>(`chats/${id}`, token);
+	get<IChatDto>(`chats/${id}`, { authToken: token });
 
 export const getSettings = (id: string, token: string) =>
 	new Promise((resolve) =>
@@ -59,8 +64,7 @@ export const chatChangeVisible = (
 	query: ChatChangeVisibleQuery,
 	token: string
 ) =>
-	post<IChatDto>({
+	post<IChatDto>(`chats/${id}/change-visible`, {
 		authToken: token,
-		query: query,
-		path: `chats/${id}/change-visible`,
+		extra: query,
 	});

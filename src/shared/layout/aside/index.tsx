@@ -30,6 +30,7 @@ export const Aside = () => {
 	const params = useParams();
 	const isHidden = !params.chatId;
 	const searchParams = searchParamsGrabber(locate.search);
+
 	return (
 		<StyledAside>
 			<StyledNavBar>
