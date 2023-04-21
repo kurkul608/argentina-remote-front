@@ -1,5 +1,10 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 export const PostMainPage = () => {
-	return <div>Post main page (Page for news, updates, and menu)</div>;
+	return (
+		<>
+			<Outlet />
+		</>
+	);
 };

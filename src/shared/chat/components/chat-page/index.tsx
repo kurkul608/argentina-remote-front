@@ -92,9 +92,7 @@ export const ChatListWidget = () => {
 			>
 				<ChatsWrapper>
 					{list.map((chat) => (
-						<ChatListWrapper
-							key={`widget-chat-list--${chat.tgChatInfo.chatInfo.id}`}
-						>
+						<ChatListWrapper key={`widget-chat-list--${chat._id}`}>
 							<Widget onClick={() => handleOnClick(chat)}>
 								<ChatWrapper>
 									<TextWrapper>

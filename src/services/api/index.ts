@@ -38,6 +38,7 @@ interface IRequest {
 	authToken?: string;
 	body?: IBodyParams;
 	headers?: IQueryHeaders;
+	query?: IQueryHeaders;
 	extra?: IQueryHeaders;
 	onUploadProgress?: CallableFunction;
 	onDownloadProgress?: CallableFunction;
@@ -60,9 +61,8 @@ const request = <T>(
 				url,
 				method,
 				headers,
-				...(method === "POST" || method === "PUT" || method === "PATCH"
-					? { data: body }
-					: { params: body }),
+				data: body,
+				params: { ...params.query },
 				...(params.extra || {}),
 			};
 			instance

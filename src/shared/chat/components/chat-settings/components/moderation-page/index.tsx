@@ -9,12 +9,12 @@ import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 
 const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatId: state.chat.chat?._id,
 });
 
 export const ModerationPage = () => {
 	const navigate = useNavigate();
-	const { chatInfo } = useAppSelector(selector);
+	const { chatId } = useAppSelector(selector);
 
 	const match = useMatch(
 		routeBuilderWithReplace(
@@ -26,7 +26,7 @@ export const ModerationPage = () => {
 				Routes.chatSettingsModeration,
 			],
 			"chatId",
-			chatInfo?.id || 0
+			chatId || 0
 		)
 	);
 
@@ -60,6 +60,7 @@ export const ModerationPage = () => {
 					Routes.chatSettings,
 					Routes.chatSettingsModeration,
 				]}
+				id={chatId || 0}
 			/>
 			<Outlet />
 		</TabMenuWrapper>

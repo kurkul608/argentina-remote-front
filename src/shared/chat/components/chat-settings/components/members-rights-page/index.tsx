@@ -9,12 +9,12 @@ import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 
 const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatId: state.chat.chat?._id,
 });
 
 export const MembersRights = () => {
 	const navigate = useNavigate();
-	const { chatInfo } = useAppSelector(selector);
+	const { chatId } = useAppSelector(selector);
 
 	const match = useMatch(
 		routeBuilderWithReplace(
@@ -26,7 +26,7 @@ export const MembersRights = () => {
 				Routes.chatSettingsMembersRights,
 			],
 			"chatId",
-			chatInfo?.id || 0
+			chatId || 0
 		)
 	);
 
@@ -52,6 +52,7 @@ export const MembersRights = () => {
 					Routes.chatSettings,
 					Routes.chatSettingsMembersRights,
 				]}
+				id={chatId || 0}
 			/>
 			<Outlet />
 		</TabMenuWrapper>
