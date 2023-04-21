@@ -16,6 +16,7 @@ import { ChatActivityPage } from "shared/chat/components/chat-settings/component
 import { ReputationPage } from "shared/chat/components/chat-settings/components/reputation-page";
 import { JournalPage } from "shared/chat/components/chat-settings/components/journal-page";
 import { PostMainPage } from "pages/post/main";
+import { PostMain } from "shared/post/components/main";
 
 const NotFound = () => {
 	return <div>Page not found</div>;
@@ -66,6 +67,12 @@ const postRoutes: RouteObject[] = [
 	{
 		path: Routes.post,
 		element: <PostMainPage />,
+		children: [
+			{
+				index: true,
+				element: <PostMain />,
+			},
+		],
 	},
 ];
 

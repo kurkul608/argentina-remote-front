@@ -6,8 +6,6 @@ import {
 } from "shared/components/tab-menu/styled";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
 import { Routes } from "shared/router";
-import { useAppSelector } from "redux/hooks";
-import { IRootState } from "redux/store";
 
 export interface ITabMenu {
 	name: string;
@@ -17,15 +15,10 @@ export interface ITabMenu {
 export interface ITabMenuProps {
 	items: ITabMenu[];
 	baseRoute: Routes[];
+	id: string | number;
 }
 
-const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
-});
-
-export const TabMenu = ({ baseRoute, items }: ITabMenuProps) => {
-	const { chatInfo } = useAppSelector(selector);
-
+export const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 	return (
 		<StyledWrapper>
 			<MenuTable>
@@ -33,15 +26,11 @@ export const TabMenu = ({ baseRoute, items }: ITabMenuProps) => {
 					<MenuItem
 						end
 						key={`menu--item--${i}`}
-						to={
-							chatInfo
-								? routeBuilderWithReplace(
-										[...baseRoute, item.route],
-										"chatId",
-										chatInfo.id
-								  )
-								: Routes.admin
-						}
+						to={routeBuilderWithReplace(
+							[...baseRoute, item.route],
+							"chatId",
+							id
+						)}
 					>
 						{item.name}
 					</MenuItem>

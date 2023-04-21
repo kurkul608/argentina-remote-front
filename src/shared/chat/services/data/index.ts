@@ -18,7 +18,7 @@ export interface ChatChangeVisibleQuery {
 export const getChatsList = (token: string, query: AllChatsQuery) =>
 	get<ITableDataInterface<IChatDto>>("chats", {
 		authToken: token,
-		extra: query,
+		query,
 	});
 
 export const getChat = (id: string, token: string) =>
@@ -66,5 +66,5 @@ export const chatChangeVisible = (
 ) =>
 	post<IChatDto>(`chats/${id}/change-visible`, {
 		authToken: token,
-		extra: query,
+		query,
 	});
