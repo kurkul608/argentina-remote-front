@@ -4048,6 +4048,11 @@ image-size@~0.5.0:
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
   integrity sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==
 
+immer@^9.0.19:
+  version "9.0.21"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.21.tgz#1e025ea31a40f24fb064f1fef23e931496330176"
+  integrity sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==
+
 immer@^9.0.7:
   version "9.0.16"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.16.tgz#8e7caab80118c2b54b37ad43e05758cdefad0198"
@@ -6275,6 +6280,11 @@ typed-array-length@^1.0.4:
     call-bind "^1.0.2"
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
+
+typegram@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/typegram/-/typegram-5.0.0.tgz#1b3f1b36a4dba0b189d5ad0dc659c343648e4be2"
+  integrity sha512-6Z4klKmEsDKfN8dLEf8Buh6vZk1RMGUgOJscVSRXbM+RiiRgjeabc2NucR4e+RoQ1m3mwMjbi+Td+TbrQTWT+g==
 
 typescript@*:
   version "4.9.4"

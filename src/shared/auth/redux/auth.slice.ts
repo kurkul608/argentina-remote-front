@@ -19,9 +19,7 @@ export const initialState: IAuth = {
 
 export const checkAuthAsync = createAsyncThunk(
 	"auth/check",
-	async (token: string) => {
-		return checkAuth(token);
-	}
+	async (token: string) => checkAuth(token)
 );
 
 const AuthSlice = createSlice({
@@ -37,14 +35,23 @@ const AuthSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(checkAuthAsync.fulfilled, (state, action) => {
-			const response = action.payload.data;
-			if (typeof response === "boolean") {
+			const data = action.payload;
+			if (typeof data === "boolean") {
 				state.isExpired = false;
 			} else {
 				state.isExpired = true;
 				state.token = undefined;
 			}
 		});
+		// builder.addCase(checkAuthAsync.rejected, (state, action) => {
+		// 	console.log(".....");
+		// 	console.log("REJECTED");
+		// 	console.log(action.payload);
+		// });
+		// builder.addCase(checkAuthAsync.pending, () => {
+		// 	console.log("PENDING");
+		// 	console.log(".....");
+		// });
 	},
 });
 

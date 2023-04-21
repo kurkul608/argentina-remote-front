@@ -1,9 +1,9 @@
 import React from "react";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
-import { AuthPage } from "pages/auth-page";
-import { ChatPage } from "pages/chat-page";
-import { ChatListPage } from "pages/chat-list-page";
-import { ChatSettings } from "pages/chat-settings";
+import { AuthPage } from "pages/auth";
+import { ChatPage } from "pages/chat/chat-page";
+import { ChatListPage } from "pages/chat/chat-list-page";
+import { ChatSettings } from "pages/chat/chat-settings";
 import { PrivateRoute } from "shared/router/private/private-route";
 import { MembersRights } from "shared/chat/components/chat-settings/components/members-rights-page";
 import { GreetingsPage } from "shared/chat/components/chat-settings/components/greetings-page";
@@ -15,6 +15,8 @@ import { ChatRulesPage } from "shared/chat/components/chat-settings/components/m
 import { ChatActivityPage } from "shared/chat/components/chat-settings/components/chat-activity-page";
 import { ReputationPage } from "shared/chat/components/chat-settings/components/reputation-page";
 import { JournalPage } from "shared/chat/components/chat-settings/components/journal-page";
+import { PostMainPage } from "pages/post/main";
+import { PostMain } from "shared/post/components/main";
 
 const NotFound = () => {
 	return <div>Page not found</div>;
@@ -23,6 +25,8 @@ const NotFound = () => {
 export enum Routes {
 	landing = "",
 	admin = "admin",
+
+	// Chat routes
 	chatList = "chat",
 	chat = ":chatId",
 	chatSettings = "settings",
@@ -50,8 +54,28 @@ export enum Routes {
 	chatSettingsReputationSpecialTriggers = "triggers",
 	chatSettingsReputationTopsCustomization = "customization",
 	chatSettingsJournal = "journal",
+
+	//Posting routes
+	post = "post",
+	postDraft = "draft",
+
+	//Auth routes
 	auth = "auth/:token",
 }
+
+const postRoutes: RouteObject[] = [
+	{
+		path: Routes.post,
+		element: <PostMainPage />,
+		children: [
+			{
+				index: true,
+				element: <PostMain />,
+			},
+		],
+	},
+];
+
 const chatSettingsRoutes: RouteObject[] = [
 	{
 		path: Routes.chatSettings,
@@ -150,6 +174,7 @@ const adminRoutes: RouteObject[] = [
 				index: true,
 			},
 			...chatRoutes,
+			...postRoutes,
 		],
 	},
 ];

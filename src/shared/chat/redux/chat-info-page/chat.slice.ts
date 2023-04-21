@@ -44,8 +44,7 @@ export const chatSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getChatAsync.fulfilled, (state, action) => {
-			const response = action.payload.data;
-			state.chat = fromChatDtoService(response);
+			state.chat = fromChatDtoService(action.payload);
 			state.isLoading = false;
 		});
 		builder.addCase(getChatAsync.pending, (state) => {

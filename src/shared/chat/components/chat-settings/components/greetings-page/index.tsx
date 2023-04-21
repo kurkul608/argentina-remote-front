@@ -9,12 +9,12 @@ import { routeBuilderWithReplace } from "shared/router/services/route-builder";
 import { IRootState } from "redux/store";
 
 const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatId: state.chat.chat?._id,
 });
 
 export const GreetingsPage = () => {
 	const navigate = useNavigate();
-	const { chatInfo } = useAppSelector(selector);
+	const { chatId } = useAppSelector(selector);
 
 	const match = useMatch(
 		routeBuilderWithReplace(
@@ -26,7 +26,7 @@ export const GreetingsPage = () => {
 				Routes.chatSettingsGreeting,
 			],
 			"chatId",
-			chatInfo?.id || 0
+			chatId || 0
 		)
 	);
 	const TabConfig: ITabMenu[] = [
@@ -60,6 +60,7 @@ export const GreetingsPage = () => {
 					Routes.chatSettings,
 					Routes.chatSettingsGreeting,
 				]}
+				id={chatId || 0}
 			/>
 			<Outlet />
 		</TabMenuWrapper>

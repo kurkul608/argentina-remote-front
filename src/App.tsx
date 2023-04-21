@@ -21,6 +21,7 @@ export const App = () => {
 	const auth = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 	const tokenStorage = getAuthToken(auth);
+
 	useEffect(() => {
 		if (!tokenStorage) {
 			const tokenFromLocalStorage = localStorageServiceGet("auth");

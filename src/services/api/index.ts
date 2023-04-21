@@ -1,49 +1,95 @@
-import axios from "axios";
+import axios, { CancelToken } from "axios";
 import { config } from "./config";
 
 export const instance = axios.create({
 	...config.api,
-	headers: {
-		"Content-Type": "application/json",
-	},
 });
+
 instance.interceptors.response.use(
 	function (response) {
 		return response;
 	},
 	function (error) {
-		error.response.status === 401 && localStorage.removeItem("auth");
-		error.response.status === 401 && location.reload();
+		if (error.response.status === 401) {
+			localStorage.removeItem("auth");
+			location.reload();
+		} else {
+			throw error;
+		}
 	}
 );
-export const get = async <T, D = any>(
-	path: string,
-	authToken: string,
-	query?: D
-) => {
-	return instance.get<T>(path, {
-		headers: {
-			Authorization: `Bearer ${authToken}`,
-		},
-		params: query,
-	});
-};
-interface IParams<D, P> {
-	path: string;
-	authToken: string;
-	body?: D;
-	query?: P;
+
+export const cancelToken = axios.CancelToken;
+
+type IBodyParams = object | string;
+
+interface IQueryHeaders {
+	[key: string]:
+		| string
+		| boolean
+		| number
+		| CancelToken
+		| null
+		| undefined
+		| CallableFunction;
 }
-export const post = async <T>({
-	authToken,
-	query,
-	body,
-	path,
-}: IParams<any, any>) => {
-	return instance.post<T>(path, body, {
-		headers: {
-			Authorization: `Bearer ${authToken}`,
-		},
-		params: query,
+
+interface IRequest {
+	authToken?: string;
+	body?: IBodyParams;
+	headers?: IQueryHeaders;
+	query?: IQueryHeaders;
+	extra?: IQueryHeaders;
+	onUploadProgress?: CallableFunction;
+	onDownloadProgress?: CallableFunction;
+}
+const request = <T>(
+	method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
+	url: string,
+	params: IRequest = {}
+) => {
+	return new Promise<T>((resolve, reject) => {
+		try {
+			const body = params.body || {};
+			const headers = {
+				Authorization: `Bearer ${params.authToken}`,
+				"Content-Type": "application/json",
+				...(params.headers || {}),
+			};
+
+			const config: object = {
+				url,
+				method,
+				headers,
+				data: body,
+				params: { ...params.query },
+				...(params.extra || {}),
+			};
+			instance
+				.request(config)
+				.then((response: any) => {
+					if (response.status >= 200 && response.status <= 299) {
+						return resolve(response.data as T);
+					} else {
+						throw response.data?.message;
+					}
+				})
+				.catch((error: any) => {
+					if (!error?.response) {
+						return reject("Can't reach server");
+					}
+					// eslint-disable-next-line no-unsafe-optional-chaining
+					const { message } = error?.response?.data;
+					return reject(message);
+				});
+		} catch (error: any) {
+			return reject(error.message);
+		}
 	});
 };
+
+export const get = <T>(path: string, params: IRequest) =>
+	request<T>("GET", path, params);
+
+export const post = <T>(path: string, params: IRequest) =>
+	request<T>("POST", path, params);
