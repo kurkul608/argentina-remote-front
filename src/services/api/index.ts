@@ -93,3 +93,6 @@ export const get = <T>(path: string, params: IRequest) =>
 
 export const post = <T>(path: string, params: IRequest) =>
 	request<T>("POST", path, params);
+
+export const patch = <T>(path: string, params: IRequest) =>
+	request<T>("PATCH", path, params);
