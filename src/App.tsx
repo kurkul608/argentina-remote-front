@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { DefaultTheme, ThemeProvider } from "styled-components";
+import React, { useEffect } from "react";
+import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./global";
 import { Theme } from "constants/theme";
 import { RouterProvider } from "react-router";
@@ -8,19 +8,23 @@ import { logIn } from "shared/auth/redux/auth.slice";
 import { getAuthToken } from "helpers/storage-parser";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { localStorageServiceGet } from "services/local-storage.service";
+import { IRootState } from "redux/store";
+import { setTheme } from "shared/theme/redux/theme.slice";
 
-export const darkTheme: DefaultTheme = {
-	mainTheme: Theme.dark,
-};
-export const lightTheme: DefaultTheme = {
-	mainTheme: Theme.light,
-};
-
+const selector = (state: IRootState) => ({
+	auth: state.auth,
+	theme: state.theme.theme,
+});
 export const App = () => {
-	const [theme, setTheme] = useState<DefaultTheme>(lightTheme);
-	const auth = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
+
+	const { auth, theme } = useAppSelector(selector);
+
 	const tokenStorage = getAuthToken(auth);
+
+	const themeHandler = (theme: Theme) => {
+		dispatch(setTheme(theme));
+	};
 
 	useEffect(() => {
 		if (!tokenStorage) {
@@ -31,20 +35,20 @@ export const App = () => {
 
 	useEffect(() => {
 		if (!window.matchMedia) {
-			setTheme(lightTheme);
+			themeHandler(Theme.light);
 		} else {
 			if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-				setTheme(darkTheme);
+				themeHandler(Theme.dark);
 			} else {
-				setTheme(lightTheme);
+				themeHandler(Theme.light);
 			}
 			window
 				.matchMedia("(prefers-color-scheme: dark)")
 				.addEventListener("change", (e) => {
 					if (e.matches) {
-						setTheme(darkTheme);
+						themeHandler(Theme.dark);
 					} else {
-						setTheme(lightTheme);
+						themeHandler(Theme.light);
 					}
 				});
 		}

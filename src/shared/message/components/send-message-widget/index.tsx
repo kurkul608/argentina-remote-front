@@ -17,7 +17,7 @@ import { Input } from "shared/components/form-input";
 import { Button } from "shared/components/form-button";
 import { DropdownList, IDropdownOption } from "shared/components/dropdown-list";
 import { useAppSelector } from "redux/hooks";
-import { sendMessage } from "../../services/data";
+// import { sendMessage } from "../../services/data";
 import * as Yup from "yup";
 import { TextEditor } from "shared/components/text-editor";
 import { getAuthToken } from "helpers/storage-parser";
@@ -41,7 +41,7 @@ export const SendMessageWidget = ({ chatIds }: SendMessageWidgetProps) => {
 		message: Yup.string().required(),
 		pin: Yup.boolean(),
 	});
-	const { list, token } = useAppSelector((state) => ({
+	const { list } = useAppSelector((state) => ({
 		list: state.chats.list,
 		token: getAuthToken(state.auth)!,
 	}));
@@ -61,11 +61,11 @@ export const SendMessageWidget = ({ chatIds }: SendMessageWidgetProps) => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: async () => {
-			await sendMessage(token, {
-				message: values.message,
-				pin_message: values.pin,
-				chat_ids: values.selectedChats,
-			});
+			// await sendMessage(token, {
+			// 	message: values.message,
+			// 	pin_message: values.pin,
+			// 	chat_ids: values.selectedChats,
+			// });
 			resetForm({
 				values: {
 					selectedChats: values.selectedChats,
