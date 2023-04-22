@@ -1,6 +1,8 @@
+import { ChatMember } from "typegram/manage";
+
 export interface ChatSettings {
 	userRights: {
-		adminList: string[];
+		adminList: ChatMember[];
 		changeBotSettingsAllowedList?: string[];
 		useBotCommandsList?: string[];
 		notAffectByRulesList?: string[];

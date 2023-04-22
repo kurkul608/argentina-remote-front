@@ -14,15 +14,21 @@ export enum TableStyles {
 	table = "table",
 }
 
+export interface ContentProps {
+	content?: string;
+	status: string;
+	misc: string;
+}
+
 export interface TableProps {
 	style: TableStyles;
-	content?: string[];
+	content?: ContentProps[];
 }
 
 export interface ITableWidgetProps {
 	title: string;
 	description?: string;
-	content?: string[];
+	content?: ContentProps[];
 	isEditable?: boolean;
 	handleOnDelete?: () => any;
 	handleOnCreate?: () => any;

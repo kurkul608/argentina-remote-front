@@ -18,12 +18,12 @@ export const RegularTable = ({ content }: Pick<TableProps, "content">) => {
 			<ItemsTable>
 				{content &&
 					content.map((item) => (
-						<Item key={item}>
+						<Item key={item.content}>
 							<NameWrapper>
 								<Icon name={IconName.user} />
-								<Name>{item}</Name>
+								<Name>{item.content}</Name>
 							</NameWrapper>
-							<Status>owner</Status>
+							<Status>{item.status}</Status>
 						</Item>
 					))}
 			</ItemsTable>

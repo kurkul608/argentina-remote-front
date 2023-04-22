@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ChatSettings } from "shared/chat/types/chat-settings";
+import { getChatAdmins } from "shared/chat/services/data";
+import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
 
 export type configSettings = Pick<ChatSettings, "userRights">;
 
@@ -11,16 +13,22 @@ const initialState: configSettings["userRights"] = {
 	useBotCommandsList: [],
 };
 
+export interface GetAdminsParams {
+	token: string;
+	id: string;
+}
+
+export const getChatAdminsAsync = createAsyncThunk(
+	"userRights/admins",
+	async ({ token, id }: GetAdminsParams) => {
+		return (await getChatAdmins(id, token)) as ChatAdminsDtoInterface;
+	}
+);
+
 export const userRightsSlice = createSlice({
 	name: "chat/settings/userRights",
 	initialState,
 	reducers: {
-		addAdmin: (state, action: PayloadAction<string>) => {
-			state.adminList.push(action.payload);
-		},
-		removeAdmin: (state, action: PayloadAction<string>) => {
-			state.adminList.filter((username) => username !== action.payload);
-		},
 		addBotAdmin: (state, action: PayloadAction<string>) => {
 			if (state.changeBotSettingsAllowedList)
 				state.changeBotSettingsAllowedList.push(action.payload);
@@ -42,11 +50,20 @@ export const userRightsSlice = createSlice({
 				);
 		},
 	},
+	extraReducers: (builder) => {
+		builder.addCase(
+			getChatAdminsAsync.fulfilled,
+			(state, action: PayloadAction<ChatAdminsDtoInterface>) => {
+				state.adminList.push(...action.payload.admins);
+			}
+		);
+		builder.addCase(getChatAdminsAsync.pending, (state) => {
+			state.adminList = [];
+		});
+	},
 });
 
 export const {
-	addAdmin,
-	removeAdmin,
 	addBotAdmin,
 	removeBotAdmin,
 	addCommandListUser,
