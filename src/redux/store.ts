@@ -5,10 +5,12 @@ import chatInfoReducer from "../shared/chat/redux/chat-info-page/chat.slice";
 import chatSettingsUserRights from "shared/chat/redux/chat-settings/user-rights.slice";
 import chatSettingsReducer from "../shared/chat/redux/chat-settings/chat-settings.slice";
 import themeReducer from "shared/theme/redux/theme.slice";
+import resizeReducer from "shared/resizer/redux/resizer.slice";
 
 export const store = configureStore({
 	reducer: {
 		theme: themeReducer,
+		resizer: resizeReducer,
 		auth: authReducer,
 		chats: chatReducer,
 		chat: chatInfoReducer,
