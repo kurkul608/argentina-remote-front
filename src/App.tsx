@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { localStorageServiceGet } from "services/local-storage.service";
 import { IRootState } from "redux/store";
 import { setTheme } from "shared/theme/redux/theme.slice";
+import { Resizer } from "shared/resizer/components";
 
 const selector = (state: IRootState) => ({
 	auth: state.auth,
@@ -56,6 +57,7 @@ export const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<Resizer />
 			<GlobalStyles />
 			<RouterProvider router={router} />
 		</ThemeProvider>
