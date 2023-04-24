@@ -54,7 +54,7 @@ export const userRightsSlice = createSlice({
 		builder.addCase(
 			getChatAdminsAsync.fulfilled,
 			(state, action: PayloadAction<ChatAdminsDtoInterface>) => {
-				state.adminList.push(...action.payload.admins);
+				state.adminList.push(...action.payload.data);
 			}
 		);
 		builder.addCase(getChatAdminsAsync.pending, (state) => {

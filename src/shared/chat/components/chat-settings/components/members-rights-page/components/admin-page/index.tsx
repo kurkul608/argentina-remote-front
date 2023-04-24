@@ -5,13 +5,16 @@ import { ContentWrapper } from "shared/chat/components/chat-settings/components/
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateToggleFiled } from "shared/chat/redux/chat-settings/chat-settings.slice";
 import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
+import { IRootState } from "redux/store";
+
+const selector = (state: IRootState) => ({
+	userRights: state.chatSettings.chatSettingsUserRights,
+	token: state.auth.token,
+	id: state.chat.chat?._id,
+});
 
 export const RightsAdmin = () => {
-	const { userRights, token, id } = useAppSelector((state) => ({
-		userRights: state.chatSettings.chatSettingsUserRights,
-		token: state.auth.token,
-		id: state.chat.chat?._id,
-	}));
+	const { userRights, token, id } = useAppSelector(selector);
 	const dispatch = useAppDispatch();
 	const callBack = (value: boolean) => {
 		dispatch(
