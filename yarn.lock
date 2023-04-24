@@ -5383,6 +5383,13 @@ react-redux@^8.0.4:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
+react-resize-detector@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-9.1.0.tgz#45ea7176e57f1a568abd0e3eafcbfd3532fb284e"
+  integrity sha512-vGFbfkIZp4itJqR4yl+GhjrZHtdlQvou1r10ek0yZUMkizKbPdekKTpPb003IV3b8E5BJFThVG0oocjE3lNsug==
+  dependencies:
+    lodash "^4.17.21"
+
 react-router-dom@^6.4.2:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.4.3.tgz#70093b5f65f85f1df9e5d4182eb7ff3a08299275"
