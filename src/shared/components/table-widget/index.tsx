@@ -8,31 +8,34 @@ import {
 	StyledTable,
 } from "shared/components/table-widget/styled";
 
-export enum TableStyles {
+export enum ITableStyles {
 	chips = "chips",
 	text = "text",
 	table = "table",
 }
 
-export interface ContentProps {
+export interface IContentProps {
 	content?: string;
 	status: string;
-	misc: string;
+
+	misc?: {
+		[x: string]: boolean;
+	};
 }
 
-export interface TableProps {
-	style: TableStyles;
-	content?: ContentProps[];
+export interface ITableProps {
+	style: ITableStyles;
+	content?: IContentProps[];
 }
 
 export interface ITableWidgetProps {
 	title: string;
 	description?: string;
-	content?: ContentProps[];
+	content?: IContentProps[];
 	isEditable?: boolean;
-	handleOnDelete?: () => any;
-	handleOnCreate?: () => any;
-	handleOnUpdate?: () => any;
+	handleOnDelete?: () => void;
+	handleOnCreate?: () => void;
+	handleOnUpdate?: () => void;
 }
 
 export const TableWidget = ({
@@ -40,11 +43,11 @@ export const TableWidget = ({
 	description,
 	content,
 }: ITableWidgetProps) => {
-	const [style, setStyle] = useState(TableStyles.table);
-	const handleOnClick = (style: TableStyles) => {
+	const [style, setStyle] = useState(ITableStyles.table);
+	const handleOnClick = (style: ITableStyles) => {
 		setStyle(style);
 	};
-	const keys = Object.entries(TableStyles);
+	const keys = Object.entries(ITableStyles);
 	return (
 		<StyledTable>
 			<Widget name={title}>
@@ -54,7 +57,7 @@ export const TableWidget = ({
 						style={{ width: 20, height: 50 }}
 						key={`button-style-${key}`}
 						type="button"
-						onClick={() => handleOnClick(TableStyles[value])}
+						onClick={() => handleOnClick(ITableStyles[value])}
 					/>
 				))}
 				<Table style={style} content={content} />
@@ -63,11 +66,11 @@ export const TableWidget = ({
 	);
 };
 
-const Table = ({ style, content }: TableProps) => {
+const Table = ({ style, content }: ITableProps) => {
 	switch (style) {
-		case TableStyles.chips:
+		case ITableStyles.chips:
 			return <ChipsTable content={content} />;
-		case TableStyles.text:
+		case ITableStyles.text:
 			return <TextTable content={content} />;
 		default:
 			return <RegularTable content={content} />;

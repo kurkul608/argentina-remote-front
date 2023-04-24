@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { ContentProps, TableWidget } from "shared/components/table-widget";
+import { IContentProps, TableWidget } from "shared/components/table-widget";
 import { SwitchWidget } from "shared/components/switch-widget";
 import { ContentWrapper } from "shared/chat/components/chat-settings/components/members-rights-page/styled";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateToggleFiled } from "shared/chat/redux/chat-settings/chat-settings.slice";
 import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
 import { IRootState } from "redux/store";
+import { ChatMemberAdministrator } from "typegram";
 
 const selector = (state: IRootState) => ({
 	userRights: state.chatSettings.chatSettingsUserRights,
@@ -30,11 +31,19 @@ export const RightsAdmin = () => {
 		}
 	}, [id]);
 
-	const adminChat: ContentProps[] = userRights.adminList.map((user) => {
+	const adminChat: IContentProps[] = userRights.adminList.map((user) => {
+		const misc: { [index: string]: boolean } = {};
+		if (user.status === "administrator") {
+			for (const i in user) {
+				if (i !== "status" && i !== "user" && i !== "custom_title") {
+					misc[i] = user[i as keyof ChatMemberAdministrator] as boolean;
+				}
+			}
+		}
 		return {
 			content: user.user.username,
 			status: user.status,
-			misc: "dopinfa",
+			misc,
 		};
 	});
 

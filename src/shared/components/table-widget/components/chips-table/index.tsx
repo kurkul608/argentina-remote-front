@@ -1,7 +1,7 @@
 import React from "react";
-import { TableProps } from "shared/components/table-widget/index";
+import { ITableProps } from "shared/components/table-widget/index";
 
-export const ChipsTable = ({ content }: Pick<TableProps, "content">) => {
+export const ChipsTable = ({ content }: Pick<ITableProps, "content">) => {
 	return (
 		<div>
 			{content &&

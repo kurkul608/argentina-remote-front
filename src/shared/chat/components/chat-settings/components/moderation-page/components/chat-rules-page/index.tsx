@@ -7,7 +7,7 @@ export const ChatRulesPage = () => {
 		<ContentWrapper>
 			<TableWidget
 				title={"Admin List"}
-				content={[{ content: "ad", status: "ad", misc: "asd" }]}
+				content={[{ content: "ad", status: "ad" }]}
 			/>
 			{/*<SwitchWidget*/}
 			{/*	name={"Allow chat admins to call bot commands"}*/}
