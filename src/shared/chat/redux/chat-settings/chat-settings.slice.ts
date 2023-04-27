@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ChatSettings } from "shared/chat/types/chat-settings";
+import { ChatSettings } from "shared/chat/types/chat-settings/chat-settings";
 import { getSettings } from "shared/chat/services/data";
 import { WritableDraft } from "immer/dist/types/types-external";
 

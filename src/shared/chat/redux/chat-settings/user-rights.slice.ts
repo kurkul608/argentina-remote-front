@@ -1,16 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ChatSettings } from "shared/chat/types/chat-settings";
 import { getChatAdmins } from "shared/chat/services/data";
 import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
+import { IChatSettingsUserRights } from "shared/chat/types/chat-settings/chat-sub-settings";
 
-export type configSettings = Pick<ChatSettings, "userRights">;
+export interface IUserSettings {
+	data: IChatSettingsUserRights;
+	isLoading: boolean;
+}
 
-const initialState: configSettings["userRights"] = {
-	adminList: [],
-	changeBotSettingsAllowedList: [],
-	allowChatAdminCallCommands: false,
-	notAffectByRulesList: [],
-	useBotCommandsList: [],
+const initialState: IUserSettings = {
+	data: {
+		adminList: [],
+		allowChatAdminCallCommands: false,
+		notAffectByRulesList: [],
+		changeBotSettingsAllowedList: [],
+		useBotCommandsList: [],
+	},
+	isLoading: false,
 };
 
 export interface GetAdminsParams {
@@ -30,22 +36,22 @@ export const userRightsSlice = createSlice({
 	initialState,
 	reducers: {
 		addBotAdmin: (state, action: PayloadAction<string>) => {
-			if (state.changeBotSettingsAllowedList)
-				state.changeBotSettingsAllowedList.push(action.payload);
+			if (state.data.changeBotSettingsAllowedList)
+				state.data.changeBotSettingsAllowedList.push(action.payload);
 		},
 		removeBotAdmin: (state, action: PayloadAction<string>) => {
-			if (state.changeBotSettingsAllowedList)
-				state.changeBotSettingsAllowedList.filter(
+			if (state.data.changeBotSettingsAllowedList)
+				state.data.changeBotSettingsAllowedList.filter(
 					(username) => username !== action.payload
 				);
 		},
 		addCommandListUser: (state, action: PayloadAction<string>) => {
-			if (state.notAffectByRulesList)
-				state.notAffectByRulesList.push(action.payload);
+			if (state.data.notAffectByRulesList)
+				state.data.notAffectByRulesList.push(action.payload);
 		},
 		removeCommandListUser: (state, action: PayloadAction<string>) => {
-			if (state.notAffectByRulesList)
-				state.notAffectByRulesList.filter(
+			if (state.data.notAffectByRulesList)
+				state.data.notAffectByRulesList.filter(
 					(username) => username !== action.payload
 				);
 		},
@@ -54,11 +60,17 @@ export const userRightsSlice = createSlice({
 		builder.addCase(
 			getChatAdminsAsync.fulfilled,
 			(state, action: PayloadAction<ChatAdminsDtoInterface>) => {
-				state.adminList.push(...action.payload.data);
+				state.data.adminList.push(...action.payload.data);
+				state.isLoading = false;
 			}
 		);
 		builder.addCase(getChatAdminsAsync.pending, (state) => {
-			state.adminList = [];
+			state.data.adminList = [];
+			state.isLoading = true;
+		});
+		builder.addCase(getChatAdminsAsync.rejected, (state) => {
+			state.data.adminList = [];
+			state.isLoading = false;
 		});
 	},
 });

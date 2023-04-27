@@ -1,6 +1,6 @@
 import { get, post } from "services/api";
 import { ITableDataInterface } from "interfaces/dto/table-data.interface";
-import { ChatSettings } from "shared/chat/types/chat-settings";
+import { ChatSettings } from "shared/chat/types/chat-settings/chat-settings";
 import { IChatDto } from "shared/chat/types/chat-dto.interface";
 import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
 

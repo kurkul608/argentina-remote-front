@@ -9,7 +9,7 @@ import { IRootState } from "redux/store";
 import { ChatMemberAdministrator } from "typegram";
 
 const selector = (state: IRootState) => ({
-	userRights: state.chatSettings.chatSettingsUserRights,
+	userRights: state.chatSettings.chatSettingsUserRights.data,
 	token: state.auth.token,
 	id: state.chat.chat?._id,
 });
