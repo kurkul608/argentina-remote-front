@@ -41,9 +41,9 @@ export const StyledNavBar = styled.ul`
 			}
 		}
 		svg {
-			height: 20px;
+			//height: 20px;
 			width: auto;
-			fill: white;
+			//fill: ${(props) => color(props.theme.mainTheme).widgetBackGround};
 		}
 		p {
 			font-size: 1.3rem;

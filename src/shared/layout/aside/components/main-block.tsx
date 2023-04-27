@@ -3,12 +3,11 @@ import { StyledNavBar } from "shared/layout/aside/styled";
 import { NavLink, useLocation } from "react-router-dom";
 import { routeBuilder } from "shared/router/services/route-builder";
 import { Routes } from "shared/router";
-import HouseIcon from "@mui/icons-material/House";
 import { searchParamsBuilder } from "shared/router/services/search-params-builder";
 import { searchParamsFinder } from "shared/router/services/search-params-finder";
-import BugReportIcon from "@mui/icons-material/BugReport";
 import { useTranslation } from "react-i18next";
 import { searchParamsGrabber } from "shared/router/services/search-params-grabber";
+import { Icon, IconName } from "shared/components/icon";
 
 export const MainBlock = () => {
 	const { t } = useTranslation("translation", { keyPrefix: "aside" });
@@ -26,8 +25,12 @@ export const MainBlock = () => {
 						isActive ? "active-nav-link" : undefined
 					}
 				>
-					<HouseIcon />
-					<p>{t("mainPage")}</p>
+					{({ isActive }) => (
+						<>
+							<Icon name={IconName.home} isActive={isActive} />
+							<p>{t("mainPage")}</p>
+						</>
+					)}
 				</NavLink>
 				<NavLink
 					end
@@ -41,7 +44,7 @@ export const MainBlock = () => {
 							: undefined
 					}
 				>
-					<BugReportIcon />
+					<Icon name={IconName.chat} />
 					<p>{t("chatList")}</p>
 				</NavLink>
 				<NavLink
@@ -56,7 +59,7 @@ export const MainBlock = () => {
 							: undefined
 					}
 				>
-					<BugReportIcon />
+					<Icon name={IconName.closeEye} />
 					<p>{t("hiddenChatList")}</p>
 				</NavLink>
 			</li>
