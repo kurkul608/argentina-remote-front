@@ -27,6 +27,8 @@ export enum ColorsDark {
 	limitCircleBaseColor = "#5684fd",
 	limitCircleSecondaryColor = "#F98215",
 	limitCircleErrorColor = "#F53656",
+	iconColor = "#c4c4c4",
+	iconActive = "#F98215",
 }
 export enum ColorsLight {
 	backGround = "#f1f3f6",
@@ -53,6 +55,8 @@ export enum ColorsLight {
 	limitCircleBaseColor = "#5684fd",
 	limitCircleSecondaryColor = "#F98215",
 	limitCircleErrorColor = "#F53656",
+	iconColor = "#222222",
+	iconActive = "#ffffff",
 }
 
 export const color = (mode: PaletteMode) => {
