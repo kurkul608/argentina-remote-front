@@ -1,8 +1,11 @@
 import React from "react";
 import User from "../../../public/assets/icons/user.svg";
-import Chat from "public/assets/icons/chat.svg";
-import CloseEye from "public/assets/icons/eye-close.svg";
-import { StyledHome, StyledSettings } from "shared/components/icon/styled";
+import {
+	StyledChat,
+	StyledEyeClose,
+	StyledHome,
+	StyledSettings,
+} from "shared/components/icon/styled";
 
 export enum IconName {
 	user = "user",
@@ -26,9 +29,9 @@ export const Icon = ({ name, isActive }: IconProps) => {
 		case IconName.home:
 			return <StyledHome isActive={isActive || false} />;
 		case IconName.chat:
-			return <Chat />;
+			return <StyledChat isActive={isActive || false} />;
 		case IconName.closeEye:
-			return <CloseEye />;
+			return <StyledEyeClose isActive={isActive || false} />;
 		default:
 			return <></>;
 	}

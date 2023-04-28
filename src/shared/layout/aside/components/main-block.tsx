@@ -44,8 +44,17 @@ export const MainBlock = () => {
 							: undefined
 					}
 				>
-					<Icon name={IconName.chat} />
-					<p>{t("chatList")}</p>
+					{({ isActive }) => (
+						<>
+							<Icon
+								name={IconName.chat}
+								isActive={
+									!searchParamsFinder(searchParams, "isHidden") && isActive
+								}
+							/>
+							<p>{t("chatList")}</p>
+						</>
+					)}
 				</NavLink>
 				<NavLink
 					end
@@ -59,8 +68,17 @@ export const MainBlock = () => {
 							: undefined
 					}
 				>
-					<Icon name={IconName.closeEye} />
-					<p>{t("hiddenChatList")}</p>
+					{({ isActive }) => (
+						<>
+							<Icon
+								name={IconName.closeEye}
+								isActive={
+									!!(searchParamsFinder(searchParams, "isHidden") && isActive)
+								}
+							/>
+							<p>{t("hiddenChatList")}</p>
+						</>
+					)}
 				</NavLink>
 			</li>
 		</StyledNavBar>

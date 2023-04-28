@@ -9,8 +9,8 @@ export const ChatBarTitleWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0 15px;
-	margin-top: 15px;
-	gap: 15px;
+	margin-top: 10px;
+	gap: 10px;
 `;
 export const ChatBarImageWrapper = styled.div`
 	width: 24px;
@@ -23,6 +23,6 @@ export const ChatBarTitle = styled.span`
 `;
 
 export const ChatNavWrapper = styled.div`
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 `;

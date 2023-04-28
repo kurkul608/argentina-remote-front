@@ -25,7 +25,7 @@ export enum ColorsDark {
 	limitCircleBaseColor = "#5684fd",
 	limitCircleSecondaryColor = "#F98215",
 	limitCircleErrorColor = "#F53656",
-	iconColor = "#ffffff",
+	iconColor = "#c4c4c4",
 	iconActive = "#F98215",
 }
 export enum ColorsLight {
