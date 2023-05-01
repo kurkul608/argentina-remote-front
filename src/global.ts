@@ -4,13 +4,13 @@ import { Theme } from "@mui/material/styles";
 
 export const globalStyle = (theme: Theme) => `
      html {
-      font-size: 10px;
-      @media (max-width: 768px){
-       font-size: 9px;
-      }
-      @media (max-width: 300px){
-       font-size: 8px;
-      }
+      // font-size: 10px;
+      // @media (max-width: 768px){
+      //  font-size: 9px;
+      // }
+      // @media (max-width: 300px){
+      //  font-size: 8px;
+      // }
      }
      body {
       background-color: ${color(theme.palette.mode).backGround};

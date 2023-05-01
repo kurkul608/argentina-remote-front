@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
+import { Button } from "@mui/material";
 
 export const LanguageSwitchWrapper = styled("div")`
 	display: flex;
@@ -28,3 +29,7 @@ export const LanguageSwitchButton = styled("button")<IButtonProps>`
 	height: 30px;
 	width: 30px;
 `;
+
+export const StyledButton = styled(Button)(({ theme }) => ({
+	backgroundColor: theme.palette.primary.main,
+}));
