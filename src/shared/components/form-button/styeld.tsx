@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const StyledButton = styled.button`
+export const StyledButton = styled("button")`
 	padding: 15px;
 	width: 100%;
-	color: ${(props) => color(props.theme.mainTheme).widgetMainText};
-	background: ${(props) => color(props.theme.mainTheme).backGround};
+	color: ${(props) => color(props.theme.palette.mode).widgetMainText};
+	background: ${(props) => color(props.theme.palette.mode).backGround};
 	border-radius: 10px;
 	border: none;
 	transition: background-color 0.5s;
@@ -16,6 +16,6 @@ export const StyledButton = styled.button`
 	}
 	&:disabled {
 		background-color: ${(props) =>
-			color(props.theme.mainTheme).inputErrorColor};
+			color(props.theme.palette.mode).inputErrorColor};
 	}
 `;
