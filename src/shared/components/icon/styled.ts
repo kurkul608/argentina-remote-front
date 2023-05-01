@@ -6,43 +6,44 @@ import Chat from "public/assets/icons/chat.svg";
 import { color } from "constants/colors";
 import { Theme } from "constants/theme";
 
-export const StyledSettings = styled(Settings)<{ isActive: boolean }>`
+export const StyledSettings = styled(Settings)<{ $isActive: boolean }>`
 	width: 2.4rem;
 	height: 2.4rem;
 
 	.settings_svg__inner {
 		stroke: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor};
 	}
 	.settings_svg__outer {
 		stroke: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor};
 	}
 `;
 
-export const StyledEyeClose = styled(EyeClose)<{ isActive: boolean }>`
+export const StyledEyeClose = styled(EyeClose)<{ $isActive: boolean }>`
 	width: 2.4rem;
 	height: 2.4rem;
 
 	.eye-close_svg__body {
 		fill: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor};
+		fill-opacity: ${(props) => (props.$isActive ? 1 : 0.25)};
 	}
 `;
 
-export const StyledHome = styled(Home)<{ isActive: boolean }>`
+export const StyledHome = styled(Home)<{ $isActive: boolean }>`
   width: 2.4rem;
   height: 2.4rem;
 
   .home_svg__body {
     fill: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor};
 
@@ -52,7 +53,7 @@ export const StyledHome = styled(Home)<{ isActive: boolean }>`
 
   .home_svg__roof {
     fill: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor}
   }
@@ -60,7 +61,7 @@ export const StyledHome = styled(Home)<{ isActive: boolean }>`
 
   .home_svg__tube {
     fill: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor}
   }
@@ -74,19 +75,19 @@ export const StyledHome = styled(Home)<{ isActive: boolean }>`
 					fill: white;
 			  `
 			: css`
-					fill: ${props.isActive ? "white" : "black"};
+					fill: ${props.$isActive ? "white" : "black"};
 			  `;
 	}}
 }
 `;
 
-export const StyledChat = styled(Chat)<{ isActive: boolean }>`
+export const StyledChat = styled(Chat)<{ $isActive: boolean }>`
 	width: 2.4rem;
 	height: 2.4rem;
 
 	.chat_svg__body {
 		fill: ${(props) =>
-			props.isActive
+			props.$isActive
 				? color(props.theme.mainTheme).iconActive
 				: color(props.theme.mainTheme).iconColor};
 	}

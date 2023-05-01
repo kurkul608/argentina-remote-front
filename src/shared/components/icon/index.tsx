@@ -25,13 +25,13 @@ export const Icon = ({ name, isActive }: IconProps) => {
 		case IconName.user:
 			return <User />;
 		case IconName.settings:
-			return <StyledSettings isActive={isActive || false} />;
+			return <StyledSettings $isActive={isActive || false} />;
 		case IconName.home:
-			return <StyledHome isActive={isActive || false} />;
+			return <StyledHome $isActive={isActive || false} />;
 		case IconName.chat:
-			return <StyledChat isActive={isActive || false} />;
+			return <StyledChat $isActive={isActive || false} />;
 		case IconName.closeEye:
-			return <StyledEyeClose isActive={isActive || false} />;
+			return <StyledEyeClose $isActive={isActive || false} />;
 		default:
 			return <></>;
 	}
