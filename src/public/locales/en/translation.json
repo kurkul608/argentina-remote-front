@@ -1,4 +1,9 @@
 {
+	"info": {
+		"appName": "ChatMind",
+		"dashboard": "Dashboard",
+		"description": "a service for moderating, analyzing, and managing chats, as well as news and other themed channels in the Telegram messenger"
+	},
 	"aside": {
 		"mainPage": "Main page",
 		"chatList": "Chat List",
@@ -10,7 +15,11 @@
 		}
 	},
 	"header": {
-		"logout": "Log out"
+		"logout": "Log out",
+		"dialog": {
+			"title": "Application settings",
+			"description": "Choose the language"
+		}
 	},
 	"chatPage": {
 		"chat": "Chat",

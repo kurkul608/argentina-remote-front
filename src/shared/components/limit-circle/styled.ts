@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const InnerCircle = styled.circle<{
+export const InnerCircle = styled("circle")<{
 	dashedArrayValue: number;
 	offset: number;
 	color: string;
@@ -19,16 +19,16 @@ export const InnerCircle = styled.circle<{
 	stroke: ${(props) => {
 		switch (props.color) {
 			case "base":
-				return color(props.theme.mainTheme).limitCircleBaseColor;
+				return color(props.theme.palette.mode).limitCircleBaseColor;
 			case "attention":
-				return color(props.theme.mainTheme).limitCircleSecondaryColor;
+				return color(props.theme.palette.mode).limitCircleSecondaryColor;
 			case "error":
-				return color(props.theme.mainTheme).limitCircleErrorColor;
+				return color(props.theme.palette.mode).limitCircleErrorColor;
 		}
 	}};
 `;
 
-export const CircleWrapper = styled.span`
+export const CircleWrapper = styled("span")`
 	display: inline-block;
 	border-radius: 50%;
 `;

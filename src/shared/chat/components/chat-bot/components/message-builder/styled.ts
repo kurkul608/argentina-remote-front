@@ -1,45 +1,46 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { ButtonWrapper } from "shared/components/button/styled";
 import { color } from "constants/colors";
 
-export const BuilderWrapper = styled.div`
+export const BuilderWrapper = styled("div")`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 `;
 
-export const Title = styled.h3`
+export const Title = styled("h3")`
 	margin-top: 20px;
 	color: #a5a5a5;
 	font-weight: 400;
 	font-size: 2rem;
 `;
-export const BuilderHeader = styled.div`
+export const BuilderHeader = styled("div")`
 	display: flex;
 	justify-content: space-between;
 `;
-export const Limit = styled.h3`
+export const Limit = styled("h3")`
 	margin-top: 20px;
 	color: #ffffff;
 	font-weight: 400;
 	font-size: 1.4rem; ;
 `;
 
-export const Message = styled.div`
+export const Message = styled("div")`
 	display: flex;
 	align-items: end;
 	gap: 10px;
 	flex: 1 1 0;
 `;
-export const TextBlock = styled.div`
+export const TextBlock = styled("div")`
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding: 15px;
 	gap: 7px;
-	border: ${(props) => color(props.theme.mainTheme).messageWidgetBorderColor}
+	border: ${(props) => color(props.theme.palette.mode).messageWidgetBorderColor}
 		1px solid;
-	background-color: ${(props) => color(props.theme.mainTheme).widgetBackGround};
+	background-color: ${(props) =>
+		color(props.theme.palette.mode).widgetBackGround};
 	max-width: 480px;
 	border-radius: 12px;
 	font-size: 1.6rem;
@@ -47,13 +48,13 @@ export const TextBlock = styled.div`
 	color: #ffffff;
 	flex: 1 1 0;
 `;
-export const MessageLogo = styled.div`
+export const MessageLogo = styled("div")`
 	width: 26px;
 	height: 26px;
 	border-radius: 100%;
 	border: 1px solid #ffffff;
 `;
-export const MessageText = styled.div`
+export const MessageText = styled("div")`
 	display: block;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
@@ -62,26 +63,26 @@ export const MessageText = styled.div`
 	height: 50px;
 	margin-bottom: 20px;
 `;
-export const MessageAuthor = styled.div`
+export const MessageAuthor = styled("div")`
 	color: #a5a5a5;
 	font-weight: 600;
 `;
-export const MessageTime = styled.div`
+export const MessageTime = styled("div")`
 	position: absolute;
 	right: 20px;
 	bottom: 5px;
 	font-size: 1.2rem;
 `;
-export const Wrapper = styled.div`
+export const Wrapper = styled("div")`
 	display: flex;
 	justify-content: space-between;
 `;
-export const Settings = styled.div`
+export const Settings = styled("div")`
 	display: flex;
 	align-items: center;
 `;
 
-export const CreateMessageButton = styled.button`
+export const CreateMessageButton = styled("button")`
 	padding: 14px 0;
 	color: #a5a5a5;
 	border-radius: 7px;
@@ -94,16 +95,16 @@ export const CreateMessageButton = styled.button`
 		transition: background-color 0.2s;
 	}
 `;
-export const MessageWrapper = styled.div`
+export const MessageWrapper = styled("div")`
 	display: flex;
 	justify-content: space-between;
 `;
-export const MessageTitle = styled.div`
+export const MessageTitle = styled("div")`
 	display: flex;
 	align-items: center;
 	gap: 10px;
 `;
-export const ButtonWrapperExample = styled.div`
+export const ButtonWrapperExample = styled("div")`
 	& > ${ButtonWrapper} {
 		background-color: transparent;
 		padding: 0;

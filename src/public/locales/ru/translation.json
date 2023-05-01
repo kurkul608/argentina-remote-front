@@ -1,4 +1,9 @@
 {
+	"info": {
+		"appName": "ChatMind",
+		"dashboard": "Панель управления",
+		"description": "сервис модерации и анализа чатов в Telegram."
+	},
 	"aside": {
 		"mainPage": "Главная страница",
 		"chatList": "Список чатов",
@@ -10,7 +15,11 @@
 		}
 	},
 	"header": {
-		"logout": "Выход"
+		"logout": "Выход",
+		"dialog": {
+			"title": "Настройки приложения",
+			"description": "Выберите язык"
+		}
 	},
 	"chatPage": {
 		"chatList": "Список чатов"

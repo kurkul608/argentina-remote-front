@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
+import { Button } from "@mui/material";
 
-export const LanguageSwitchWrapper = styled.div`
+export const LanguageSwitchWrapper = styled("div")`
 	display: flex;
 	gap: 15px;
 `;
@@ -9,7 +10,7 @@ export const LanguageSwitchWrapper = styled.div`
 interface IButtonProps {
 	active: boolean;
 }
-export const LanguageSwitchButton = styled.button<IButtonProps>`
+export const LanguageSwitchButton = styled("button")<IButtonProps>`
 	background: none;
 	border: none;
 	padding: 0;
@@ -18,13 +19,17 @@ export const LanguageSwitchButton = styled.button<IButtonProps>`
 	outline: inherit;
 	color: ${(props) =>
 		props.active
-			? color(props.theme.mainTheme).activeTabText
-			: color(props.theme.mainTheme).breadcrumbsTitleText};
+			? color(props.theme.palette.mode).activeTabText
+			: color(props.theme.palette.mode).breadcrumbsTitleText};
 	border: ${(props) =>
 		props.active
-			? `1px solid ${color(props.theme.mainTheme).activeTabText}`
-			: `1px solid ${color(props.theme.mainTheme).breadcrumbsTitleText}`};
+			? `1px solid ${color(props.theme.palette.mode).activeTabText}`
+			: `1px solid ${color(props.theme.palette.mode).breadcrumbsTitleText}`};
 	font-size: 16px;
 	height: 30px;
 	width: 30px;
 `;
+
+export const StyledButton = styled(Button)(({ theme }) => ({
+	backgroundColor: theme.palette.primary.main,
+}));

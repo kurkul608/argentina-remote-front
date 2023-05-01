@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled("div")`
 	min-width: 500px;
 	font-size: 1.2rem;
 	.active {
@@ -9,35 +9,35 @@ export const Wrapper = styled.div`
 	}
 `;
 
-export const ChatHeader = styled.div`
+export const ChatHeader = styled("div")`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 10px;
 	margin-bottom: 20px;
 `;
-export const BackButton = styled.div`
+export const BackButton = styled("div")`
 	color: white;
 `;
 
-export const ChatName = styled.div`
+export const ChatName = styled("div")`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	color: white;
 `;
 
-export const ChatPhoto = styled.div`
+export const ChatPhoto = styled("div")`
 	width: 36px;
 	height: 36px;
 	border-radius: 50%;
 	background: url("https://sun9-east.userapi.com/sun9-32/s/v1/ig2/_j5Ob0h5RvbFYvwfT2GO-_QLQI-tcBNMZ65rx46Rgu81O1twNZCEx5bBJplggyKYVrnjQdL61cbCHdBLklTrUpi9.jpg?size=391x398&quality=96&type=album");
 	background-size: contain;
 `;
-export const ChatTitle = styled.h3``;
-export const ChatUnderTitle = styled.p``;
+export const ChatTitle = styled("h3")``;
+export const ChatUnderTitle = styled("p")``;
 
-export const ChatMode = styled.ul`
+export const ChatMode = styled("ul")`
 	position: relative;
 	background-color: #212227;
 	display: flex;
@@ -62,26 +62,26 @@ export const ChatMode = styled.ul`
 		left: 100%;
 	}
 `;
-export const ChatOption = styled.li`
+export const ChatOption = styled("li")`
 	color: white;
 	padding: 5px 9px;
 `;
 
-export const Chat = styled.div`
+export const Chat = styled("div")`
 	min-height: 400px;
 `;
 
-export const ChatWrapper = styled.div`
+export const ChatWrapper = styled("div")`
 	margin: 10px 0;
 	background-color: #252323;
 	display: block;
 `;
-export const ChatInnerWrapper = styled.div`
+export const ChatInnerWrapper = styled("div")`
 	overflow: auto;
 	height: 700px;
 	&::-webkit-scrollbar {
 		background-color: ${(props) =>
-			color(props.theme.mainTheme).widgetBackGround};
+			color(props.theme.palette.mode).widgetBackGround};
 		width: 5px;
 	}
 
@@ -90,24 +90,24 @@ export const ChatInnerWrapper = styled.div`
 	}
 `;
 
-export const ChatMessages = styled.ul`
+export const ChatMessages = styled("ul")`
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 `;
-export const Message = styled.li`
+export const Message = styled("li")`
 	color: white;
 	margin-left: 10px;
 	&:last-child {
 		margin-bottom: 10px;
 	}
 `;
-export const MessageTop = styled.div`
+export const MessageTop = styled("div")`
 	color: black;
 	max-width: 464px;
 	display: flex;
 `;
-export const MessageWrapper = styled.div`
+export const MessageWrapper = styled("div")`
 	display: flex;
 	padding: 10px;
 	justify-content: flex-end;
@@ -117,22 +117,22 @@ export const MessageWrapper = styled.div`
 	background-color: #d9d9d9;
 `;
 
-export const MessageBot = styled.div`
+export const MessageBot = styled("div")`
 	display: flex;
 	gap: 10px;
 	margin-top: 20px;
 `;
-export const MessageImg = styled.div`
+export const MessageImg = styled("div")`
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
 	background: url("https://sun9-east.userapi.com/sun9-32/s/v1/ig2/_j5Ob0h5RvbFYvwfT2GO-_QLQI-tcBNMZ65rx46Rgu81O1twNZCEx5bBJplggyKYVrnjQdL61cbCHdBLklTrUpi9.jpg?size=391x398&quality=96&type=album");
 	background-size: contain;
 `;
-export const MessageBotWrapper = styled.div``;
-export const MessageTime = styled.div``;
-export const MessageAuthor = styled.div``;
-export const Date = styled.li`
+export const MessageBotWrapper = styled("div")``;
+export const MessageTime = styled("div")``;
+export const MessageAuthor = styled("div")``;
+export const Date = styled("li")`
 	color: white;
 	text-align: center;
 	&:first-child {

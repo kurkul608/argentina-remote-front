@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { widgetSize } from "constants/size";
 interface IWrapper {
 	size: widgetSize;
 }
-export const Wrapper = styled.div<IWrapper>`
+export const Wrapper = styled("div")<IWrapper>`
 	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
