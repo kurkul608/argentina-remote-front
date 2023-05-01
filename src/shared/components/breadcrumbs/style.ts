@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const BreadcrumbsWrapper = styled.div`
+export const BreadcrumbsWrapper = styled("div")`
 	display: flex;
 	gap: 10px;
 	font-size: 1.4rem;
 `;
 
-export const Breadcrumb = styled.div`
+export const Breadcrumb = styled("div")`
 	cursor: pointer;
 	position: relative;
-	color: ${(props) => color(props.theme.mainTheme).regularTabText};
+	color: ${(props) => color(props.theme.palette.mode).regularTabText};
 	&:hover {
 		&:after {
 			position: absolute;
@@ -24,7 +24,7 @@ export const Breadcrumb = styled.div`
 
 	&:last-child {
 		cursor: default;
-		color: ${(props) => color(props.theme.mainTheme).activeTabText};
+		color: ${(props) => color(props.theme.palette.mode).activeTabText};
 		&:hover {
 			&:after {
 				position: absolute;
@@ -38,12 +38,12 @@ export const Breadcrumb = styled.div`
 	}
 `;
 
-export const Separator = styled.div`
+export const Separator = styled("div")`
 	user-select: none;
-	color: ${(props) => color(props.theme.mainTheme).regularTabText};
+	color: ${(props) => color(props.theme.palette.mode).regularTabText};
 `;
 
-export const BreadcrumbWrapper = styled.div`
+export const BreadcrumbWrapper = styled("div")`
 	display: flex;
 	gap: 10px;
 `;

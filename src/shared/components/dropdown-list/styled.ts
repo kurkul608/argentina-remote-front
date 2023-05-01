@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
-export const StyledWrapper = styled.div`
+export const StyledWrapper = styled("div")`
 	.invalid {
-		border: 1px ${(props) => color(props.theme.mainTheme).inputErrorColor} solid;
+		border: 1px ${(props) => color(props.theme.palette.mode).inputErrorColor}
+			solid;
 	}
 `;
-export const DropdownWrapper = styled.div`
+export const DropdownWrapper = styled("div")`
 	position: relative;
 	padding: 10px 20px;
 	border: 1px #f7b03e solid;
@@ -26,7 +27,7 @@ export const DropdownWrapper = styled.div`
 	}
 `;
 
-export const Dropdown = styled.div`
+export const Dropdown = styled("div")`
 	padding: 5px;
 	width: 250px;
 	min-height: 25px;
@@ -39,12 +40,12 @@ export const Dropdown = styled.div`
 	}
 `;
 
-export const OuterWrapper = styled.div`
+export const OuterWrapper = styled("div")`
 	display: flex;
 	transition: all 0.2s ease-in-out;
 	justify-content: space-between;
 `;
-export const Icon = styled.div`
+export const Icon = styled("div")`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -52,19 +53,20 @@ export const Icon = styled.div`
 	transition: all 0.2s ease-in-out;
 `;
 
-export const Table = styled.ul`
+export const Table = styled("ul")`
 	padding: 5px 0;
 	position: absolute;
 	width: 100%;
 	top: 50px;
 	left: 0;
 	max-height: 200px;
-	background-color: ${(props) => color(props.theme.mainTheme).widgetBackGround};
+	background-color: ${(props) =>
+		color(props.theme.palette.mode).widgetBackGround};
 	z-index: 1;
 	overflow: auto;
 	&::-webkit-scrollbar {
 		background-color: ${(props) =>
-			color(props.theme.mainTheme).widgetBackGround};
+			color(props.theme.palette.mode).widgetBackGround};
 		width: 5px;
 	}
 
@@ -73,7 +75,7 @@ export const Table = styled.ul`
 	}
 `;
 
-export const TableItem = styled.li`
+export const TableItem = styled("li")`
 	width: 100%;
 	user-select: none;
 	cursor: pointer;
@@ -82,8 +84,8 @@ export const TableItem = styled.li`
 	}
 `;
 
-export const Error = styled.p`
+export const Error = styled("p")`
 	margin-top: 10px;
 	font-size: 1.4rem;
-	color: ${(props) => color(props.theme.mainTheme).inputErrorColor};
+	color: ${(props) => color(props.theme.palette.mode).inputErrorColor};
 `;

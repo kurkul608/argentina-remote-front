@@ -1,27 +1,28 @@
-import { DefaultTheme } from "styled-components";
-import { Theme } from "constants/theme";
+// import { DefaultTheme } from "styled-components";
+// import { Theme } from "constants/theme";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { createTheme, Theme } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 
 export interface IThemeState {
-	theme: DefaultTheme;
+	mode: PaletteMode;
 }
 
 export const initialThemeState: IThemeState = {
-	theme: {
-		mainTheme: Theme.light,
-	},
+	mode: "dark",
 };
 
 const ThemeSlice = createSlice({
 	name: "theme",
 	initialState: initialThemeState,
 	reducers: {
-		setTheme: (state, action: PayloadAction<Theme>) => {
-			state.theme.mainTheme = action.payload;
+		setMode: (state, action: PayloadAction<PaletteMode>) => {
+			state.mode = action.payload;
+			// state.theme.palette.mode = action.payload;
 		},
 	},
 });
 
-export const { setTheme } = ThemeSlice.actions;
+export const { setMode } = ThemeSlice.actions;
 
 export default ThemeSlice.reducer;

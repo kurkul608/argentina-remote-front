@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const SettingsUL = styled.ul`
+export const SettingsUL = styled("ul")`
 	margin-top: 50px;
 	width: 100%;
-	color: ${(props) => color(props.theme.mainTheme).widgetMainText};
+	color: ${(props) => color(props.theme.palette.mode).widgetMainText};
 `;
-export const SettingLine = styled.li`
+export const SettingLine = styled("li")`
 	width: 100%;
 	font-size: 2rem;
 	display: flex;
@@ -15,5 +15,5 @@ export const SettingLine = styled.li`
 	border-bottom: 1px solid gray;
 	justify-content: space-between;
 `;
-export const LineTitle = styled.h5``;
-export const LineDescription = styled.p``;
+export const LineTitle = styled("h5")``;
+export const LineDescription = styled("p")``;
