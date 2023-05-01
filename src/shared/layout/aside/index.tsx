@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as ST from "./styled";
 import { ChatBlock } from "shared/layout/aside/components/chat-block";
 import { MainBlock } from "shared/layout/aside/components/main-block";
@@ -7,12 +7,23 @@ import Divider from "@mui/material/Divider";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import List from "@mui/material/List";
+import { IRootState } from "redux/store";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { setAside } from "shared/theme/redux/theme.slice";
+import { ThemeSwitch } from "shared/layout/header/theme-switch/theme-switch";
+
+const selector = (state: IRootState) => ({
+	open: state.theme.isAsideOpen,
+});
 
 export const Aside = () => {
-	const [open, setOpen] = useState(false);
+	const { open } = useAppSelector(selector);
+
 	const toggleDrawer = () => {
-		setOpen(!open);
+		dispatch(setAside());
 	};
+
+	const dispatch = useAppDispatch();
 	return (
 		// <StyledAside>
 		// 	<MainBlock />
@@ -39,6 +50,7 @@ export const Aside = () => {
 				{/*{secondaryListItems}*/}
 				<ChatBlock />
 			</List>
+			<ThemeSwitch />
 		</ST.StyledDrawer>
 	);
 };

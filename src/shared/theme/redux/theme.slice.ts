@@ -6,10 +6,12 @@ import { PaletteMode } from "@mui/material";
 
 export interface IThemeState {
 	mode: PaletteMode;
+	isAsideOpen: boolean;
 }
 
 export const initialThemeState: IThemeState = {
 	mode: "dark",
+	isAsideOpen: false,
 };
 
 const ThemeSlice = createSlice({
@@ -18,11 +20,13 @@ const ThemeSlice = createSlice({
 	reducers: {
 		setMode: (state, action: PayloadAction<PaletteMode>) => {
 			state.mode = action.payload;
-			// state.theme.palette.mode = action.payload;
+		},
+		setAside: (state) => {
+			state.isAsideOpen = !state.isAsideOpen;
 		},
 	},
 });
 
-export const { setMode } = ThemeSlice.actions;
+export const { setMode, setAside } = ThemeSlice.actions;
 
 export default ThemeSlice.reducer;
