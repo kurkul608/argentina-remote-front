@@ -3,6 +3,7 @@ import { Aside } from "./aside";
 import { Outlet } from "react-router-dom";
 import React from "react";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container/Container";
 
 export const Layout = () => {
 	return (
@@ -21,7 +22,9 @@ export const Layout = () => {
 					overflow: "auto",
 				}}
 			>
-				<Outlet />
+				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+					<Outlet />
+				</Container>
 			</Box>
 			{/*<Header*/}
 			{/*	isAsideVisible={isAsideVisible}*/}
