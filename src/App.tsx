@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import GlobalStyles from "./global";
 // import { Theme } from "constants/theme";
-import { GlobalStyles } from "@mui/material";
+import Box from "@mui/material/Box";
+import { CssBaseline, GlobalStyles, PaletteMode } from "@mui/material";
 import { RouterProvider } from "react-router";
 import { router } from "shared/router";
 import { logIn } from "shared/auth/redux/auth.slice";
@@ -17,8 +18,8 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { PaletteMode } from "@mui/material";
 import { globalStyle } from "global";
+import { BreakpointsValues } from "constants/breakpoints";
 
 // const theme = createTheme();
 // t.breakpoints.
@@ -69,13 +70,19 @@ export const App = () => {
 		palette: {
 			mode,
 		},
+		breakpoints: {
+			values: BreakpointsValues,
+		},
 	});
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Resizer />
-			<GlobalStyles styles={globalStyle} />
-			<RouterProvider router={router} />
+			<Box sx={{ display: "flex" }}>
+				<CssBaseline />
+				<Resizer />
+				<GlobalStyles styles={globalStyle} />
+				<RouterProvider router={router} />
+			</Box>
 		</ThemeProvider>
 	);
 };

@@ -1,5 +1,7 @@
 import { styled } from "@mui/material/styles";
 import BreakPoints from "constants/breakpoints";
+// import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+// import { drawerWidth } from "constants/size";
 
 export const Main = styled("main")`
 	width: 100%;
