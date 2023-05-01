@@ -1,6 +1,6 @@
 import { Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import {
 	Description,
 	StyledWidget,

@@ -60,6 +60,9 @@ export enum Routes {
 	//Posting routes
 	post = "post",
 	postDraft = "draft",
+	postPublished = "published",
+	postPlanned = "planned",
+	postContentPlan = "content-plan",
 
 	//Auth routes
 	auth = "auth/:token",
@@ -76,6 +79,36 @@ const postRoutes: RouteObject[] = [
 			},
 			{
 				path: Routes.postDraft,
+				element: <PostDraftPage />,
+				children: [
+					{
+						index: true,
+						element: <PostDraft />,
+					},
+				],
+			},
+			{
+				path: Routes.postPlanned,
+				element: <PostDraftPage />,
+				children: [
+					{
+						index: true,
+						element: <PostDraft />,
+					},
+				],
+			},
+			{
+				path: Routes.postPublished,
+				element: <PostDraftPage />,
+				children: [
+					{
+						index: true,
+						element: <PostDraft />,
+					},
+				],
+			},
+			{
+				path: Routes.postContentPlan,
 				element: <PostDraftPage />,
 				children: [
 					{

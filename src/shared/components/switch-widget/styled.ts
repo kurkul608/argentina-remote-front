@@ -1,14 +1,9 @@
 import { styled } from "@mui/material/styles";
-import { WidgetName } from "shared/widget/styled";
 
 export const StyledWidget = styled("div")`
 	max-width: 1000px;
 	font-size: 2.4rem;
 	color: white;
-	${WidgetName} {
-		color: white;
-		font-size: 1.6rem;
-	}
 `;
 
 export const Description = styled("div")`

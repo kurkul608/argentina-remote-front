@@ -1,7 +1,7 @@
 import React from "react";
 import * as ST from "./styled";
 import { ChatBlock } from "shared/layout/aside/components/chat-block";
-import { MainBlock } from "shared/layout/aside/components/main-block";
+
 import { IconButton, Toolbar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 
@@ -11,6 +11,7 @@ import { IRootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { setAside } from "shared/theme/redux/theme.slice";
 import { ThemeSwitch } from "shared/layout/header/theme-switch/theme-switch";
+import { MainNavigation } from "shared/layout/aside/components/main";
 
 const selector = (state: IRootState) => ({
 	open: state.theme.isAsideOpen,
@@ -25,10 +26,6 @@ export const Aside = () => {
 
 	const dispatch = useAppDispatch();
 	return (
-		// <StyledAside>
-		// 	<MainBlock />
-		// 	<ChatBlock />
-		// </StyledAside>
 		<ST.StyledDrawer variant="permanent" open={open}>
 			<Toolbar
 				sx={{
@@ -44,10 +41,8 @@ export const Aside = () => {
 			</Toolbar>
 			<Divider />
 			<List component="nav">
-				{/*{mainListItems}*/}
-				<MainBlock />
+				<MainNavigation />
 				<Divider sx={{ my: 1 }} />
-				{/*{secondaryListItems}*/}
 				<ChatBlock />
 			</List>
 			<ThemeSwitch />

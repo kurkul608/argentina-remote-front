@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { PageTitle } from "shared/components/title";
+import Title from "shared/components/title";
 import { Breadcrumbs } from "shared/components/breadcrumbs";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router-dom";
@@ -27,10 +27,10 @@ export const ChatSettings = () => {
 	}, []);
 	return (
 		<>
-			<PageTitle>
+			<Title>
 				<h3>{t("chats")}</h3>
 				<Breadcrumbs link={location.pathname} />
-			</PageTitle>
+			</Title>
 			<Outlet />
 			{/*<WidgetWrapper>*/}
 			{/*	<ChatInfoWidget />*/}
