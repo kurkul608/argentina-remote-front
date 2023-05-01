@@ -47,6 +47,37 @@
 			"pageTitle": "Saved drafts",
 			"createWidget": {
 				"title": "Create post"
+
+			}
+		}
+	},
+	"message": {
+		"sendForm": {
+			"title": "Create message",
+			"step1": {
+				"stepName": "Create post",
+				"fillDate": "Fill data",
+				"addButtons": "Add buttons",
+				"textFieldLabel": "Text",
+				"createLinkLabel": "Add link",
+				"emptyMessageTextError": "Message is required"
+			},
+			"step2": {
+				"stepName": "Select chats"
+			},
+			"step3": {
+				"stepName": "Schedule"
+			},
+			"final": {
+				"message": "Thank you for use our service",
+				"description": "Your request has been generated and will be processed on time"
+			},
+			"buttons": {
+				"sendMySelf": "Send myself",
+				"next": "Next",
+				"back": "Back",
+				"final": "Final",
+				"more": "Create new"
 			}
 		}
 	}

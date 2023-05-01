@@ -46,6 +46,37 @@
 			"pageTitle": "Сохраненные черновики",
 			"createWidget": {
 				"title": "Созданине поста"
+
+			}
+		}
+	},
+	"message": {
+		"sendForm": {
+			"title": "Слздать сообщение",
+			"step1": {
+				"stepName": "Пост",
+				"fillDate": "Заполните данные",
+				"addButtons": "Добавьте кнопки",
+				"textFieldLabel": "Текст",
+				"createLinkLabel": "Добавить ссылку",
+				"emptyMessageTextError": "Текст сообщения обязателен"
+			},
+			"step2": {
+				"stepName": "Выбрать чат"
+			},
+			"step3": {
+				"stepName": "Запланируйте время"
+			},
+			"final": {
+				"message": "Спасибо за использование нашего сервиса",
+				"description": "Ваш запрос был сформирован и будет обработан вовремя"
+			},
+			"buttons": {
+				"sendMySelf": "Отправить себе",
+				"next": "Вперед",
+				"back": "Назад",
+				"final": "Готово",
+				"more": "Создать еще одно"
 			}
 		}
 	}
