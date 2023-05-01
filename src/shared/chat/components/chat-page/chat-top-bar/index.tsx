@@ -3,7 +3,7 @@ import {
 	TopBarChatPhoto,
 	TopBarWrapper,
 } from "shared/chat/components/chat-page/chat-top-bar/styled";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import { Button } from "shared/components/button";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getAuthToken } from "helpers/storage-parser";

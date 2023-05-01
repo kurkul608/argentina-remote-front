@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled("div")`
 	position: relative;
 	width: 100%;
 	background-color: #1c1c1c;
@@ -9,14 +9,14 @@ export const ContentWrapper = styled.div`
 	color: white;
 	font-size: 1.2rem;
 `;
-export const Total = styled.span`
+export const Total = styled("span")`
 	display: block;
 	font-size: 1.4rem;
 	margin: 5px 0 5px 10px;
 	text-align: left;
 `;
 
-export const ItemsTable = styled.ul`
+export const ItemsTable = styled("ul")`
 	overflow-y: auto;
 	max-height: 250px;
 	position: relative;
@@ -38,7 +38,7 @@ export const ItemsTable = styled.ul`
 		background-color: rgb(25, 25, 25);
 	}
 `;
-export const Item = styled.li`
+export const Item = styled("li")`
 	color: #ffffff;
 	margin: 10px 0;
 	padding: 12px 0;
@@ -48,14 +48,14 @@ export const Item = styled.li`
 	font-size: 1.4rem;
 	border-radius: 10px; ;
 `;
-export const NameWrapper = styled.div`
+export const NameWrapper = styled("div")`
 	display: flex;
 	align-items: center;
 	margin-left: 10px;
 `;
-export const Link = styled.div``;
-export const Name = styled.div``;
-export const Status = styled.div`
+export const Link = styled("div")``;
+export const Name = styled("div")``;
+export const Status = styled("div")`
 	margin-right: 20px;
 `;
-export const FireButton = styled.button``;
+export const FireButton = styled("button")``;

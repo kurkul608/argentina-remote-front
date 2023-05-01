@@ -1,8 +1,8 @@
 import "styled-components";
-import { Theme } from "./constants/theme";
+import { Theme } from "@mui/material/styles";
 
 declare module "styled-components" {
-	export interface DefaultTheme {
-		mainTheme: Theme;
+	export interface DefaultTheme extends Theme {
+		t: string;
 	}
 }

@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled("div")`
 	display: flex;
 	margin-top: 10px;
 	flex-direction: column;

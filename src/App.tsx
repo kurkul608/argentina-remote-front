@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
-import { ThemeProvider } from "styled-components";
-import GlobalStyles from "./global";
-import { Theme } from "constants/theme";
+// import { ThemeProvider } from "styled-components";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import GlobalStyles from "./global";
+// import { Theme } from "constants/theme";
+import Box from "@mui/material/Box";
+import { CssBaseline, GlobalStyles, PaletteMode } from "@mui/material";
 import { RouterProvider } from "react-router";
 import { router } from "shared/router";
 import { logIn } from "shared/auth/redux/auth.slice";
@@ -9,22 +12,30 @@ import { getAuthToken } from "helpers/storage-parser";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { localStorageServiceGet } from "services/local-storage.service";
 import { IRootState } from "redux/store";
-import { setTheme } from "shared/theme/redux/theme.slice";
+import { setMode } from "shared/theme/redux/theme.slice";
 import { Resizer } from "shared/resizer/components";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { globalStyle } from "global";
+import { BreakpointsValues } from "constants/breakpoints";
 
+// const theme = createTheme();
+// t.breakpoints.
 const selector = (state: IRootState) => ({
 	auth: state.auth,
-	theme: state.theme.theme,
+	mode: state.theme.mode,
 });
 export const App = () => {
 	const dispatch = useAppDispatch();
 
-	const { auth, theme } = useAppSelector(selector);
+	const { auth, mode } = useAppSelector(selector);
 
 	const tokenStorage = getAuthToken(auth);
 
-	const themeHandler = (theme: Theme) => {
-		dispatch(setTheme(theme));
+	const themeHandler = (mode: PaletteMode) => {
+		dispatch(setMode(mode));
 	};
 
 	useEffect(() => {
@@ -36,30 +47,42 @@ export const App = () => {
 
 	useEffect(() => {
 		if (!window.matchMedia) {
-			themeHandler(Theme.light);
+			themeHandler("light");
 		} else {
 			if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-				themeHandler(Theme.dark);
+				themeHandler("dark");
 			} else {
-				themeHandler(Theme.light);
+				themeHandler("light");
 			}
 			window
 				.matchMedia("(prefers-color-scheme: dark)")
 				.addEventListener("change", (e) => {
 					if (e.matches) {
-						themeHandler(Theme.dark);
+						themeHandler("dark");
 					} else {
-						themeHandler(Theme.light);
+						themeHandler("light");
 					}
 				});
 		}
 	}, []);
 
+	const theme = createTheme({
+		palette: {
+			mode,
+		},
+		breakpoints: {
+			values: BreakpointsValues,
+		},
+	});
+
 	return (
 		<ThemeProvider theme={theme}>
-			<Resizer />
-			<GlobalStyles />
-			<RouterProvider router={router} />
+			<Box sx={{ display: "flex" }}>
+				<CssBaseline />
+				<Resizer />
+				<GlobalStyles styles={globalStyle} />
+				<RouterProvider router={router} />
+			</Box>
 		</ThemeProvider>
 	);
 };

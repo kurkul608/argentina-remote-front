@@ -1,8 +1,8 @@
 import React from "react";
 import { ChatTopBar } from "shared/chat/components/chat-page/chat-top-bar";
-import { WidgetWrapper } from "shared/widget/components/widget-wrapper";
+import { WidgetWrapper } from "shared/components/widget/components/widget-wrapper";
 import { Breadcrumbs } from "shared/components/breadcrumbs";
-import { PageTitle } from "shared/components/title";
+import Title from "shared/components/title";
 import { useAppSelector } from "redux/hooks";
 import { ChatInfoWidget } from "shared/chat/components/chat-info-page";
 import { IRootState } from "redux/store";
@@ -15,10 +15,10 @@ export const ChatPage = () => {
 	const { chatInfo } = useAppSelector(selector);
 	return (
 		<>
-			<PageTitle>
+			<Title>
 				<h3>{chatInfo?.title}</h3>
 				<Breadcrumbs link={location.pathname} />
-			</PageTitle>
+			</Title>
 			<ChatTopBar />
 			<WidgetWrapper>
 				<ChatInfoWidget />

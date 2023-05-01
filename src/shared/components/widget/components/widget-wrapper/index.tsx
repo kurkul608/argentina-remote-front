@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "shared/widget/components/widget-wrapper/styled";
+import { Wrapper } from "shared/components/widget/components/widget-wrapper/styled";
 import { widgetSize } from "constants/size";
 interface IWidgetWrapper {
 	children: React.ReactNode;

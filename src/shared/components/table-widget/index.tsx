@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import { ChipsTable } from "shared/components/table-widget/components/chips-table";
 import { TextTable } from "shared/components/table-widget/components/text-table";
 import { RegularTable } from "shared/components/table-widget/components/regular-table";

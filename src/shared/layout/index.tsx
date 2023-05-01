@@ -1,39 +1,43 @@
 import { Header } from "./header";
 import { Aside } from "./aside";
 import { Outlet } from "react-router-dom";
-import React, { useState } from "react";
-import { Main } from "./styled";
-import { IRootState } from "redux/store";
-import { useAppSelector } from "redux/hooks";
-import Breakpoints from "constants/breakpoints";
+import React from "react";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container/Container";
 
-const selector = (state: IRootState) => ({
-	actualBreakpoint: state.resizer.actualBreakpoint,
-});
 export const Layout = () => {
-	const { actualBreakpoint } = useAppSelector(selector);
-	const isMobile =
-		actualBreakpoint === Breakpoints.MOBILE ||
-		actualBreakpoint === Breakpoints.SMALL_MOBILE;
-
-	const [isAsideVisible, setIsAsideVisible] = useState(false);
-
-	const isAsideVisibleHandler = () => {
-		setIsAsideVisible(!isAsideVisible);
-	};
-
 	return (
 		<>
-			<Header
-				isAsideVisible={isAsideVisible}
-				isAsideVisibleHandler={isAsideVisibleHandler}
-			/>
-			<div style={{ display: "flex" }}>
-				{(!isMobile || isAsideVisible) && <Aside />}
-				<Main>
+			<Header />
+			<Aside />
+			<Box
+				component="main"
+				sx={{
+					backgroundColor: (theme) =>
+						theme.palette.mode === "light"
+							? theme.palette.grey[100]
+							: theme.palette.grey[900],
+					flexGrow: 1,
+					height: "100vh",
+					overflow: "auto",
+				}}
+			>
+				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+					<Toolbar />
 					<Outlet />
-				</Main>
-			</div>
+				</Container>
+			</Box>
+			{/*<Header*/}
+			{/*	isAsideVisible={isAsideVisible}*/}
+			{/*	isAsideVisibleHandler={isAsideVisibleHandler}*/}
+			{/*/>*/}
+			{/*<div style={{ display: "flex" }}>*/}
+			{/*	{(!isMobile || isAsideVisible) && <Aside />}*/}
+			{/*	<Main>*/}
+			{/*		<Outlet />*/}
+			{/*	</Main>*/}
+			{/*</div>*/}
 		</>
 	);
 };

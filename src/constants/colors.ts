@@ -1,4 +1,6 @@
-import { Theme } from "./theme";
+// import { Theme } from "./theme";
+
+import { PaletteMode } from "@mui/material";
 
 export enum ColorsDark {
 	backGround = "#212227",
@@ -53,6 +55,6 @@ export enum ColorsLight {
 	limitCircleErrorColor = "#F53656",
 }
 
-export const color = (theme: Theme) => {
-	return theme === Theme.dark ? ColorsDark : ColorsLight;
+export const color = (mode: PaletteMode) => {
+	return mode === "dark" ? ColorsDark : ColorsLight;
 };

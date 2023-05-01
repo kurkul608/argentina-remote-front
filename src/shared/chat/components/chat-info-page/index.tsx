@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import { LineDescription, LineTitle, SettingLine, SettingsUL } from "./styled";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";

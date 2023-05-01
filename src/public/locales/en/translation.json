@@ -1,8 +1,20 @@
 {
+	"info": {
+		"appName": "ChatMind",
+		"dashboard": "Dashboard",
+		"description": "a service for moderating, analyzing, and managing chats, as well as news and other themed channels in the Telegram messenger"
+	},
 	"aside": {
 		"mainPage": "Main page",
 		"chatList": "Chat List",
 		"hiddenChatList": "Hidden Chats",
+		"posting": {
+			"main": "Posting",
+			"draft": "Draft",
+			"listPublished": "Published",
+			"listPlanned": "Planned",
+			"contentPlan": "Content plan"
+		},
 		"test": "Test",
 		"chatCategories": {
 			"settings": "Settings",
@@ -10,7 +22,11 @@
 		}
 	},
 	"header": {
-		"logout": "Log out"
+		"logout": "Log out",
+		"dialog": {
+			"title": "Application settings",
+			"description": "Choose the language"
+		}
 	},
 	"chatPage": {
 		"chat": "Chat",
@@ -25,5 +41,13 @@
 		"id": "Chat ID",
 		"chatTitle": "Chat title",
 		"count": "Subscribers count"
+	},
+	"post": {
+		"draft": {
+			"pageTitle": "Saved drafts",
+			"createWidget": {
+				"title": "Create post"
+			}
+		}
 	}
 }

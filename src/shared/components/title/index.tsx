@@ -1,10 +1,14 @@
 import React from "react";
-import { TitleWrapper } from "./styled";
+import Typography from "@mui/material/Typography";
 
-interface ITitle {
-	children: React.ReactNode;
+interface TitleProps {
+	children?: React.ReactNode;
 }
 
-export const PageTitle = ({ children }: ITitle) => {
-	return <TitleWrapper>{children}</TitleWrapper>;
-};
+export default function Title(props: TitleProps) {
+	return (
+		<Typography component="h2" variant="h6" color="primary" gutterBottom>
+			{props.children}
+		</Typography>
+	);
+}
