@@ -20,7 +20,7 @@ import "@fontsource/roboto/700.css";
 import { PaletteMode } from "@mui/material";
 import { globalStyle } from "global";
 
-const theme = createTheme();
+// const theme = createTheme();
 // t.breakpoints.
 const selector = (state: IRootState) => ({
 	auth: state.auth,
@@ -65,8 +65,14 @@ export const App = () => {
 		}
 	}, []);
 
+	const theme = createTheme({
+		palette: {
+			mode,
+		},
+	});
+
 	return (
-		<ThemeProvider theme={{ ...theme, palette: { ...theme.palette, mode } }}>
+		<ThemeProvider theme={theme}>
 			<Resizer />
 			<GlobalStyles styles={globalStyle} />
 			<RouterProvider router={router} />

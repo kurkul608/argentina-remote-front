@@ -1,8 +1,10 @@
 import { styled } from "@mui/material/styles";
+import MuiDrawer from "@mui/material/Drawer";
 import { color } from "constants/colors";
 import { StyledAccordionMenu } from "shared/components/accordion/styled";
 import BreakPoints from "constants/breakpoints";
 import { ZIndex } from "constants/z-index";
+import { drawerWidth } from "constants/size";
 
 export const StyledAside = styled("aside")`
 	height: 100%;
@@ -82,3 +84,30 @@ export const AsideAccordion = styled("div")`
 		color: ${(props) => color(props.theme.palette.mode).activeTabText};
 	}
 `;
+
+export const StyledDrawer = styled(MuiDrawer, {
+	shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+	"& .MuiDrawer-paper": {
+		position: "relative",
+		whiteSpace: "nowrap",
+		// backgroundColor: theme.palette.background.default,
+		width: drawerWidth,
+		transition: theme.transitions.create("width", {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+		boxSizing: "border-box",
+		...(!open && {
+			overflowX: "hidden",
+			transition: theme.transitions.create("width", {
+				easing: theme.transitions.easing.sharp,
+				duration: theme.transitions.duration.leavingScreen,
+			}),
+			width: theme.spacing(7),
+			[theme.breakpoints.up("sm")]: {
+				width: theme.spacing(9),
+			},
+		}),
+	},
+}));

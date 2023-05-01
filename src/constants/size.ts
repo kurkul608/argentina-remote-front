@@ -3,3 +3,5 @@ export enum widgetSize {
 	medium,
 	large,
 }
+
+export const drawerWidth = 240;
