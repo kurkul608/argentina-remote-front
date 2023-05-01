@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import {
 	ChatListWrapper,
 	ChatPhoto,

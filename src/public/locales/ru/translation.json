@@ -8,6 +8,13 @@
 		"mainPage": "Главная страница",
 		"chatList": "Список чатов",
 		"hiddenChatList": "Скрытые чаты",
+		"posting": {
+			"main": "Посты",
+			"draft": "Черновик",
+			"listPublished": "Опубликованные",
+			"listPlanned": "Запланированные",
+			"contentPlan": "Контент план"
+		},
 		"test": "Тест",
 		"chatCategories" :{
 			"settings": "Настройки",
@@ -33,5 +40,13 @@
 		"id": "ID чата",
 		"chatTitle": "Название чата",
 		"count": "Количество участников"
+	},
+	"post": {
+		"draft": {
+			"pageTitle": "Сохраненные черновики",
+			"createWidget": {
+				"title": "Созданине поста"
+			}
+		}
 	}
 }

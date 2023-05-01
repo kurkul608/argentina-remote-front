@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Widget } from "shared/widget";
+import { Widget } from "shared/components/widget";
 import {
 	BackButton,
 	Chat,
