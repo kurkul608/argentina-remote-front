@@ -3,6 +3,7 @@ import { Aside } from "./aside";
 import { Outlet } from "react-router-dom";
 import React from "react";
 import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container/Container";
 
 export const Layout = () => {
@@ -23,6 +24,7 @@ export const Layout = () => {
 				}}
 			>
 				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+					<Toolbar />
 					<Outlet />
 				</Container>
 			</Box>

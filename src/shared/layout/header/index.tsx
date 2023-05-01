@@ -25,6 +25,7 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 import { setAside } from "shared/theme/redux/theme.slice";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitch } from "shared/layout/header/language-switch/language-switch";
 
 const selector = (state: IRootState) => ({
 	open: state.theme.isAsideOpen,
@@ -86,13 +87,13 @@ export const Header = () => {
 				</IconButton>
 				<Dialog
 					open={isSettingsDialogOpen}
-					// fullWidth={fullWidth}
 					maxWidth="sm"
 					onClose={settingsHandler}
 				>
 					<DialogTitle>{headerDialog("title")}</DialogTitle>
 					<DialogContent>
 						<DialogContentText>{headerDialog("description")}</DialogContentText>
+						<LanguageSwitch />
 					</DialogContent>
 				</Dialog>
 			</Toolbar>
