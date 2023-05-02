@@ -1,5 +1,4 @@
 import { styled } from "@mui/material/styles";
-import { ButtonWrapper } from "shared/components/button/styled";
 import { color } from "constants/colors";
 
 export const BuilderWrapper = styled("div")`
@@ -31,23 +30,46 @@ export const Message = styled("div")`
 	gap: 10px;
 	flex: 1 1 0;
 `;
-export const TextBlock = styled("div")`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	padding: 15px;
-	gap: 7px;
-	border: ${(props) => color(props.theme.palette.mode).messageWidgetBorderColor}
-		1px solid;
-	background-color: ${(props) =>
-		color(props.theme.palette.mode).widgetBackGround};
-	max-width: 480px;
-	border-radius: 12px;
-	font-size: 1.6rem;
-	font-weight: 400;
-	color: #ffffff;
-	flex: 1 1 0;
-`;
+// export const TextBlock = styled("div")`
+// 	position: relative;
+// 	display: flex;
+// 	flex-direction: column;
+// 	padding: 15px;
+// 	gap: 7px;
+// 	border: ${(props) => color(props.theme.palette.mode).messageWidgetBorderColor}
+// 		1px solid;
+// 	background-color: ${(props) =>
+// 		color(props.theme.palette.mode).widgetBackGround};
+// 	max-width: 480px;
+// 	border-radius: 12px;
+// 	font-size: 1.6rem;
+// 	font-weight: 400;
+// 	color: #ffffff;
+// 	flex: 1 1 0;
+// `;
+
+export const TextBlock = styled("div")(
+	({
+		theme: {
+			palette: { mode },
+		},
+	}) => ({
+		position: "relative",
+		display: "flex",
+		flexDirection: "column",
+		padding: "15px",
+		gap: "7px",
+		border: `${color(mode).messageWidgetBorderColor} 1px solid`,
+		backgroundColor: color(mode).widgetBackGround,
+		maxWidth: "480px",
+		borderRadius: "12px",
+		fontSize: "1.6rem",
+		fontWeight: 400,
+		color: color(mode).baseText,
+		flex: "1 1 0",
+	})
+);
+
 export const MessageLogo = styled("div")`
 	width: 26px;
 	height: 26px;
@@ -105,8 +127,9 @@ export const MessageTitle = styled("div")`
 	gap: 10px;
 `;
 export const ButtonWrapperExample = styled("div")`
-	& > ${ButtonWrapper} {
+	& > button {
 		background-color: transparent;
+		border: black 1px solid;
 		padding: 0;
 		border-radius: 10px;
 	}

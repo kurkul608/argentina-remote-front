@@ -32,9 +32,6 @@ export const ChatSettings = () => {
 				<Breadcrumbs link={location.pathname} />
 			</Title>
 			<Outlet />
-			{/*<WidgetWrapper>*/}
-			{/*	<ChatInfoWidget />*/}
-			{/*</WidgetWrapper>*/}
 		</>
 	);
 };

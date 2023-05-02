@@ -56,7 +56,6 @@ export const RightsAdmin = () => {
 				value={userRights.allowChatAdminCallCommands}
 				callback={callBack}
 			/>
-			);
 		</ContentWrapper>
 	);
 };

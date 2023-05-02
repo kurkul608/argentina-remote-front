@@ -19,6 +19,10 @@
 		"chatCategories": {
 			"settings": "Settings",
 			"info": "Info"
+		},
+		"settings": {
+			"memberRights": "Members Rights",
+			"greeting": "Greeting"
 		}
 	},
 	"header": {

@@ -1,5 +1,5 @@
 // import { createGlobalStyle } from "styled-components";
-import { color } from "./constants/colors";
+import { color } from "constants/colors";
 import { Theme } from "@mui/material/styles";
 
 export const globalStyle = (theme: Theme) => `
