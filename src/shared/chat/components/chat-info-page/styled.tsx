@@ -1,11 +1,18 @@
 import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
-export const SettingsUL = styled("ul")`
-	margin-top: 50px;
-	width: 100%;
-	color: ${(props) => color(props.theme.palette.mode).widgetMainText};
-`;
+export const SettingsUL = styled("ul")(
+	({
+		theme: {
+			palette: { mode },
+		},
+	}) => ({
+		marginTop: "50px",
+		width: "100%",
+		color: color(mode).widgetMainText,
+	})
+);
+
 export const SettingLine = styled("li")`
 	width: 100%;
 	font-size: 2rem;

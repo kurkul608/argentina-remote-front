@@ -1,7 +1,6 @@
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import { color } from "constants/colors";
-import { StyledAccordionMenu } from "shared/components/accordion/styled";
 import BreakPoints from "constants/breakpoints";
 import { ZIndex } from "constants/z-index";
 import { drawerWidth } from "constants/size";
@@ -27,6 +26,7 @@ export const StyledAside = styled("aside")`
 
 export const StyledNavBar = styled("ul")`
 	width: 100%;
+
 	a {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -39,51 +39,61 @@ export const StyledNavBar = styled("ul")`
 		&:hover {
 			background-color: ${(props) =>
 				color(props.theme.palette.mode).activeNavLinkBackground};
+
 			p {
 				color: ${(props) => color(props.theme.palette.mode).activeTabText};
 			}
 		}
+
 		svg {
 			height: 20px;
 			width: auto;
 			fill: white;
 		}
+
 		p {
 			font-size: 1.3rem;
 			color: ${(props) => color(props.theme.palette.mode).regularTabText};
 			text-transform: uppercase;
 		}
 	}
+
 	.active-nav-link {
 		background-color: ${(props) =>
 			color(props.theme.palette.mode).activeNavLinkBackground};
+
 		p {
 			color: ${(props) => color(props.theme.palette.mode).activeTabText};
 		}
 	}
 `;
 
-export const AsideAccordion = styled("div")`
-	${StyledAccordionMenu} {
-		padding-left: 15px;
-		padding-right: 15px;
-		width: 100%;
-		height: 42px;
-		display: flex;
-		gap: 10px;
-		align-items: center;
-		font-size: 1.3rem;
-		color: ${(props) => color(props.theme.palette.mode).regularTabText};
-		text-transform: uppercase;
-		&:hover {
-			background-color: ${(props) =>
-				color(props.theme.palette.mode).activeNavLinkBackground};
-		}
-	}
-	.accordion--active {
-		color: ${(props) => color(props.theme.palette.mode).activeTabText};
-	}
-`;
+export const AsideAccordion = styled("div")(
+	({
+		theme: {
+			palette: { mode },
+		},
+	}) => ({
+		"& StyledAccordionMenu": {
+			paddingLeft: "50px",
+			paddingRight: "15px",
+			width: "100%",
+			height: "42px",
+			display: "flex",
+			gap: " 10px",
+			alignItems: "center",
+			fontSize: "1.3rem",
+			color: color(mode).regularTabText,
+			textTransform: "uppercase",
+			"&:hover": {
+				backgroundColor: color(mode).activeNavLinkBackground,
+			},
+		},
+		".accordion--active": {
+			backgroundColor: color(mode).activeTabText,
+		},
+	})
+);
 
 export const StyledDrawer = styled(MuiDrawer, {
 	shouldForwardProp: (prop) => prop !== "open",

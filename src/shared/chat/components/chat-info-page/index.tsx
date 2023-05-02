@@ -22,7 +22,6 @@ export const ChatInfoWidget = () => {
 	const { chatInfo, chatMembersCount, auth } = useAppSelector(selector);
 
 	const dispatch = useAppDispatch();
-
 	const token = getAuthToken(auth)!;
 
 	useEffect(() => {
