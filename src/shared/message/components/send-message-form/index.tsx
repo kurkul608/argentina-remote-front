@@ -6,27 +6,39 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Box from "@mui/material/Box/Box";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { StepMessage } from "shared/message/components/send-message-form/step-message";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { StepChatsSelect } from "shared/message/components/send-message-form/step-chats-select";
 import { IChat } from "shared/chat/types/chat.interface";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import {
 	addChatToDraft,
+	addMessagesToDraft,
 	clearChoose,
 } from "shared/post/redux/draft/draft.slice";
+import { green } from "@mui/material/colors";
+import { createMessageService } from "shared/message/services/data/create-message.service";
+import { MessageType } from "shared/message/interfaces/message-type.interface";
+import { IRootState } from "redux/store";
+import { fromMessageDtoService } from "shared/message/services/from-dto.service";
+
+const selector = (state: IRootState) => ({ token: state.auth.token! });
 export const SendMessageForm = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "message.sendForm",
 	});
 
 	const [activeStep, setActiveStep] = useState(0);
+	const [loading, setLoading] = useState(false);
+
+	const { token } = useAppSelector(selector);
 
 	const dispatch = useAppDispatch();
 
 	const stepsToZero = () => {
+		//TODO Need use addMessagesToDraft by props
 		dispatch(clearChoose());
 		setActiveStep(0);
 	};
@@ -56,11 +68,29 @@ export const SendMessageForm = () => {
 	const formik1step = useFormik({
 		initialValues: {
 			text: "",
+			notifications: false,
 		},
 		validationSchema: validationSchema1step,
-		onSubmit: () => {
+		onSubmit: async (values) => {
+			// await createMessageService()
+			try {
+				setLoading(true);
+				const message = await createMessageService(
+					{
+						type: MessageType.text,
+						quill_delta: [values.text],
+						notifications: true,
+					},
+					token
+				);
+				//TODO Need use addMessagesToDraft by props
+				dispatch(addMessagesToDraft([fromMessageDtoService(message)]));
+				setLoading(false);
+				setActiveStep(1);
+			} catch (e) {
+				setLoading(false);
+			}
 			// alert(JSON.stringify(values, null, 2));
-			setActiveStep(1);
 		},
 	});
 
@@ -75,6 +105,7 @@ export const SendMessageForm = () => {
 		validationSchema: validationSchema2step,
 		onSubmit: (values) => {
 			// alert(JSON.stringify(values, null, 2));
+			//TODO Need use addMessagesToDraft by props
 			dispatch(addChatToDraft(values.chats));
 			setActiveStep(2);
 		},
@@ -143,11 +174,30 @@ export const SendMessageForm = () => {
 							{activeStep !== 0 && (
 								<Button onClick={handleBack}>{t("buttons.back")}</Button>
 							)}
-							<Button variant="contained" onClick={handleNext}>
-								{activeStep === steps.length - 1
-									? t("buttons.final")
-									: t("buttons.next")}
-							</Button>
+							<Box sx={{ position: "relative" }}>
+								<Button
+									variant="contained"
+									onClick={handleNext}
+									disabled={loading}
+								>
+									{activeStep === steps.length - 1
+										? t("buttons.final")
+										: t("buttons.next")}
+								</Button>
+								{loading && (
+									<CircularProgress
+										size={24}
+										sx={{
+											color: green[500],
+											position: "absolute",
+											top: "50%",
+											left: "50%",
+											marginTop: "-12px",
+											marginLeft: "-12px",
+										}}
+									/>
+								)}
+							</Box>
 						</Box>
 					</ST.StyledFooter>
 				</>

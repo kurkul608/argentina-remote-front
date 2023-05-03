@@ -4,6 +4,7 @@ import { getChatsList } from "shared/chat/services/data";
 import { IGetAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
 import { fromChatDtoService } from "shared/chat/services/from-chat-dto.service";
 import { Limits } from "constants/limits";
+import { IMessage } from "shared/message/interfaces/message.interface";
 
 export interface IDraftState {
 	createPost: {
@@ -17,6 +18,7 @@ export interface IDraftState {
 			q: string;
 
 			selectedChats: IChat[];
+			savedMessages: IMessage[];
 		};
 	};
 }
@@ -32,6 +34,7 @@ export const draftInitialState: IDraftState = {
 			q: "",
 
 			selectedChats: [],
+			savedMessages: [],
 		},
 	},
 };
@@ -58,6 +61,9 @@ export const draftSlice = createSlice({
 		},
 		clearChoose: (state) => {
 			state.createPost.chooseChats = draftInitialState.createPost.chooseChats;
+		},
+		addMessagesToDraft: (state, action: PayloadAction<IMessage[]>) => {
+			state.createPost.chooseChats.savedMessages = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -97,6 +103,7 @@ export const draftSlice = createSlice({
 		});
 	},
 });
-export const { addChatToDraft, clearChoose } = draftSlice.actions;
+export const { addChatToDraft, clearChoose, addMessagesToDraft } =
+	draftSlice.actions;
 
 export default draftSlice.reducer;
