@@ -11,6 +11,12 @@ import { StepMessage } from "shared/message/components/send-message-form/step-me
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { StepChatsSelect } from "shared/message/components/send-message-form/step-chats-select";
+import { IChat } from "shared/chat/types/chat.interface";
+import { useAppDispatch } from "redux/hooks";
+import {
+	addChatToDraft,
+	clearChoose,
+} from "shared/post/redux/draft/draft.slice";
 export const SendMessageForm = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "message.sendForm",
@@ -18,12 +24,24 @@ export const SendMessageForm = () => {
 
 	const [activeStep, setActiveStep] = useState(0);
 
-	const stepsToZero = () => setActiveStep(0);
+	const dispatch = useAppDispatch();
+
+	const stepsToZero = () => {
+		dispatch(clearChoose());
+		setActiveStep(0);
+	};
 	const handleNext = () => {
-		if (activeStep === 0) {
-			formik1step.handleSubmit();
-		} else {
-			setActiveStep(activeStep + 1);
+		switch (activeStep) {
+			case 0:
+				formik1step.handleSubmit();
+				break;
+
+			case 1:
+				formik2step.handleSubmit();
+				break;
+
+			default:
+				setActiveStep(activeStep + 1);
 		}
 	};
 
@@ -45,6 +63,23 @@ export const SendMessageForm = () => {
 			setActiveStep(1);
 		},
 	});
+
+	const validationSchema2step = yup.object({
+		chats: yup.array().min(1, t("step2.emptyChatsArrayTextError") as string),
+	});
+
+	const formik2step = useFormik({
+		initialValues: {
+			chats: [] as IChat[],
+		},
+		validationSchema: validationSchema2step,
+		onSubmit: (values) => {
+			// alert(JSON.stringify(values, null, 2));
+			dispatch(addChatToDraft(values.chats));
+			setActiveStep(2);
+		},
+	});
+
 	const steps = [t("step1.stepName"), t("step2.stepName"), t("step3.stepName")];
 	const getStepContent = (step: number) => {
 		switch (step) {
@@ -59,7 +94,15 @@ export const SendMessageForm = () => {
 					/>
 				);
 			case 1:
-				return <StepChatsSelect />;
+				return (
+					<StepChatsSelect
+						setFieldValue={formik2step.setFieldValue}
+						handleSubmit={formik2step.handleSubmit}
+						error={formik2step.errors.chats}
+						value={formik2step.values.chats}
+						touched={formik2step.touched.chats}
+					/>
+				);
 			case 2:
 				return <></>;
 			// default:

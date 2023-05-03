@@ -4,7 +4,7 @@ import { ChatSettings } from "shared/chat/types/chat-settings";
 import { IChatDto } from "shared/chat/types/chat-dto.interface";
 
 export interface AllChatsQuery {
-	[key: string]: number | boolean | undefined;
+	[key: string]: number | boolean | undefined | string;
 	limit: number;
 	offset: number;
 	isHidden?: boolean;

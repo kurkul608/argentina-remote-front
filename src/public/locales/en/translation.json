@@ -42,6 +42,11 @@
 		"chatTitle": "Chat title",
 		"count": "Subscribers count"
 	},
+	"chat": {
+		"selectForm": {
+			"label": "Select one or more chats"
+		}
+	},
 	"post": {
 		"draft": {
 			"pageTitle": "Saved drafts",
@@ -63,7 +68,8 @@
 				"emptyMessageTextError": "Message is required"
 			},
 			"step2": {
-				"stepName": "Select chats"
+				"stepName": "Select chats",
+				"emptyChatsArrayTextError": "You have to choose at least 1 chat"
 			},
 			"step3": {
 				"stepName": "Schedule"

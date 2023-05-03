@@ -41,6 +41,11 @@
 		"chatTitle": "Название чата",
 		"count": "Количество участников"
 	},
+	"chat": {
+		"selectForm": {
+			"label": "Выберите 1 или больше чатов"
+		}
+	},
 	"post": {
 		"draft": {
 			"pageTitle": "Сохраненные черновики",
@@ -62,7 +67,8 @@
 				"emptyMessageTextError": "Текст сообщения обязателен"
 			},
 			"step2": {
-				"stepName": "Выбрать чат"
+				"stepName": "Выбрать чат",
+				"emptyChatsArrayTextError": "Выберите минимум 1 чат"
 			},
 			"step3": {
 				"stepName": "Запланируйте время"

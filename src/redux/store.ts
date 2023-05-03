@@ -4,6 +4,7 @@ import authReducer from "../shared/auth/redux/auth.slice";
 import chatInfoReducer from "../shared/chat/redux/chat-info-page/chat.slice";
 // import chatSettingsUserRights from "shared/chat/redux/chat-settings/user-rights.slice";
 import chatSettingsReducer from "../shared/chat/redux/chat-settings";
+import postReducer from "../shared/post/redux";
 import themeReducer from "shared/theme/redux/theme.slice";
 import resizeReducer from "shared/resizer/redux/resizer.slice";
 
@@ -15,6 +16,7 @@ export const store = configureStore({
 		chats: chatReducer,
 		chat: chatInfoReducer,
 		chatSettings: chatSettingsReducer,
+		post: postReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({ serializableCheck: false }),

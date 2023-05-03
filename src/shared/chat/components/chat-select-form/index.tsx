@@ -1,42 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IRootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { getAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
 import { Limits } from "constants/limits";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField/TextField";
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
+import { useTranslation } from "react-i18next";
+import { IChat } from "shared/chat/types/chat.interface";
+import { FormikErrors, FormikTouched } from "formik";
+import { IGetAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
+import { ITableDataInterface } from "interfaces/dto/table-data.interface";
+import { IChatDto } from "shared/chat/types/chat-dto.interface";
 
-const selector = (state: IRootState) => ({
-	chats: state.chats.list,
-	page: state.chats.page,
-	isLoading: state.chats.isLoading,
-	token: state.auth.token!,
-});
-export const ChatSelectForm = () => {
-	const [open, setOpen] = React.useState(false);
+interface IOwnProps {
+	value: IChat[];
+	setFieldValue(field: string, value: IChat[]): void;
+	handleSubmit(e?: React.FormEvent<HTMLFormElement> | undefined): void;
+	touched?: FormikTouched<IChat>[];
+	error?: string | never[] | string[] | FormikErrors<IChat>[];
 
-	const { chats, token, page, isLoading } = useAppSelector(selector);
+	getChats(
+		arg: IGetAllChats
+	): AsyncThunkAction<ITableDataInterface<IChatDto>, IGetAllChats, object>;
+
+	chats: IChat[];
+	selectedChats: IChat[];
+	page: number;
+	total: number;
+	isLoading: boolean;
+}
+
+const selector = (state: IRootState) => ({ token: state.auth.token! });
+
+export const ChatSelectForm = (props: IOwnProps) => {
+	const { t } = useTranslation("translation", {
+		keyPrefix: "chat.selectForm",
+	});
+
+	const [open, setOpen] = useState(false);
+
+	const { token } = useAppSelector(selector);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(
-			getAllChats({
+			props.getChats({
 				token,
-				params: { limit: Limits.chatsPerPage, page, isHidden: false },
+				params: {
+					limit: Limits.chatsPerChatSelect,
+					page: 0,
+					isHidden: false,
+					// q,
+				},
 			})
 		);
 	}, []);
+
 	return (
 		<Autocomplete
 			multiple
 			id="asynchronous-demo"
-			sx={{ width: 300 }}
+			sx={{ width: "100%" }}
 			open={open}
-			// onInputChange={(e, val) => {
-			// 	console.log(e.target);
-			// 	console.log(val);
-			// }}
+			value={props.value}
+			onChange={(_, value) => props.setFieldValue("chats", value)}
 			onOpen={() => {
 				setOpen(true);
 			}}
@@ -47,17 +75,19 @@ export const ChatSelectForm = () => {
 				option.tgChatInfo.chatInfo.title === value.tgChatInfo.chatInfo.title
 			}
 			getOptionLabel={(option) => option.tgChatInfo.chatInfo.title}
-			options={chats}
-			loading={isLoading}
+			options={props.chats}
+			loading={props.isLoading}
 			renderInput={(params) => (
 				<TextField
 					{...params}
-					label="Asynchronous"
+					label={t("label")}
+					name={"chats"}
+					error={Boolean(props.touched && props.error)}
 					InputProps={{
 						...params.InputProps,
 						endAdornment: (
 							<>
-								{isLoading ? (
+								{props.isLoading ? (
 									<CircularProgress color="inherit" size={20} />
 								) : null}
 								{params.InputProps.endAdornment}

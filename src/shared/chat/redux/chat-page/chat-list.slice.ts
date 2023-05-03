@@ -27,6 +27,7 @@ export interface GetAllChatsParams {
 	limit: number;
 	isHidden?: boolean;
 	forceClear?: boolean;
+	q?: string;
 }
 export interface IGetAllChats {
 	token: string;
@@ -35,11 +36,12 @@ export interface IGetAllChats {
 export const getAllChats = createAsyncThunk(
 	"chats/getAllChats",
 	async ({ token, params }: IGetAllChats) => {
-		const { page, limit, isHidden } = params;
+		const { page, limit, isHidden, q } = params;
 		return getChatsList(token, {
 			limit: limit,
 			offset: page * limit,
 			isHidden: isHidden,
+			q,
 		});
 	}
 );
@@ -62,7 +64,7 @@ export const chatsSlice = createSlice({
 					action.payload.data.map(fromChatDtoService)
 				);
 				state.total = action.payload.total;
-				state.hasMore = state.page * Limits.chatsPerPage < state.total;
+				state.hasMore = state.page * Limits.chatsPerPage < action.payload.total;
 				state.isLoading = false;
 			})
 			.addCase(getAllChats.rejected, (state, action) => {
