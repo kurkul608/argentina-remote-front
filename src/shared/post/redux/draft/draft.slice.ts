@@ -4,7 +4,7 @@ import { getChatsList } from "shared/chat/services/data";
 import { IGetAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
 import { fromChatDtoService } from "shared/chat/services/from-chat-dto.service";
 import { Limits } from "constants/limits";
-import { IMessage } from "shared/message/interfaces/message.interface";
+import { IMessage } from "shared/message/interfaces/message/message.interface";
 
 export interface IDraftState {
 	createPost: {

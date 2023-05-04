@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import { Widget } from "shared/components/widget";
 import { useTranslation } from "react-i18next";
-import { SendMessageForm } from "shared/message/components/send-message-form";
+import { CreatePost } from "shared/post/components/create-post-form";
 
 export const PostDraft = () => {
 	const { t } = useTranslation("translation", { keyPrefix: "post.draft" });
@@ -15,7 +15,7 @@ export const PostDraft = () => {
 			</Grid>
 			<Grid item xs={12}>
 				<Widget name={t("createWidget.title")}>
-					<SendMessageForm />
+					<CreatePost />
 				</Widget>
 			</Grid>
 			{/*<Grid item xs={12} md={8} lg={1}>*/}

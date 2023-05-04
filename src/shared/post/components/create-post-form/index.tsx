@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import * as ST from "./styled";
+import * as ST from "shared/post/components/create-post-form/styled";
 import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography/Typography";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Box from "@mui/material/Box/Box";
-import { Button, CircularProgress } from "@mui/material";
-import { StepMessage } from "shared/message/components/send-message-form/step-message";
+import { Button } from "@mui/material";
+import { StepMessage } from "shared/post/components/create-post-form/step-message";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { StepChatsSelect } from "shared/message/components/send-message-form/step-chats-select";
+import { StepChatsSelect } from "shared/post/components/create-post-form/step-chats-select";
 import { IChat } from "shared/chat/types/chat.interface";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import {
@@ -18,14 +18,32 @@ import {
 	addMessagesToDraft,
 	clearChoose,
 } from "shared/post/redux/draft/draft.slice";
-import { green } from "@mui/material/colors";
 import { createMessageService } from "shared/message/services/data/create-message.service";
-import { MessageType } from "shared/message/interfaces/message-type.interface";
+import { MessageType } from "shared/message/interfaces/message/message-type.interface";
 import { IRootState } from "redux/store";
-import { fromMessageDtoService } from "shared/message/services/from-dto.service";
+import { fromMessageDtoService } from "shared/message/services/dto/from-dto.service";
+import { createPost } from "shared/post/services/data";
+import { postCreateToDtoService } from "shared/post/services/dto/create/to-dto.service";
+import { Keyboard } from "shared/message/interfaces/keyboard/keyboard-type.interface";
+import { IKeyboard } from "shared/message/interfaces/keyboard/keyboard.interface";
+import { ButtonWithLoader } from "shared/components/button-with-loader";
 
-const selector = (state: IRootState) => ({ token: state.auth.token! });
-export const SendMessageForm = () => {
+const selector = (state: IRootState) => ({
+	token: state.auth.token!,
+	chats: state.post.draft.createPost.chooseChats.selectedChats,
+	messages: state.post.draft.createPost.chooseChats.savedMessages,
+});
+
+interface IStep1 {
+	text: string;
+	notifications: boolean;
+	buttons: IKeyboard[][];
+}
+
+interface IStep2 {
+	chats: IChat[];
+}
+export const CreatePost = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "message.sendForm",
 	});
@@ -33,7 +51,7 @@ export const SendMessageForm = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [loading, setLoading] = useState(false);
 
-	const { token } = useAppSelector(selector);
+	const { token, messages, chats } = useAppSelector(selector);
 
 	const dispatch = useAppDispatch();
 
@@ -42,7 +60,7 @@ export const SendMessageForm = () => {
 		dispatch(clearChoose());
 		setActiveStep(0);
 	};
-	const handleNext = () => {
+	const handleNext = async () => {
 		switch (activeStep) {
 			case 0:
 				formik1step.handleSubmit();
@@ -50,6 +68,26 @@ export const SendMessageForm = () => {
 
 			case 1:
 				formik2step.handleSubmit();
+				break;
+
+			case steps.length - 1:
+				try {
+					await createPost(
+						token,
+						postCreateToDtoService({
+							title: "Test title",
+							chats: chats.map((chat) => chat._id),
+							messages: messages.map((message) => message._id),
+							pinMessage: false,
+							postNow: true,
+						})
+					);
+					setLoading(true);
+					setLoading(false);
+				} catch (e) {
+					setLoading(false);
+				}
+				setActiveStep(activeStep + 1);
 				break;
 
 			default:
@@ -65,10 +103,18 @@ export const SendMessageForm = () => {
 		text: yup.string().required(t("step1.emptyMessageTextError") as string),
 	});
 
-	const formik1step = useFormik({
+	const formik1step = useFormik<IStep1>({
 		initialValues: {
 			text: "",
-			notifications: false,
+			notifications: true,
+			buttons: [
+				[
+					{
+						type: Keyboard.link,
+						link: { text: "Google", url: "https://google.com" },
+					},
+				],
+			],
 		},
 		validationSchema: validationSchema1step,
 		onSubmit: async (values) => {
@@ -80,6 +126,7 @@ export const SendMessageForm = () => {
 						type: MessageType.text,
 						quill_delta: [values.text],
 						notifications: true,
+						keyboard: values.buttons,
 					},
 					token
 				);
@@ -98,9 +145,9 @@ export const SendMessageForm = () => {
 		chats: yup.array().min(1, t("step2.emptyChatsArrayTextError") as string),
 	});
 
-	const formik2step = useFormik({
+	const formik2step = useFormik<IStep2>({
 		initialValues: {
-			chats: [] as IChat[],
+			chats: [],
 		},
 		validationSchema: validationSchema2step,
 		onSubmit: (values) => {
@@ -174,30 +221,15 @@ export const SendMessageForm = () => {
 							{activeStep !== 0 && (
 								<Button onClick={handleBack}>{t("buttons.back")}</Button>
 							)}
-							<Box sx={{ position: "relative" }}>
-								<Button
-									variant="contained"
-									onClick={handleNext}
-									disabled={loading}
-								>
-									{activeStep === steps.length - 1
-										? t("buttons.final")
-										: t("buttons.next")}
-								</Button>
-								{loading && (
-									<CircularProgress
-										size={24}
-										sx={{
-											color: green[500],
-											position: "absolute",
-											top: "50%",
-											left: "50%",
-											marginTop: "-12px",
-											marginLeft: "-12px",
-										}}
-									/>
-								)}
-							</Box>
+							<ButtonWithLoader
+								loading={loading}
+								variant={"contained"}
+								handleClick={handleNext}
+							>
+								{activeStep === steps.length - 1
+									? t("buttons.final")
+									: t("buttons.next")}
+							</ButtonWithLoader>
 						</Box>
 					</ST.StyledFooter>
 				</>
