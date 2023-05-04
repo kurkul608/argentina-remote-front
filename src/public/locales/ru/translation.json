@@ -22,7 +22,8 @@
 		},
 		"settings": {
 			"memberRights": "Права участников",
-			"greeting": "Приветствие"
+			"greeting": "Приветствие",
+			"moderation": "Модерация"
 		}
 	},
 	"header": {

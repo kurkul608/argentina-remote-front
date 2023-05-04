@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import { ListItemButton, ListItemIcon } from "@mui/material";
+import React from "react";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
-import ListItemText from "@mui/material/ListItemText";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -13,6 +8,10 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { routeBuilder } from "shared/router/services/route-builder";
 import { Routes } from "shared/router";
 import { NavButton } from "shared/layout/aside/components/nav-button";
+import { AsideCollapse } from "shared/layout/aside/components/collapse";
+import { useTranslation } from "react-i18next";
+import { routeExactMatchV2 } from "shared/router/services/route-exact";
+import { useLocation } from "react-router-dom";
 
 interface IOwnProps {
 	main: string;
@@ -22,20 +21,19 @@ interface IOwnProps {
 	contentPlan: string;
 }
 export const Post = (props: IOwnProps) => {
-	const [postOpen, setPostOpen] = useState(false);
-
-	const postOpenHandler = () => setPostOpen(!postOpen);
-
+	const { t } = useTranslation("translation", { keyPrefix: "aside" });
+	const locate = useLocation();
+	const inPost = routeExactMatchV2(
+		locate.pathname,
+		routeBuilder([Routes.admin, Routes.post])
+	);
 	return (
 		<>
-			<ListItemButton onClick={postOpenHandler}>
-				<ListItemIcon>
-					<DynamicFeedIcon />
-				</ListItemIcon>
-				<ListItemText primary={props.main} />
-				{postOpen ? <ExpandLess /> : <ExpandMore />}
-			</ListItemButton>
-			<Collapse in={postOpen} timeout="auto" unmountOnExit>
+			<AsideCollapse
+				icon={<DynamicFeedIcon />}
+				title={t("posting.main")}
+				expandByDefault={inPost}
+			>
 				<List component="div" disablePadding>
 					<NavButton
 						text={props.draft}
@@ -66,7 +64,7 @@ export const Post = (props: IOwnProps) => {
 						sx={{ pl: 4 }}
 					/>
 				</List>
-			</Collapse>
+			</AsideCollapse>
 		</>
 	);
 };

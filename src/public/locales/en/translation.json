@@ -22,7 +22,8 @@
 		},
 		"settings": {
 			"memberRights": "Members Rights",
-			"greeting": "Greeting"
+			"greeting": "Greeting",
+			"moderation":"Moderation"
 		}
 	},
 	"header": {
