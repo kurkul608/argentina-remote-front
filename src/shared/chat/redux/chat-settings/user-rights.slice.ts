@@ -69,7 +69,6 @@ export const userRightsSlice = createSlice({
 			state.isLoading = true;
 		});
 		builder.addCase(getChatAdminsAsync.rejected, (state) => {
-			state.data.adminList = [];
 			state.isLoading = false;
 		});
 	},

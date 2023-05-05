@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IContentProps, TableWidget } from "shared/components/table-widget";
 import { SwitchWidget } from "shared/components/switch-widget";
 import { ContentWrapper } from "shared/chat/components/chat-settings/components/members-rights-page/styled";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateToggleFiled } from "shared/chat/redux/chat-settings/chat-settings.slice";
-import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
 import { IRootState } from "redux/store";
 import { ChatMemberAdministrator } from "typegram";
 
@@ -15,7 +14,7 @@ const selector = (state: IRootState) => ({
 });
 
 export const RightsAdmin = () => {
-	const { userRights, token, id } = useAppSelector(selector);
+	const { userRights } = useAppSelector(selector);
 	const dispatch = useAppDispatch();
 	const callBack = (value: boolean) => {
 		dispatch(
@@ -25,18 +24,19 @@ export const RightsAdmin = () => {
 			})
 		);
 	};
-	useEffect(() => {
-		if (!!token && id) {
-			dispatch(getChatAdminsAsync({ token: token, id: id }));
-		}
-	}, [id]);
 
 	const adminChat: IContentProps[] = userRights.adminList.map((user) => {
 		const misc: { [index: string]: boolean } = {};
 		if (user.status === "administrator") {
-			for (const i in user) {
-				if (i !== "status" && i !== "user" && i !== "custom_title") {
-					misc[i] = user[i as keyof ChatMemberAdministrator] as boolean;
+			for (const permission in user) {
+				if (
+					permission !== "status" &&
+					permission !== "user" &&
+					permission !== "custom_title"
+				) {
+					misc[permission] = user[
+						permission as keyof ChatMemberAdministrator
+					] as boolean;
 				}
 			}
 		}

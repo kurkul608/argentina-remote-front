@@ -11,6 +11,7 @@ import { IRootState } from "redux/store";
 const selector = (state: IRootState) => ({
 	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
 	chatMembersCount: state.chat.chat?.tgChatInfo.chatMembersCount,
+	chatID: state.chat.chat?._id,
 	auth: state.auth,
 });
 export const ChatInfoWidget = () => {
@@ -19,13 +20,15 @@ export const ChatInfoWidget = () => {
 	});
 	const { chatId } = useParams();
 
-	const { chatInfo, chatMembersCount, auth } = useAppSelector(selector);
+	const { chatInfo, chatMembersCount, auth, chatID } = useAppSelector(selector);
 
 	const dispatch = useAppDispatch();
 	const token = getAuthToken(auth)!;
 
 	useEffect(() => {
-		if (chatId) dispatch(getChatAsync({ id: chatId, token }));
+		if (chatId) {
+			if (chatId !== chatID) dispatch(getChatAsync({ id: chatId, token }));
+		}
 	}, []);
 
 	const count = chatMembersCount;
