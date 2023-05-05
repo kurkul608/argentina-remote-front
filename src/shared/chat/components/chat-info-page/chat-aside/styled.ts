@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 import { color } from "constants/colors";
 
 export const ChatLeftBarWrapper = styled("div")`
-	padding: 0 15px;
 	border-top: 1px #f7b03e solid;
 	font-size: 1.5rem;
 `;

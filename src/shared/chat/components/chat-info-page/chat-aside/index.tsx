@@ -5,7 +5,7 @@ import {
 	ChatBarTitleWrapper,
 	ChatLeftBarWrapper,
 	ChatNavWrapper,
-} from "shared/chat/components/chat-page/chat-aside/styled";
+} from "shared/chat/components/chat-info-page/chat-aside/styled";
 import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 

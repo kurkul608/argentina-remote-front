@@ -12,3 +12,17 @@ export const routeExactMatch = (
 		splitRoute[splitRoute.length - depth]
 	);
 };
+
+export const routeExactMatchV2 = (
+	fullRoute: Pathname,
+	route: string
+): boolean => {
+	const routes: Routes[] = fullRoute.split("/") as Routes[];
+	const routeArray: Routes[] = route.split("/") as Routes[];
+	for (const routeIndex in routeArray) {
+		if (routes[routeIndex] !== routeArray[routeIndex]) {
+			return false;
+		}
+	}
+	return true;
+};

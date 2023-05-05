@@ -1,7 +1,8 @@
 import { get, post } from "services/api";
 import { ITableDataInterface } from "interfaces/dto/table-data.interface";
-import { ChatSettings } from "shared/chat/types/chat-settings";
+import { ChatSettings } from "shared/chat/types/chat-settings/chat-settings";
 import { IChatDto } from "shared/chat/types/chat-dto.interface";
+import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
 
 export interface AllChatsQuery {
 	[key: string]: number | boolean | undefined;
@@ -24,13 +25,16 @@ export const getChatsList = (token: string, query: AllChatsQuery) =>
 export const getChat = (id: string, token: string) =>
 	get<IChatDto>(`chats/${id}`, { authToken: token });
 
+export const getChatAdmins = (id: string, token: string) =>
+	get<ChatAdminsDtoInterface>(`setting/${id}/admin`, { authToken: token });
+
 export const getSettings = (id: string, token: string) =>
 	new Promise((resolve) =>
 		setTimeout(
-			() =>
+			async () =>
 				resolve({
 					userRights: {
-						adminList: ["petya", "artem", "mark"],
+						adminList: [],
 						allowChatAdminCallCommands: false,
 					},
 					greetings: {

@@ -14,6 +14,7 @@ type IOwnProps = {
 	text: string;
 	icon: ReactNode;
 	sx?: SxProps<Theme>;
+	end?: boolean;
 };
 
 export const NavButton = ({
@@ -23,11 +24,11 @@ export const NavButton = ({
 	text,
 	icon,
 	sx,
+	end,
 }: IOwnProps) => {
 	const locate = useLocation();
 
 	const searchParams = searchParamsGrabber(locate.search);
-
 	const matchParam = () => {
 		if (param !== undefined) {
 			return searchParamsFinder(searchParams, param);
@@ -38,7 +39,7 @@ export const NavButton = ({
 	return (
 		<ListItemButton
 			component={NavLink}
-			end
+			end={end}
 			to={to}
 			sx={{
 				...sx,

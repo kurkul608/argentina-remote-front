@@ -2,7 +2,7 @@ import React from "react";
 import {
 	TopBarChatPhoto,
 	TopBarWrapper,
-} from "shared/chat/components/chat-page/chat-top-bar/styled";
+} from "shared/chat/components/chat-info-page/chat-top-bar/styled";
 import { Widget } from "shared/components/widget";
 import { Button } from "shared/components/button";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
@@ -36,9 +36,7 @@ export const ChatTopBar = () => {
 						{isHidden ? "hidden" : "nothidden"}
 					</Button>
 				</TopBarWrapper>
-				;
 			</Widget>
-			;
 		</>
 	);
 };

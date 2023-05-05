@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { color } from "../../../constants/colors";
+import { color } from "constants/colors";
 
 export const TitleWrapper = styled("div")`
 	grid-column-start: 1;

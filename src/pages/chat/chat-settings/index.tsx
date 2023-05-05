@@ -8,21 +8,31 @@ import { useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getAuthToken } from "helpers/storage-parser";
 import { getChatSettingsAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
+import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
+import { IRootState } from "redux/store";
+
+const selector = (state: IRootState) => ({
+	auth: state.auth,
+	id: state.chat.chat?._id,
+});
 
 export const ChatSettings = () => {
 	const { t } = useTranslation("translation", { keyPrefix: "chatsPage" });
 	const location = useLocation();
 	const { chatId } = useParams();
 	const dispatch = useAppDispatch();
-	const { auth } = useAppSelector((state) => ({
-		auth: state.auth,
-	}));
+	const { auth, id } = useAppSelector(selector);
 	const token = getAuthToken(auth)!;
 
 	useEffect(() => {
 		if (chatId) {
-			dispatch(getChatAsync({ id: chatId, token }));
-			dispatch(getChatSettingsAsync({ id: chatId, token }));
+			if (chatId !== id) {
+				Promise.all([
+					dispatch(getChatAsync({ id: chatId, token })),
+					dispatch(getChatSettingsAsync({ id: chatId, token })),
+					dispatch(getChatAdminsAsync({ token: token, id: chatId })),
+				]);
+			}
 		}
 	}, []);
 	return (
@@ -32,9 +42,6 @@ export const ChatSettings = () => {
 				<Breadcrumbs link={location.pathname} />
 			</Title>
 			<Outlet />
-			{/*<WidgetWrapper>*/}
-			{/*	<ChatInfoWidget />*/}
-			{/*</WidgetWrapper>*/}
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { TableProps } from "shared/components/table-widget/index";
+import { ITableProps } from "shared/components/table-widget/index";
 import {
 	ContentWrapper,
 	Item,
@@ -11,19 +11,32 @@ import {
 } from "shared/components/table-widget/components/regular-table/styled";
 import { Icon, IconName } from "shared/components/icon";
 
-export const RegularTable = ({ content }: Pick<TableProps, "content">) => {
+export interface ITableOptions {
+	data: { [x: string]: boolean };
+}
+
+export const TableOptions = ({ data }: ITableOptions) => {
+	const items = [];
+	for (const [key, value] of Object.entries(data)) {
+		items.push(<div>{`${key}:${value}`}</div>);
+	}
+	return <div>{items.map((item) => item)}</div>;
+};
+
+export const RegularTable = ({ content }: Pick<ITableProps, "content">) => {
 	return (
 		<ContentWrapper>
 			{content && <Total>Total: {`${content.length}`}</Total>}
 			<ItemsTable>
 				{content &&
 					content.map((item) => (
-						<Item key={item}>
+						<Item key={item.content}>
 							<NameWrapper>
 								<Icon name={IconName.user} />
-								<Name>{item}</Name>
+								<Name>{item.content}</Name>
 							</NameWrapper>
-							<Status>owner</Status>
+							{item.misc && <TableOptions data={item.misc} />}
+							<Status>{item.status}</Status>
 						</Item>
 					))}
 			</ItemsTable>

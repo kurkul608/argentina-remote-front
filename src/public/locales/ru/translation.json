@@ -19,6 +19,11 @@
 		"chatCategories" :{
 			"settings": "Настройки",
 			"info": "Информация"
+		},
+		"settings": {
+			"memberRights": "Права участников",
+			"greeting": "Приветствие",
+			"moderation": "Модерация"
 		}
 	},
 	"header": {

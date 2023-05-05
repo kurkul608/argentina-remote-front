@@ -29,7 +29,7 @@ export const Accordion = ({ children, name, isOpen }: IAccordion) => {
 		<StyledWrapper>
 			<StyledAccordionMenu
 				isHidden={isHidden}
-				className={isHidden ? "" : "accordion--active"}
+				className={isHidden ? "" : "collapse--active"}
 				onClick={handleOnClick}
 			>
 				<StyledTitle isHidden={isHidden}>{name}</StyledTitle>

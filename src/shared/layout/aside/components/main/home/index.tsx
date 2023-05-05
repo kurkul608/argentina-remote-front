@@ -13,6 +13,7 @@ export const Home = ({ text }: IOwnProps) => {
 			text={text}
 			icon={<HouseIcon />}
 			to={routeBuilder([Routes.admin])}
+			end
 		/>
 	);
 };
