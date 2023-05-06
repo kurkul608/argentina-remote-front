@@ -79,8 +79,8 @@ export const Header = () => {
 				>
 					{info("appName")} {info("dashboard")}
 				</Typography>
-				<IconButton color="inherit">
-					<SettingsIcon onClick={settingsHandler} />
+				<IconButton color="inherit" onClick={settingsHandler}>
+					<SettingsIcon />
 					{/*<Badge badgeContent={4} color="secondary">*/}
 					{/*	<NotificationsIcon />*/}
 					{/*</Badge>*/}

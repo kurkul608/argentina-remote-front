@@ -47,11 +47,71 @@
 		"chatTitle": "Chat title",
 		"count": "Subscribers count"
 	},
+	"chat": {
+		"selectForm": {
+			"label": "Select one or more chats"
+		}
+	},
 	"post": {
 		"draft": {
 			"pageTitle": "Saved drafts",
 			"createWidget": {
 				"title": "Create post"
+
+			}
+		}
+	},
+	"message": {
+		"sendForm": {
+			"title": "Create message",
+			"step1": {
+				"stepName": "Create post",
+				"fillDate": "Fill data",
+				"addButtons": "Add buttons",
+				"textFieldLabel": "Text",
+				"createLinkLabel": "Add button",
+				"addNewRow": "Add row",
+				"emptyMessageTextError": "Message is required",
+				"keyboardDialog": {
+					"title": "Add button",
+					"description": "Select the type of button, and fill out the form to add a button, the appropriate type",
+					"buttonClose": "Close",
+					"buttonSuccess": "Add button",
+					"buttonChange": "Update button",
+					"buttonRemove": "Remove button",
+					"autocompleteLabel": "Choose button type"
+				}
+			},
+			"step2": {
+				"stepName": "Select chats",
+				"emptyChatsArrayTextError": "You have to choose at least 1 chat"
+			},
+			"step3": {
+				"stepName": "Schedule"
+			},
+			"final": {
+				"message": "Thank you for use our service",
+				"description": "Your request has been generated and will be processed on time"
+			},
+			"buttons": {
+				"sendMySelf": "Send myself",
+				"next": "Next",
+				"back": "Back",
+				"final": "Final",
+				"more": "Create new"
+			}
+		},
+		"keyboard": {
+			"link": {
+				"title": "Link",
+				"textLabel": "Link label",
+				"linkLabel": "Link address",
+				"textValidation": "Link label cannot be empty",
+				"linkValidation": "Must be a valid URL"
+			},
+			"typeValidation": {
+				"required": "Type is required",
+				"invalidType": "Invalid keyboard type"
 			}
 		}
 	}

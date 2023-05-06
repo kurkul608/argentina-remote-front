@@ -5,7 +5,7 @@ import { IChatDto } from "shared/chat/types/chat-dto.interface";
 import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
 
 export interface AllChatsQuery {
-	[key: string]: number | boolean | undefined;
+	[key: string]: number | boolean | undefined | string;
 	limit: number;
 	offset: number;
 	isHidden?: boolean;

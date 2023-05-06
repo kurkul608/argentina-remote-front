@@ -46,11 +46,71 @@
 		"chatTitle": "Название чата",
 		"count": "Количество участников"
 	},
+	"chat": {
+		"selectForm": {
+			"label": "Выберите 1 или больше чатов"
+		}
+	},
 	"post": {
 		"draft": {
 			"pageTitle": "Сохраненные черновики",
 			"createWidget": {
 				"title": "Созданине поста"
+
+			}
+		}
+	},
+	"message": {
+		"sendForm": {
+			"title": "Слздать сообщение",
+			"step1": {
+				"stepName": "Пост",
+				"fillDate": "Заполните данные",
+				"addButtons": "Добавьте кнопки",
+				"textFieldLabel": "Текст",
+				"createLinkLabel": "Добавить кнопку",
+				"addNewRow": "Добавить ряд",
+				"emptyMessageTextError": "Текст сообщения обязателен",
+				"keyboardDialog": {
+					"title": "Добавление кнопки",
+					"description": "Выберите тип кнопки, и заполните форму для добавления кнопки, подходящего типа",
+					"buttonClose": "Закрыть",
+					"buttonSuccess": "Добавить кнопку",
+					"buttonChange": "Обновить кнопку",
+					"buttonRemove": "Удалить кнопку",
+					"autocompleteLabel": "Выберите тип кнопки"
+				}
+			},
+			"step2": {
+				"stepName": "Выбрать чат",
+				"emptyChatsArrayTextError": "Выберите минимум 1 чат"
+			},
+			"step3": {
+				"stepName": "Запланируйте время"
+			},
+			"final": {
+				"message": "Спасибо за использование нашего сервиса",
+				"description": "Ваш запрос был сформирован и будет обработан вовремя"
+			},
+			"buttons": {
+				"sendMySelf": "Отправить себе",
+				"next": "Вперед",
+				"back": "Назад",
+				"final": "Готово",
+				"more": "Создать еще одно"
+			}
+		},
+		"keyboard": {
+			"link": {
+				"title": "Ссылка",
+				"textLabel": "Название ссылки",
+				"linkLabel": "Адрес ссылки",
+				"textValidation": "Название не должно быть пустым",
+				"linkValidation": "Ссылка должна быть валидной"
+			},
+			"typeValidation": {
+				"required": "Выбор типа обязателен",
+				"invalidType": "Не корректный тип данных"
 			}
 		}
 	}
