@@ -24,7 +24,6 @@ import { IRootState } from "redux/store";
 import { fromMessageDtoService } from "shared/message/services/dto/from-dto.service";
 import { createPost } from "shared/post/services/data";
 import { postCreateToDtoService } from "shared/post/services/dto/create/to-dto.service";
-import { Keyboard } from "shared/message/interfaces/keyboard/keyboard-type.interface";
 import { IKeyboard } from "shared/message/interfaces/keyboard/keyboard.interface";
 import { ButtonWithLoader } from "shared/components/button-with-loader";
 
@@ -107,14 +106,7 @@ export const CreatePost = () => {
 		initialValues: {
 			text: "",
 			notifications: true,
-			buttons: [
-				[
-					{
-						type: Keyboard.link,
-						link: { text: "Google", url: "https://google.com" },
-					},
-				],
-			],
+			buttons: [],
 		},
 		validationSchema: validationSchema1step,
 		onSubmit: async (values) => {
@@ -164,6 +156,8 @@ export const CreatePost = () => {
 			case 0:
 				return (
 					<StepMessage
+						buttons={formik1step.values.buttons}
+						setFieldValue={formik1step.setFieldValue}
 						handleChange={formik1step.handleChange}
 						handleSubmit={formik1step.handleSubmit}
 						error={formik1step.errors.text}

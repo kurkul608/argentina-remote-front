@@ -4,11 +4,14 @@ import TextField from "@mui/material/TextField/TextField";
 import Typography from "@mui/material/Typography/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Button from "@mui/material/Button/Button";
+import { GenerateKeyboard } from "shared/message/components/generate-keyboard";
+import { IKeyboard } from "shared/message/interfaces/keyboard/keyboard.interface";
 
 interface IOwnProps {
 	value: string;
+	buttons: IKeyboard[][];
 	handleChange(e: React.ChangeEvent<any>): void;
+	setFieldValue(field: string, value: IKeyboard[][]): void;
 	handleSubmit(e?: React.FormEvent<HTMLFormElement> | undefined): void;
 	touched?: boolean;
 	error?: string;
@@ -19,6 +22,8 @@ export const StepMessage = ({
 	error,
 	handleChange,
 	handleSubmit,
+	buttons,
+	setFieldValue,
 }: IOwnProps) => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "message.sendForm.step1",
@@ -58,16 +63,7 @@ export const StepMessage = ({
 			<Typography variant="h6" gutterBottom>
 				{t("addButtons")}
 			</Typography>
-			<Grid container spacing={3}>
-				<Grid item xs={12} sm={6}>
-					<Button variant={"outlined"} sx={{ width: "100%" }} type={"button"}>
-						{t("createLinkLabel")}
-					</Button>
-				</Grid>
-				{/*<Grid item xs={12} sm={6}>*/}
-				{/*	<Button sx={{ width: "100%" }}>{t("createLinkLabel")}</Button>*/}
-				{/*</Grid>*/}
-			</Grid>
+			<GenerateKeyboard setFieldValue={setFieldValue} buttons={buttons} />
 		</Box>
 	);
 };

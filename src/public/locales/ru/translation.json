@@ -63,8 +63,18 @@
 				"fillDate": "Заполните данные",
 				"addButtons": "Добавьте кнопки",
 				"textFieldLabel": "Текст",
-				"createLinkLabel": "Добавить ссылку",
-				"emptyMessageTextError": "Текст сообщения обязателен"
+				"createLinkLabel": "Добавить кнопку",
+				"addNewRow": "Добавить ряд",
+				"emptyMessageTextError": "Текст сообщения обязателен",
+				"keyboardDialog": {
+					"title": "Добавление кнопки",
+					"description": "Выберите тип кнопки, и заполните форму для добавления кнопки, подходящего типа",
+					"buttonClose": "Закрыть",
+					"buttonSuccess": "Добавить кнопку",
+					"buttonChange": "Обновить кнопку",
+					"buttonRemove": "Удалить кнопку",
+					"autocompleteLabel": "Выберите тип кнопки"
+				}
 			},
 			"step2": {
 				"stepName": "Выбрать чат",
@@ -83,6 +93,19 @@
 				"back": "Назад",
 				"final": "Готово",
 				"more": "Создать еще одно"
+			}
+		},
+		"keyboard": {
+			"link": {
+				"title": "Ссылка",
+				"textLabel": "Название ссылки",
+				"linkLabel": "Адрес ссылки",
+				"textValidation": "Название не должно быть пустым",
+				"linkValidation": "Ссылка должна быть валидной"
+			},
+			"typeValidation": {
+				"required": "Выбор типа обязателен",
+				"invalidType": "Не корректный тип данных"
 			}
 		}
 	}

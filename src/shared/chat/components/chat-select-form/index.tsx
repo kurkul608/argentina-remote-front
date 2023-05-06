@@ -60,7 +60,7 @@ export const ChatSelectForm = (props: IOwnProps) => {
 	return (
 		<Autocomplete
 			multiple
-			id="asynchronous-demo"
+			id="select-chat"
 			sx={{ width: "100%" }}
 			open={open}
 			value={props.value}
