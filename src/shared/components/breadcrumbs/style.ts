@@ -20,6 +20,7 @@ export const Breadcrumb = styled("div")`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	height: 1.9rem;
+	max-width: 350px;
 	@media (max-width: 1024px) {
 		max-width: 250px;
 	}
