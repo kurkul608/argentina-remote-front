@@ -17,6 +17,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import AddIcon from "@mui/icons-material/Add";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Typography from "@mui/material/Typography";
 
 const getIconByType = (type: Keyboard) => {
 	switch (type) {
@@ -194,7 +195,8 @@ export const GenerateKeyboard = ({
 							display: "flex",
 							gap: 2,
 							"> *": {
-								flex: "1 0 auto",
+								flex: "1 1 auto",
+								maxWidth: "100%",
 							},
 						}}
 					>
@@ -211,7 +213,7 @@ export const GenerateKeyboard = ({
 									startIcon={getIconByType(cell.type)}
 									key={`generate-keyboard--row${rowIndex}--button--${columnIndex}-tg}`}
 								>
-									{cell.link?.text}
+									<Typography noWrap>{cell.link?.text}</Typography>
 								</Button>
 								{columnIndex < 7 && columnIndex === row.length - 1 && (
 									<Button
