@@ -14,14 +14,19 @@ import { IRootState } from "redux/store";
 const selector = (state: IRootState) => ({
 	auth: state.auth,
 	id: state.chat.chat?._id,
+	chatTitle: state.chat.chat?.tgChatInfo.chatInfo.title,
 });
+
+interface IDecorator {
+	[key: string]: string;
+}
 
 export const ChatSettings = () => {
 	const { t } = useTranslation("translation", { keyPrefix: "chatsPage" });
 	const location = useLocation();
 	const { chatId } = useParams();
 	const dispatch = useAppDispatch();
-	const { auth, id } = useAppSelector(selector);
+	const { auth, id, chatTitle } = useAppSelector(selector);
 	const token = getAuthToken(auth)!;
 
 	useEffect(() => {
@@ -35,11 +40,15 @@ export const ChatSettings = () => {
 			}
 		}
 	}, []);
+	const decorator: IDecorator = {};
+	if (chatId && chatTitle) {
+		decorator[chatId] = chatTitle;
+	}
 	return (
 		<>
 			<Title>
 				<h3>{t("chats")}</h3>
-				<Breadcrumbs link={location.pathname} />
+				<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
 			</Title>
 			<Outlet />
 		</>
