@@ -5,10 +5,10 @@ export const BreadcrumbsWrapper = styled("div")`
 	display: flex;
 	gap: 10px;
 	font-size: 1.4rem;
-	@media (max-width: 1024px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.lg}px) {
 		flex-wrap: wrap;
 	}
-	@media (max-width: 450px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.sm}px) {
 		font-size: 1.2rem;
 	}
 `;
@@ -19,15 +19,15 @@ export const Breadcrumb = styled("div")`
 	color: ${(props) => color(props.theme.palette.mode).regularTabText};
 	overflow: hidden;
 	text-overflow: ellipsis;
-	height: 1.9rem;
+	white-space: nowrap;
 	max-width: 350px;
-	@media (max-width: 1024px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.lg}px) {
 		max-width: 250px;
 	}
-	@media (max-width: 450px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.sm}px) {
 		max-width: 75px;
 	}
-	@media (max-width: 359px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.xs}px) {
 		max-width: 75px;
 	}
 	&:hover {
@@ -65,7 +65,7 @@ export const Separator = styled("div")`
 export const BreadcrumbWrapper = styled("div")`
 	display: flex;
 	gap: 10px;
-	@media (max-width: 640px) {
+	@media (max-width: ${(props) => props.theme.breakpoints.values.md}) {
 		gap: 5px;
 	}
 `;
