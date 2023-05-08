@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getChatAsync } from "../../redux/chat-info-page/chat.slice";
 import { getAuthToken } from "helpers/storage-parser";
 import { IRootState } from "redux/store";
+import { getChatSettingsAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
+import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
 
 const selector = (state: IRootState) => ({
 	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
@@ -27,7 +29,13 @@ export const ChatInfoWidget = () => {
 
 	useEffect(() => {
 		if (chatId) {
-			if (chatId !== chatID) dispatch(getChatAsync({ id: chatId, token }));
+			if (chatId !== chatID) {
+				Promise.all([
+					dispatch(getChatAsync({ id: chatId, token })),
+					dispatch(getChatSettingsAsync({ id: chatId, token })),
+					dispatch(getChatAdminsAsync({ token: token, id: chatId })),
+				]);
+			}
 		}
 	}, []);
 
