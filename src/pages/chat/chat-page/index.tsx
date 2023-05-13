@@ -6,18 +6,30 @@ import Title from "shared/components/title";
 import { useAppSelector } from "redux/hooks";
 import { ChatInfoWidget } from "shared/chat/components/chat-info-page";
 import { IRootState } from "redux/store";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router";
 
 const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatTitle: state.chat.chat?.tgChatInfo.chatInfo.title,
 });
 
+interface IDecorator {
+	[key: string]: string;
+}
+
 export const ChatPage = () => {
-	const { chatInfo } = useAppSelector(selector);
+	const { chatTitle } = useAppSelector(selector);
+	const location = useLocation();
+	const { chatId } = useParams();
+	const decorator: IDecorator = {};
+	if (chatId && chatTitle) {
+		decorator[chatId] = chatTitle;
+	}
 	return (
 		<>
 			<Title>
-				<h3>{chatInfo?.title}</h3>
-				<Breadcrumbs link={location.pathname} />
+				<h3>{chatTitle}</h3>
+				<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
 			</Title>
 			<ChatTopBar />
 			<WidgetWrapper>
