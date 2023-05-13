@@ -17,7 +17,6 @@ export interface ITabMenuProps {
 
 export const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 	const [value, setValue] = useState(0);
-
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
@@ -28,6 +27,11 @@ export const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 				onChange={handleChange}
 				variant={"scrollable"}
 				allowScrollButtonsMobile
+				sx={{
+					"& .MuiTabs-indicator": {
+						display: "none",
+					},
+				}}
 			>
 				{items.map((item, i) => (
 					<Tab
@@ -38,9 +42,6 @@ export const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 							"& > a": {
 								width: "100%",
 								padding: "16px",
-							},
-							"& Mui-selected": {
-								border: "none",
 							},
 						}}
 						label={

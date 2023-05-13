@@ -24,5 +24,13 @@ export const MenuItem = styled(NavLink)`
 	&.active {
 		color: ${({ theme }) => color(theme.palette.mode).activeTabText};
 		cursor: default;
+		&:after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			left: 0;
+			border-bottom: ${({ theme }) => theme.palette.primary.main} 2px solid;
+		}
 	}
 `;
