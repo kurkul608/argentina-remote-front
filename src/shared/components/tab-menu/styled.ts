@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
+import { color } from "constants/colors";
 
 export const StyledWrapper = styled("div")`
 	position: relative;
@@ -17,11 +18,11 @@ export const MenuTable = styled("ul")`
 `;
 export const MenuItem = styled(NavLink)`
 	position: relative;
-	color: gray;
+	color: ${({ theme }) => color(theme.palette.mode).widgetMainText};
 	cursor: pointer;
 	white-space: nowrap;
 	&.active {
-		color: white;
+		color: ${({ theme }) => color(theme.palette.mode).activeTabText};
 		cursor: default;
 	}
 `;
