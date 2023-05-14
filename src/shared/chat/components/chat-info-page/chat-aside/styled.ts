@@ -23,7 +23,7 @@ export const ChatBarImageWrapper = styled("div")`
 	border-radius: 50px;
 `;
 export const ChatBarTitle = styled("span")`
-	color: ${(props) => color(props.theme.palette.mode).pageTitle};
+	color: ${(props) => color(props.theme.palette.mode).baseText};
 `;
 
 export const ChatNavWrapper = styled("div")`
