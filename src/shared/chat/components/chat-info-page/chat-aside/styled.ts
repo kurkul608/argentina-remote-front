@@ -16,10 +16,14 @@ export const ImgWrapper = styled("div")`
 	min-width: 56px;
 `;
 
-export const ChatBarImageWrapper = styled("div")`
+export const ChatBarImageWrapper = styled("div")<{ imageUrl?: string }>`
 	width: 24px;
 	height: 24px;
-	background-color: black;
+	background: ${({ imageUrl, theme }) =>
+		imageUrl
+			? `url(${imageUrl})`
+			: color(theme.palette.mode).chatPhotoBackgroundColor};
+	background-size: 100%;
 	border-radius: 50px;
 `;
 export const ChatBarTitle = styled("span")`

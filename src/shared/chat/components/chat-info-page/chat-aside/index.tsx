@@ -17,17 +17,18 @@ interface IChatLeftBar {
 
 const selector = (state: IRootState) => ({
 	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatPhoto: state.chat.chat?.tgChatInfo.photos.small,
 });
 
 export const ChatAside = ({ isHidden, children }: IChatLeftBar) => {
-	const { chatInfo } = useAppSelector(selector);
+	const { chatInfo, chatPhoto } = useAppSelector(selector);
 	return (
 		<>
 			{isHidden ? null : (
 				<ChatLeftBarWrapper>
 					<ChatBarTitleWrapper>
 						<ImgWrapper>
-							<ChatBarImageWrapper />
+							<ChatBarImageWrapper imageUrl={chatPhoto} />
 						</ImgWrapper>
 						<ChatBarTitle>{chatInfo?.title}</ChatBarTitle>
 					</ChatBarTitleWrapper>
