@@ -6,12 +6,10 @@ import { IRootState } from "redux/store";
 
 const selector = (state: IRootState) => ({
 	id: state.chat.chat?.tgChatInfo.chatInfo.id,
+	message: state.chatSettings.chatSettingsReducer.config.greetings.message,
 });
 export const MessagePage = () => {
-	const { message } = useAppSelector(
-		(state) => state.chatSettings.chatSettingsReducer.config.greetings
-	);
-	const { id } = useAppSelector(selector);
+	const { id, message } = useAppSelector(selector);
 	return (
 		<Wrapper>
 			<MessageBuilder

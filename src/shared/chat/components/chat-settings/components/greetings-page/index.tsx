@@ -29,7 +29,8 @@ export const GreetingsPage = () => {
 			chatId || 0
 		)
 	);
-	const TabConfig: ITabMenu[] = [
+
+	const tabConfig: ITabMenu[] = [
 		{
 			route: Routes.chatSettingsGreetingMessage,
 			name: "Message",
@@ -52,7 +53,7 @@ export const GreetingsPage = () => {
 	return (
 		<TabMenuWrapper>
 			<TabMenu
-				items={TabConfig}
+				items={tabConfig}
 				baseRoute={[
 					Routes.admin,
 					Routes.chatList,

@@ -1,33 +1,36 @@
 import { styled } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
+import { color } from "constants/colors";
 
 export const StyledWrapper = styled("div")`
+	position: relative;
 	width: 100%;
 	border-bottom: 1px solid gray;
 	font-size: 2.2rem;
-	padding-bottom: 5px;
 `;
 
 export const MenuTable = styled("ul")`
 	display: flex;
 	gap: 30px;
 	text-transform: uppercase;
+	overflow-x: auto;
+	overflow-y: hidden;
 `;
 export const MenuItem = styled(NavLink)`
 	position: relative;
-	color: gray;
+	color: ${({ theme }) => color(theme.palette.mode).widgetMainText};
 	cursor: pointer;
+	white-space: nowrap;
 	&.active {
-		color: white;
+		color: ${({ theme }) => color(theme.palette.mode).activeTabText};
 		cursor: default;
 		&:after {
-			position: absolute;
-			bottom: -6px;
-			width: 100%;
-			display: block;
 			content: "";
-			border-bottom: 1px solid white;
-			z-index: 1;
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			left: 0;
+			border-bottom: ${({ theme }) => theme.palette.primary.main} 2px solid;
 		}
 	}
 `;
