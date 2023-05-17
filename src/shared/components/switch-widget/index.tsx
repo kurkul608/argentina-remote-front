@@ -10,8 +10,8 @@ import {
 export interface SwitchWidgetProps {
 	name: string;
 	description: string;
-	value: boolean;
-	callback: (value: boolean) => void;
+	value?: boolean;
+	callback?: (value: boolean) => void;
 }
 
 export const SwitchWidget = ({
@@ -20,12 +20,12 @@ export const SwitchWidget = ({
 	value,
 	callback,
 }: SwitchWidgetProps) => {
-	const [isEnabled, setIsEnabled] = useState(value);
+	const [isEnabled, setIsEnabled] = useState(value || false);
 	const handleOnClick = () => {
 		setIsEnabled(!isEnabled);
 	};
 	useEffect(() => {
-		callback(isEnabled);
+		if (callback) callback(isEnabled);
 	}, [isEnabled]);
 	return (
 		<>
