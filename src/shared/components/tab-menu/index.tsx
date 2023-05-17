@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { MenuItem, StyledWrapper } from "shared/components/tab-menu/styled";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
 import { Routes } from "shared/router";
-import { Tab, Tabs } from "@mui/material";
+import { Tabs } from "@mui/material";
+import { Tab } from "../tab";
 
 export interface ITabMenu {
 	name: string;
@@ -34,30 +35,19 @@ export const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 				}}
 			>
 				{items.map((item, i) => (
-					<Tab
-						key={`${item.name}--route--${i}`}
-						sx={{
-							padding: "0px",
-							border: "none",
-							"& > a": {
-								width: "100%",
-								padding: "16px",
-							},
-						}}
-						label={
-							<MenuItem
-								end
-								key={`menu--item--${i}`}
-								to={routeBuilderWithReplace(
-									[...baseRoute, item.route],
-									"chatId",
-									id
-								)}
-							>
-								{item.name}
-							</MenuItem>
-						}
-					/>
+					<Tab key={`${item.name}--route--${i}`}>
+						<MenuItem
+							end
+							key={`menu--item--${i}`}
+							to={routeBuilderWithReplace(
+								[...baseRoute, item.route],
+								"chatId",
+								id
+							)}
+						>
+							{item.name}
+						</MenuItem>
+					</Tab>
 				))}
 			</Tabs>
 		</StyledWrapper>
