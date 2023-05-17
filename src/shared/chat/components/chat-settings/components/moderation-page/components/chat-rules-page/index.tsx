@@ -13,8 +13,6 @@ export const ChatRulesPage = () => {
 			<SwitchWidget
 				name={"Allow chat admins to call bot commands"}
 				description={"Allow chat admins to call bot commands"}
-				value={true}
-				callback={() => 123}
 			/>
 		</ContentWrapper>
 	);
