@@ -5,6 +5,7 @@ import {
 	ChatBarTitleWrapper,
 	ChatLeftBarWrapper,
 	ChatNavWrapper,
+	ImgWrapper,
 } from "shared/chat/components/chat-info-page/chat-aside/styled";
 import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
@@ -16,16 +17,19 @@ interface IChatLeftBar {
 
 const selector = (state: IRootState) => ({
 	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
+	chatPhoto: state.chat.chat?.tgChatInfo.photos.small,
 });
 
 export const ChatAside = ({ isHidden, children }: IChatLeftBar) => {
-	const { chatInfo } = useAppSelector(selector);
+	const { chatInfo, chatPhoto } = useAppSelector(selector);
 	return (
 		<>
 			{isHidden ? null : (
 				<ChatLeftBarWrapper>
 					<ChatBarTitleWrapper>
-						<ChatBarImageWrapper />
+						<ImgWrapper>
+							<ChatBarImageWrapper imageUrl={chatPhoto} />
+						</ImgWrapper>
 						<ChatBarTitle>{chatInfo?.title}</ChatBarTitle>
 					</ChatBarTitleWrapper>
 					<ChatNavWrapper>{children}</ChatNavWrapper>
