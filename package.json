@@ -8,7 +8,7 @@
 		"build": "webpack --config webpack.config.js",
 		"dev": "webpack serve --env NODE_ENV=develop --open",
 		"tscheck": "tsc",
-		"lint": "eslint . --fix --max-warnings=0",
+		"lint": "eslint . --fix --max-warnings=0 --ignore-pattern 'dist/*' --ignore-pattern 'node_modules/*'",
 		"format": "prettier . --write",
 		"prepare": "husky install .husky"
 	},

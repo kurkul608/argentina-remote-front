@@ -16,7 +16,7 @@
 			"contentPlan": "Контент план"
 		},
 		"test": "Тест",
-		"chatCategories" :{
+		"chatCategories": {
 			"settings": "Настройки",
 			"info": "Информация"
 		},
@@ -56,7 +56,6 @@
 			"pageTitle": "Сохраненные черновики",
 			"createWidget": {
 				"title": "Созданине поста"
-
 			}
 		}
 	},

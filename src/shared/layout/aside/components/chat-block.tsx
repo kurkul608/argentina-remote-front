@@ -1,6 +1,5 @@
 import React from "react";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
-import { Routes } from "shared/router";
 import { ChatAside } from "shared/chat/components/chat-info-page/chat-aside";
 import { IRootState } from "redux/store";
 import { useAppSelector } from "redux/hooks";
@@ -15,6 +14,12 @@ import ScheduleIcon from "@mui/icons-material/Schedule";
 import { AsideCollapse } from "shared/layout/aside/components/collapse";
 import { useLocation } from "react-router-dom";
 import { routeExactMatchV2 } from "shared/router/services/route-exact";
+import { getModerationRouteService } from "shared/chat/services/router/settings/moderation/get-moderation-route.service";
+import { getGreetingRouteService } from "shared/chat/services/router/settings/greeting/get-greeting-route.service";
+import { getMemberRightsRouteService } from "shared/chat/services/router/settings/member-rights/get-member-rights-route.service";
+import { getChatRouteService } from "shared/chat/services/router/get-chat-route.service";
+import { ChatRoutesEnum } from "shared/chat/router/chat.enum";
+import { getSettingsRouteService } from "shared/chat/services/router/settings/get-settings-route.service";
 
 const selector = (state: IRootState) => ({
 	chatId: state.chat.chat?._id,
@@ -30,18 +35,14 @@ export const ChatBlock = () => {
 	const inSettings = chatId
 		? routeExactMatchV2(
 				locate.pathname,
-				routeBuilderWithReplace(
-					[Routes.admin, Routes.chatList, Routes.chat, Routes.chatSettings],
-					"chatId",
-					chatId
-				)
+				routeBuilderWithReplace(getSettingsRouteService(), "chatId", chatId)
 		  )
 		: false;
 	return chatId ? (
 		<ChatAside isHidden={isHidden}>
 			<NavButton
 				to={routeBuilderWithReplace(
-					[Routes.admin, Routes.chatList, Routes.chat],
+					getChatRouteService(ChatRoutesEnum.chatId),
 					"chatId",
 					chatId
 				)}
@@ -59,13 +60,7 @@ export const ChatBlock = () => {
 						text={t("settings.memberRights")}
 						icon={<DraftsIcon />}
 						to={routeBuilderWithReplace(
-							[
-								Routes.admin,
-								Routes.chatList,
-								Routes.chat,
-								Routes.chatSettings,
-								Routes.chatSettingsMembersRights,
-							],
+							getMemberRightsRouteService(),
 							"chatId",
 							chatId
 						)}
@@ -75,13 +70,7 @@ export const ChatBlock = () => {
 						text={t("settings.greeting")}
 						icon={<CheckCircleOutlineIcon />}
 						to={routeBuilderWithReplace(
-							[
-								Routes.admin,
-								Routes.chatList,
-								Routes.chat,
-								Routes.chatSettings,
-								Routes.chatSettingsGreeting,
-							],
+							getGreetingRouteService(),
 							"chatId",
 							chatId
 						)}
@@ -95,13 +84,7 @@ export const ChatBlock = () => {
 							</ListItemIcon>
 						}
 						to={routeBuilderWithReplace(
-							[
-								Routes.admin,
-								Routes.chatList,
-								Routes.chat,
-								Routes.chatSettings,
-								Routes.chatSettingsModeration,
-							],
+							getModerationRouteService(),
 							"chatId",
 							chatId
 						)}

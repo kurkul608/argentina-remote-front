@@ -17,7 +17,6 @@ import {
 } from "./styled";
 import { getAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
-import { Routes } from "shared/router";
 import { getAuthToken } from "helpers/storage-parser";
 import { InfiniteScroll } from "shared/components/infinite-scroll";
 import { useTranslation } from "react-i18next";
@@ -28,6 +27,8 @@ import { useLocation } from "react-router-dom";
 import { searchParamsFinder } from "shared/router/services/search-params-finder";
 import { Icon, IconName } from "shared/components/icon";
 import { IChat } from "shared/chat/types/chat.interface";
+import { getSettingsRouteService } from "shared/chat/services/router/settings/get-settings-route.service";
+import { getChatRouteService } from "shared/chat/services/router/get-chat-route.service";
 
 export const ChatListWidget = () => {
 	const dispatch = useAppDispatch();
@@ -63,22 +64,14 @@ export const ChatListWidget = () => {
 	const handleOnClick = useCallback(
 		(chat: IChat) =>
 			navigate(
-				routeBuilderWithReplace(
-					[Routes.admin, Routes.chatList, Routes.chat],
-					"chatId",
-					chat._id
-				)
+				routeBuilderWithReplace(getChatRouteService(), "chatId", chat._id)
 			),
 		[navigate]
 	);
 	const handleOnClickSettings = useCallback(
 		(chat: IChat) =>
 			navigate(
-				routeBuilderWithReplace(
-					[Routes.admin, Routes.chatList, Routes.chat, Routes.chatSettings],
-					"chatId",
-					chat._id
-				)
+				routeBuilderWithReplace(getSettingsRouteService(), "chatId", chat._id)
 			),
 		[navigate]
 	);
