@@ -6,12 +6,13 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { routeBuilder } from "shared/router/services/route-builder";
-import { Routes } from "shared/router";
 import { NavButton } from "shared/layout/aside/components/nav-button";
 import { AsideCollapse } from "shared/layout/aside/components/collapse";
 import { useTranslation } from "react-i18next";
 import { routeExactMatchV2 } from "shared/router/services/route-exact";
 import { useLocation } from "react-router-dom";
+import { getPostRouteService } from "shared/post/services/router/get-post-route.service";
+import { PostRoutes } from "shared/post/router/post.enum";
 
 interface IOwnProps {
 	main: string;
@@ -25,7 +26,7 @@ export const Post = (props: IOwnProps) => {
 	const locate = useLocation();
 	const inPost = routeExactMatchV2(
 		locate.pathname,
-		routeBuilder([Routes.admin, Routes.post])
+		routeBuilder(getPostRouteService())
 	);
 	return (
 		<>
@@ -38,29 +39,25 @@ export const Post = (props: IOwnProps) => {
 					<NavButton
 						text={props.draft}
 						icon={<DraftsIcon />}
-						to={routeBuilder([Routes.admin, Routes.post, Routes.postDraft])}
+						to={routeBuilder(getPostRouteService(PostRoutes.draft))}
 						sx={{ pl: 4 }}
 					/>
 					<NavButton
 						text={props.listPublished}
 						icon={<CheckCircleOutlineIcon />}
-						to={routeBuilder([Routes.admin, Routes.post, Routes.postPublished])}
+						to={routeBuilder(getPostRouteService(PostRoutes.published))}
 						sx={{ pl: 4 }}
 					/>
 					<NavButton
 						text={props.listPlanned}
 						icon={<ScheduleIcon />}
-						to={routeBuilder([Routes.admin, Routes.post, Routes.postPlanned])}
+						to={routeBuilder(getPostRouteService(PostRoutes.planned))}
 						sx={{ pl: 4 }}
 					/>
 					<NavButton
 						text={props.contentPlan}
 						icon={<CalendarMonthIcon />}
-						to={routeBuilder([
-							Routes.admin,
-							Routes.post,
-							Routes.postContentPlan,
-						])}
+						to={routeBuilder(getPostRouteService(PostRoutes.contentPlan))}
 						sx={{ pl: 4 }}
 					/>
 				</List>

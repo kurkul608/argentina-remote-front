@@ -47,7 +47,7 @@ export const LimitCircle = ({
 					style={{ strokeDashoffset: 0, strokeWidth: 2, stroke: "#ffffff" }}
 					cx={"50%"}
 					cy={"50%"}
-				 />
+				/>
 				<InnerCircle
 					r={radius}
 					cx={"50%"}
@@ -55,7 +55,7 @@ export const LimitCircle = ({
 					dashedArrayValue={dashedArrayValue}
 					offset={currentOffset}
 					color={colorName}
-				 />
+				/>
 				<text
 					x={"50%"}
 					y={"50%"}

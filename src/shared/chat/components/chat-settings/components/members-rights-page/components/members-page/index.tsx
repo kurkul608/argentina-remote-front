@@ -8,7 +8,7 @@ export const MembersPage = () => {
 			<TableWidget
 				title={"Users who change the bot settings on the site"}
 				description={
-					"Users who are here on the site can configure greeting, moderation, chat activity, reputation, log, triggers, etc."
+					"Users who are here on the site can configure greeting, moderation, chat greeting, reputation, log, triggers, etc."
 				}
 			/>
 			<TableWidget

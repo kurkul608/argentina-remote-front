@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { MenuItem, StyledWrapper } from "shared/components/tab-menu/styled";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
-import { Routes } from "shared/router";
 import { Tabs } from "@mui/material";
 import { Tab } from "../tab";
+import { RoutesType } from "shared/router/route.enum";
 
 export interface ITabMenu {
 	name: string;
-	route: Routes;
+	route: RoutesType;
 }
 
 export interface ITabMenuProps {
 	items: ITabMenu[];
-	baseRoute: Routes[];
+	baseRoute: RoutesType[];
 	id: string | number;
 }
 
