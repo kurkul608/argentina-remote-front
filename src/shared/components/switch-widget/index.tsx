@@ -9,6 +9,7 @@ import {
 } from "shared/components/switch-widget/styled";
 import Box from "@mui/material/Box/Box";
 import { useTranslation } from "react-i18next";
+import Typography from "@mui/material/Typography/Typography";
 
 export interface SwitchWidgetProps {
 	name: string;
@@ -51,7 +52,7 @@ export const SwitchWidget = ({
 					</Wrapper>
 					{isEnabled && (
 						<StyledBox>
-							<div>{switchDescription}</div>
+							<Typography>{switchDescription}</Typography>
 							<Switch onClick={handleOnClickOption} checked={isEnabledOption} />
 						</StyledBox>
 					)}
