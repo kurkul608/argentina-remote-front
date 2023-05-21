@@ -10,6 +10,7 @@ import { getAuthToken } from "helpers/storage-parser";
 import { getChatSettingsAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
 import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
 import { IRootState } from "redux/store";
+import { CircularProgress } from "@mui/material";
 
 const selector = (state: IRootState) => ({
 	auth: state.auth,
@@ -28,6 +29,7 @@ export const ChatSettings = () => {
 	const dispatch = useAppDispatch();
 	const { auth, id, chatTitle } = useAppSelector(selector);
 	const token = getAuthToken(auth)!;
+	const decorator: IDecorator = {};
 
 	useEffect(() => {
 		if (chatId) {
@@ -40,7 +42,6 @@ export const ChatSettings = () => {
 			}
 		}
 	}, []);
-	const decorator: IDecorator = {};
 	if (chatId && chatTitle) {
 		decorator[chatId] = chatTitle;
 	}
@@ -48,7 +49,11 @@ export const ChatSettings = () => {
 		<>
 			<Title>
 				<h3>{t("chats")}</h3>
-				<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
+				{!chatTitle ? (
+					<CircularProgress />
+				) : (
+					<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
+				)}
 			</Title>
 			<Outlet />
 		</>
