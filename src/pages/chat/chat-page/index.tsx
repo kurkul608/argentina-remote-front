@@ -8,6 +8,7 @@ import { ChatInfoWidget } from "shared/chat/components/chat-info-page";
 import { IRootState } from "redux/store";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router";
+import { CircularProgress } from "@mui/material";
 
 const selector = (state: IRootState) => ({
 	chatTitle: state.chat.chat?.tgChatInfo.chatInfo.title,
@@ -28,8 +29,14 @@ export const ChatPage = () => {
 	return (
 		<>
 			<Title>
-				<h3>{chatTitle}</h3>
-				<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
+				{!chatTitle ? (
+					<CircularProgress />
+				) : (
+					<>
+						<h3>{chatTitle}</h3>
+						<Breadcrumbs link={location.pathname} decorateCrumbs={decorator} />
+					</>
+				)}
 			</Title>
 			<ChatTopBar />
 			<WidgetWrapper>
