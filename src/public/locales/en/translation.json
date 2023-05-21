@@ -113,5 +113,28 @@
 				"invalidType": "Invalid keyboard type"
 			}
 		}
-	}
+	},
+	"settings": {
+		"greetings": {
+			"systemMessages": {
+				"clearSystemMessage": {
+					"title": "Clear system messages",
+					"description": "Bot will be delete system messages from the chat",
+					"option": "Clear all types of the system messages",
+					"systemMessages": {
+						"newMember": "New member join the chat",
+						"leftMember": "Member left the chat",
+						"pinnedMessage": "Admin pinned the message",
+						"videoCallStart": "Admin started video call",
+						"videoCallEnd": "Admin ended video call",
+						"autoDeleteTimerChanged": "Admin changed auto-delete timer"
+					}
+				}
+			}
+		}
+	},
+  "options": {
+	"select": "Select options below"
+  }
 }
+

@@ -1,10 +1,24 @@
 import React from "react";
-import { Widget } from "shared/components/widget";
+import { SwitchWidget } from "shared/components/switch-widget";
+import { useTranslation } from "react-i18next";
 
 export const SystemPage = () => {
+	const { t } = useTranslation("translation", {
+		keyPrefix: "settings.greetings.systemMessages",
+	});
 	return (
-		<Widget name={"Clear system messages"}>
-			<div>Clear all:</div>
-		</Widget>
+		<SwitchWidget
+			name={t("clearSystemMessage.title")}
+			switchDescription={t("clearSystemMessage.option") || ""}
+			description={t("clearSystemMessage.description")}
+			extraOptions={[
+				t("clearSystemMessage.systemMessages.newMember"),
+				t("clearSystemMessage.systemMessages.leftMember"),
+				t("clearSystemMessage.systemMessages.pinnedMessage"),
+				t("clearSystemMessage.systemMessages.videoCallStart"),
+				t("clearSystemMessage.systemMessages.videoCallEnd"),
+				t("clearSystemMessage.systemMessages.autoDeleteTimerChanged"),
+			]}
+		/>
 	);
 };
