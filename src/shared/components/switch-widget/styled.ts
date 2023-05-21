@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Button } from "@mui/material";
+import Box from "@mui/material/Box/Box";
 
 export const StyledWidget = styled("div")`
 	max-width: 1000px;
@@ -18,4 +18,7 @@ export const Wrapper = styled("div")`
 	justify-content: space-between;
 `;
 
-export const AdvancedButton = styled(Button)``;
+export const StyledBox = styled(Box)`
+	display: flex;
+	align-items: center;
+`;

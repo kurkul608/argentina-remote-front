@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "shared/components/widget";
 import {
 	Description,
+	StyledBox,
 	StyledWidget,
 	Wrapper,
 } from "shared/components/switch-widget/styled";
+import Box from "@mui/material/Box/Box";
 
 export interface SwitchWidgetProps {
 	name: string;
@@ -39,27 +41,27 @@ export const SwitchWidget = ({
 				<Widget name={name}>
 					<Wrapper>
 						<Description>{description}</Description>
-						<div style={{ display: "flex", alignItems: "center" }}>
+						<StyledBox>
 							<Switch onClick={handleOnClick} checked={isEnabled} />
-						</div>
+						</StyledBox>
 					</Wrapper>
 					{isEnabled && (
-						<div style={{ display: "flex", alignItems: "center" }}>
+						<StyledBox>
 							<div>{switchDescription}</div>
 							<Switch onClick={handleOnClickOption} checked={isEnabledOption} />
-						</div>
+						</StyledBox>
 					)}
 					{!isEnabledOption && isEnabled && extraOptions && (
-						<div>
-							<div>Select options:</div>
+						<Box>
+							<StyledBox>Select options:</StyledBox>
 							{extraOptions.map((option) => {
 								return (
-									<div key={`switch-widget--${option}`}>
+									<StyledBox key={`switch-widget--${option}`}>
 										<FormControlLabel control={<Checkbox />} label={option} />
-									</div>
+									</StyledBox>
 								);
 							})}
-						</div>
+						</Box>
 					)}
 				</Widget>
 			</StyledWidget>
