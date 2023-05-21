@@ -1,10 +1,12 @@
 import React from "react";
-import { Widget } from "shared/components/widget";
+import { SwitchWidget } from "shared/components/switch-widget";
 
 export const SystemPage = () => {
 	return (
-		<Widget name={"Clear system messages"}>
-			<div>Clear all:</div>
-		</Widget>
+		<SwitchWidget
+			name={"Clear system messages"}
+			description={"Clear messages from Telegram chat service"}
+			extraOptions={["new_member", "left_member"]}
+		/>
 	);
 };
