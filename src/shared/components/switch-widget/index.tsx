@@ -8,6 +8,7 @@ import {
 	Wrapper,
 } from "shared/components/switch-widget/styled";
 import Box from "@mui/material/Box/Box";
+import { useTranslation } from "react-i18next";
 
 export interface SwitchWidgetProps {
 	name: string;
@@ -27,6 +28,9 @@ export const SwitchWidget = ({
 	extraOptions,
 	switchDescription,
 }: SwitchWidgetProps) => {
+	const { t } = useTranslation("translation", {
+		keyPrefix: "options",
+	});
 	const [isEnabled, setIsEnabled] = useState(value || false);
 	const [isEnabledOption, setIsEnabledOption] = useState(value || false);
 	const handleOnClick = () => setIsEnabled(!isEnabled);
@@ -53,7 +57,7 @@ export const SwitchWidget = ({
 					)}
 					{!isEnabledOption && isEnabled && extraOptions && (
 						<Box>
-							<StyledBox>Select options:</StyledBox>
+							<StyledBox>{`${t("select")}:`}</StyledBox>
 							{extraOptions.map((option) => {
 								return (
 									<StyledBox key={`switch-widget--${option}`}>

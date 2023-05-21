@@ -1,20 +1,23 @@
 import React from "react";
 import { SwitchWidget } from "shared/components/switch-widget";
+import { useTranslation } from "react-i18next";
 
 export const SystemPage = () => {
+	const { t } = useTranslation("translation", {
+		keyPrefix: "settings.greetings.systemMessages",
+	});
 	return (
 		<SwitchWidget
-			name={"Clear system messages"}
-			switchDescription={"Clear all:"}
-			description={"Clear messages from Telegram chat service"}
+			name={t("clearSystemMessage.title")}
+			switchDescription={t("clearSystemMessage.option") || ""}
+			description={t("clearSystemMessage.description")}
 			extraOptions={[
-				"new_member",
-				"left_member",
-				"pinned_messages",
-				"video_call_start",
-				"video_call_end",
-				"auto_delete_timer_changed",
-				"pinned_message",
+				t("clearSystemMessage.systemMessages.newMember"),
+				t("clearSystemMessage.systemMessages.leftMember"),
+				t("clearSystemMessage.systemMessages.pinnedMessage"),
+				t("clearSystemMessage.systemMessages.videoCallStart"),
+				t("clearSystemMessage.systemMessages.videoCallEnd"),
+				t("clearSystemMessage.systemMessages.autoDeleteTimerChanged"),
 			]}
 		/>
 	);
