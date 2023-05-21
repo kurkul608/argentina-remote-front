@@ -1,20 +1,20 @@
-import { Switch } from "@mui/material";
+import { Checkbox, FormControlLabel, Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Widget } from "shared/components/widget";
 import {
-	AdvancedButton,
 	Description,
 	StyledWidget,
 	Wrapper,
 } from "shared/components/switch-widget/styled";
-import { Settings } from "@mui/icons-material";
 
 export interface SwitchWidgetProps {
 	name: string;
 	description: string;
+	switchDescription?: string;
 	value?: boolean;
 	callback?: (value: boolean) => void;
 	extraOptions?: string[];
+	enabledOptions?: string[];
 }
 
 export const SwitchWidget = ({
@@ -23,11 +23,13 @@ export const SwitchWidget = ({
 	value,
 	callback,
 	extraOptions,
+	switchDescription,
 }: SwitchWidgetProps) => {
 	const [isEnabled, setIsEnabled] = useState(value || false);
-	const [isAdvancedMode, setAdvancedMode] = useState(false);
+	const [isEnabledOption, setIsEnabledOption] = useState(value || false);
 	const handleOnClick = () => setIsEnabled(!isEnabled);
-	const handleAdvancedButtonOnClick = () => setAdvancedMode(!isAdvancedMode);
+	const handleOnClickOption = () => setIsEnabledOption(!isEnabledOption);
+
 	useEffect(() => {
 		if (callback) callback(isEnabled);
 	}, [isEnabled]);
@@ -39,14 +41,26 @@ export const SwitchWidget = ({
 						<Description>{description}</Description>
 						<div style={{ display: "flex", alignItems: "center" }}>
 							<Switch onClick={handleOnClick} checked={isEnabled} />
-							{extraOptions && (
-								<AdvancedButton onClick={handleAdvancedButtonOnClick}>
-									<Settings />
-								</AdvancedButton>
-							)}
 						</div>
 					</Wrapper>
-					{isAdvancedMode && <div>{extraOptions}</div>}
+					{isEnabled && (
+						<div style={{ display: "flex", alignItems: "center" }}>
+							<div>{switchDescription}</div>
+							<Switch onClick={handleOnClickOption} checked={isEnabledOption} />
+						</div>
+					)}
+					{!isEnabledOption && isEnabled && extraOptions && (
+						<div>
+							<div>Select options:</div>
+							{extraOptions.map((option) => {
+								return (
+									<div key={`switch-widget--${option}`}>
+										<FormControlLabel control={<Checkbox />} label={option} />
+									</div>
+								);
+							})}
+						</div>
+					)}
 				</Widget>
 			</StyledWidget>
 		</>
