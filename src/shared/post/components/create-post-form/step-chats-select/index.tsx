@@ -1,5 +1,5 @@
 import React from "react";
-import { ChatSelectForm } from "shared/chat/components/chat-select-form";
+import { ChatSelectForm } from "shared/chat/components/others/chat-select-form";
 import Box from "@mui/material/Box";
 import { IChat } from "shared/chat/types/chat.interface";
 import { FormikErrors, FormikTouched } from "formik";
