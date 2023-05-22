@@ -3,6 +3,7 @@ import { GreetingsPage } from "shared/chat/components/chat-settings/components/g
 import { MessagePage } from "shared/chat/components/chat-settings/components/greetings-page/message-page";
 import React from "react";
 import { GreetingRoutes } from "shared/chat/router/settings/greeting/greeting.enum";
+import { SystemPage } from "shared/chat/components/chat-settings/components/greetings-page/system-page";
 
 export const greetingRoute: RouteObject = {
 	path: GreetingRoutes.greeting,
@@ -14,7 +15,7 @@ export const greetingRoute: RouteObject = {
 		},
 		{
 			path: GreetingRoutes.messages,
-			element: <div>System</div>,
+			element: <SystemPage />,
 		},
 		{
 			path: GreetingRoutes.members,
