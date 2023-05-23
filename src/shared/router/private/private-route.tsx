@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import React, { lazy, Suspense, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import {
 	localStorageServiceGet,
 	localStorageServiceRemove,
 } from "services/local-storage.service";
 import { checkAuthAsync } from "shared/auth/redux/auth.slice";
+import { redirectToUi } from "services/redirect.service";
 const Layout = lazy(() =>
 	import("shared/layout").then((module) => ({ default: module.Layout }))
 );
@@ -23,11 +23,16 @@ export const PrivateRoute = () => {
 			localStorageServiceRemove("auth");
 		}
 	}, [isExpired]);
-	return (token || localStorageToken) && !isExpired ? (
-		<Suspense fallback={<>...</>}>
-			<Layout />
-		</Suspense>
-	) : (
-		<Navigate to={"/"} replace />
-	);
+	if ((token || localStorageToken) && !isExpired) {
+		return (
+			<Suspense fallback={<>...</>}>
+				<Layout />
+			</Suspense>
+		);
+	} else {
+		redirectToUi(
+			process.env.REACT_APP_ENDPOINT ? process.env.REACT_APP_ENDPOINT : ""
+		);
+		return null;
+	}
 };
