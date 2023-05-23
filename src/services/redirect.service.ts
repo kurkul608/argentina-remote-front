@@ -1,3 +1,3 @@
-export const redirectToUi = (str: string) => {
-	window.location.href = str;
+export const redirectToUi = (url: string) => {
+	window.location.href = url;
 };
