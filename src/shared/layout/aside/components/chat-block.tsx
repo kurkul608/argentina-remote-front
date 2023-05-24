@@ -12,7 +12,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import { AsideCollapse } from "shared/layout/aside/components/collapse";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { routeExactMatchV2 } from "shared/router/services/route-exact";
 import { getModerationRouteService } from "shared/chat/services/router/settings/moderation/get-moderation-route.service";
 import { getGreetingRouteService } from "shared/chat/services/router/settings/greeting/get-greeting-route.service";
@@ -20,6 +20,7 @@ import { getMemberRightsRouteService } from "shared/chat/services/router/setting
 import { getChatRouteService } from "shared/chat/services/router/get-chat-route.service";
 import { ChatRoutesEnum } from "shared/chat/router/chat.enum";
 import { getSettingsRouteService } from "shared/chat/services/router/settings/get-settings-route.service";
+import { routeFinder } from "shared/router/services/route-finder";
 
 const selector = (state: IRootState) => ({
 	chatId: state.chat.chat?._id,
@@ -32,13 +33,15 @@ export const ChatBlock = () => {
 
 	const isHidden = !chatId;
 	const locate = useLocation();
+	const { chatId: routeChatId } = useParams();
+	const inChat = routeFinder(locate.pathname, routeChatId);
 	const inSettings = chatId
 		? routeExactMatchV2(
 				locate.pathname,
 				routeBuilderWithReplace(getSettingsRouteService(), "chatId", chatId)
 		  )
 		: false;
-	return chatId ? (
+	return chatId && inChat ? (
 		<ChatAside isHidden={isHidden}>
 			<NavButton
 				to={routeBuilderWithReplace(
