@@ -1,20 +1,41 @@
+import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
-import { GreetingsPage } from "shared/chat/components/chat-settings/components/greetings-page";
-import { MessagePage } from "shared/chat/components/chat-settings/components/greetings-page/message-page";
-import React from "react";
 import { GreetingRoutes } from "shared/chat/router/settings/greeting/greeting.enum";
+import { CircularProgress } from "@mui/material";
+
+const GreetingsPage = lazy(() => import("shared/chat/pages/settings/greeting"));
+
+const Message = lazy(
+	() => import("shared/chat/components/settings/greeting/message")
+);
+
+const System = lazy(
+	() => import("shared/chat/components/settings/greeting/system")
+);
 
 export const greetingRoute: RouteObject = {
 	path: GreetingRoutes.greeting,
-	element: <GreetingsPage />,
+	element: (
+		<Suspense fallback={<CircularProgress />}>
+			<GreetingsPage />
+		</Suspense>
+	),
 	children: [
 		{
 			path: GreetingRoutes.message,
-			element: <MessagePage />,
+			element: (
+				<Suspense fallback={<CircularProgress />}>
+					<Message />
+				</Suspense>
+			),
 		},
 		{
 			path: GreetingRoutes.messages,
-			element: <div>System</div>,
+			element: (
+				<Suspense fallback={<CircularProgress />}>
+					<System />
+				</Suspense>
+			),
 		},
 		{
 			path: GreetingRoutes.members,

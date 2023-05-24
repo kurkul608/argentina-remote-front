@@ -1,6 +1,6 @@
 import React from "react";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
-import { ChatAside } from "shared/chat/components/chat-info-page/chat-aside";
+import ChatAside from "shared/chat/components/others/aside";
 import { IRootState } from "redux/store";
 import { useAppSelector } from "redux/hooks";
 import { useTranslation } from "react-i18next";
