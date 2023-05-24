@@ -31,7 +31,7 @@ export const PrivateRoute = () => {
 		);
 	} else {
 		redirectToUi(
-			process.env.REACT_APP_ENDPOINT ? process.env.REACT_APP_ENDPOINT : ""
+			process.env.REACT_APP_UI_ENDPOINT ? process.env.REACT_APP_UI_ENDPOINT : ""
 		);
 		return null;
 	}
