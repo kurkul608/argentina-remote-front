@@ -19,6 +19,7 @@ export interface SwitchWidgetProps {
 	callback?: (value: boolean) => void;
 	extraOptions?: string[];
 	enabledOptions?: string[];
+	onSwitchDisable?: () => void;
 }
 
 export const SwitchWidget = ({
@@ -28,6 +29,7 @@ export const SwitchWidget = ({
 	callback,
 	extraOptions,
 	switchDescription,
+	onSwitchDisable,
 }: SwitchWidgetProps) => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "options",
@@ -39,6 +41,7 @@ export const SwitchWidget = ({
 
 	useEffect(() => {
 		if (callback) callback(isEnabled);
+		if (!isEnabled && onSwitchDisable) onSwitchDisable();
 	}, [isEnabled]);
 	return (
 		<>
@@ -47,7 +50,12 @@ export const SwitchWidget = ({
 					<Wrapper>
 						<Description>{description}</Description>
 						<StyledBox>
-							<Switch onClick={handleOnClick} checked={isEnabled} />
+							<Switch
+								onClick={() => {
+									handleOnClick();
+								}}
+								checked={isEnabled}
+							/>
 						</StyledBox>
 					</Wrapper>
 					{isEnabled && (
