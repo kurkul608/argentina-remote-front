@@ -36,12 +36,14 @@ const ChatSettings = () => {
 	};
 
 	useEffect(() => {
-		if (chatId) {
-			Promise.all([
-				dispatch(getChatAsync({ id: chatId, token })),
-				dispatch(getChatSettingsAsync({ id: chatId, token })),
-				dispatch(getChatAdminsAsync({ token: token, id: chatId })),
-			]);
+		if (chatId && paramsChatId) {
+			if (chatId !== paramsChatId) {
+				Promise.all([
+					dispatch(getChatAsync({ id: chatId, token })),
+					dispatch(getChatSettingsAsync({ id: chatId, token })),
+					dispatch(getChatAdminsAsync({ token: token, id: chatId })),
+				]);
+			}
 		}
 	}, []);
 
