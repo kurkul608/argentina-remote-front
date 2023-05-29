@@ -26,7 +26,7 @@ const System = () => {
 				config: {
 					clear_system_messages: {
 						clear_all: clearAll,
-						message_types: items.map((item) => item.value),
+						message_types: clearAll ? [] : items.map((item) => item.value),
 					},
 				},
 			})
