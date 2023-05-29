@@ -1,9 +1,9 @@
 import React from "react";
-import { SwitchWidget } from "shared/components/switch-widget";
 import { useTranslation } from "react-i18next";
 import { IRootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateChatSettingsByIdAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
+import IndeterminateCheckboxWidget from "shared/components/ideterminate-checkbox-widget";
 
 const selector = (state: IRootState) => ({
 	token: state.auth.token,
@@ -16,40 +16,75 @@ const System = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "settings.greetings.systemMessages",
 	});
-	const handleOnSwitchDisable = () => {
+	const onChangeCallback = (clearAll: boolean, types: string[]) => {
 		dispatch(
 			updateChatSettingsByIdAsync({
 				token: token!,
 				id: config._id!,
 				config: {
 					clear_system_messages: {
-						clear_all: false,
-						message_types: [],
+						clear_all: clearAll,
+						message_types: types,
 					},
 				},
 			})
 		);
 	};
-
+	const clearSystemMessagesOptions = [
+		{
+			value: "new_member",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes("new_member") ||
+				false,
+			title: t("clearSystemMessage.systemMessages.newMember"),
+		},
+		{
+			value: "left_member",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes("left_member") ||
+				false,
+			title: t("clearSystemMessage.systemMessages.leftMember"),
+		},
+		{
+			value: "pinned_message",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes("pinned_message") ||
+				false,
+			title: t("clearSystemMessage.systemMessages.pinnedMessage"),
+		},
+		{
+			value: "video_call_start",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes("video_call_start") ||
+				false,
+			title: t("clearSystemMessage.systemMessages.videoCallStart"),
+		},
+		{
+			value: "video_call_end",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes("video_call_end") ||
+				false,
+			title: t("clearSystemMessage.systemMessages.videoCallEnd"),
+		},
+		{
+			value: "auto_delete_timer_changed",
+			isChecked:
+				config.clearSystemMessages?.messageTypes.includes(
+					"auto_delete_timer_changed"
+				) || false,
+			title: t("clearSystemMessage.systemMessages.autoDeleteTimerChanged"),
+		},
+	];
 	return (
-		<SwitchWidget
-			name={t("clearSystemMessage.title")}
-			value={
-				config.clearSystemMessages?.clearAll ||
-				!!config.clearSystemMessages?.messageTypes.length
-			}
-			onSwitchDisable={handleOnSwitchDisable}
-			switchDescription={t("clearSystemMessage.option") || ""}
-			description={t("clearSystemMessage.description")}
-			extraOptions={[
-				t("clearSystemMessage.systemMessages.newMember"),
-				t("clearSystemMessage.systemMessages.leftMember"),
-				t("clearSystemMessage.systemMessages.pinnedMessage"),
-				t("clearSystemMessage.systemMessages.videoCallStart"),
-				t("clearSystemMessage.systemMessages.videoCallEnd"),
-				t("clearSystemMessage.systemMessages.autoDeleteTimerChanged"),
-			]}
-		/>
+		<div>
+			<IndeterminateCheckboxWidget
+				values={clearSystemMessagesOptions}
+				name={t("clearSystemMessage.title")}
+				description={t("clearSystemMessage.description") || ""}
+				mainBoxTitle={t("clearSystemMessage.option")}
+				onChangeCb={onChangeCallback}
+			/>
+		</div>
 	);
 };
 

@@ -125,6 +125,20 @@ export const chatSettingsSlice = createSlice({
 		builder.addCase(getChatSettingsByIdAsync.rejected, (state) => {
 			state.isLoading = false;
 		});
+		builder.addCase(
+			updateChatSettingsByIdAsync.fulfilled,
+			(state, action: PayloadAction<ChatSettingsDtoInterface>) => {
+				state.config = fromSettingsDtoService(action.payload);
+				state.isLoading = false;
+			}
+		);
+		builder.addCase(updateChatSettingsByIdAsync.pending, (state) => {
+			state.config = {};
+			state.isLoading = true;
+		});
+		builder.addCase(updateChatSettingsByIdAsync.rejected, (state) => {
+			state.isLoading = false;
+		});
 	},
 });
 
