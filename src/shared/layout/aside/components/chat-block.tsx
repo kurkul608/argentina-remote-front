@@ -21,7 +21,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MessageIcon from "@mui/icons-material/Message";
 import AddModeratorIcon from "@mui/icons-material/AddModerator";
-
 const selector = (state: IRootState) => ({
 	chatId: state.chat.chat?._id,
 });
