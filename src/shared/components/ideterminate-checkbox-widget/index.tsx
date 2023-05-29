@@ -10,12 +10,12 @@ export interface IValueParams {
 	value: string;
 }
 
-interface IndeterminateCheckboxWidgetProps {
-	values: IValueParams[];
+interface IndeterminateCheckboxWidgetProps<T extends IValueParams> {
+	values: T[];
 	name: string;
 	description?: string;
 	mainBoxTitle: string;
-	onChangeCb: (main: boolean, arrayItems: string[]) => void;
+	onChangeCb: (main: boolean, arrayItems: T[]) => void;
 }
 
 const isChecked = (arr: boolean[]): boolean => {
@@ -26,26 +26,26 @@ const isIndeterminate = (arr: boolean[]): boolean => {
 	return filteredArrLength > 0 && filteredArrLength < arr.length;
 };
 
-const fromBooleanToItems = (
-	arrItem: IValueParams[],
+const fromBooleanToItems = <T extends IValueParams>(
+	arrItem: T[],
 	arrBoolean: boolean[]
-): string[] => {
-	const result: string[] = [];
+): T[] => {
+	const result: T[] = [];
 	arrItem.forEach((item, index) => {
 		if (arrBoolean[index]) {
-			result.push(item.value);
+			result.push(item);
 		}
 	});
 	return result;
 };
 
-const IndeterminateCheckboxWidget = ({
+const IndeterminateCheckboxWidget = <T extends IValueParams>({
 	values,
 	name,
 	description,
 	mainBoxTitle,
 	onChangeCb,
-}: IndeterminateCheckboxWidgetProps) => {
+}: IndeterminateCheckboxWidgetProps<T>) => {
 	const initialChecked = values.map((val) => val.isChecked);
 	const [checkedArr, setCheckedArr] = useState(initialChecked);
 
@@ -67,7 +67,7 @@ const IndeterminateCheckboxWidget = ({
 	};
 
 	useEffect(() => {
-		const enabledValues = fromBooleanToItems(values, checkedArr);
+		const enabledValues: T[] = fromBooleanToItems(values, checkedArr);
 		onChangeCb(isChecked(checkedArr), enabledValues);
 	}, [checkedArr]);
 

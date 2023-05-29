@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { IRootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateChatSettingsByIdAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
-import IndeterminateCheckboxWidget from "shared/components/ideterminate-checkbox-widget";
+import IndeterminateCheckboxWidget, {
+	IValueParams,
+} from "shared/components/ideterminate-checkbox-widget";
 
 const selector = (state: IRootState) => ({
 	token: state.auth.token,
@@ -16,7 +18,7 @@ const System = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "settings.greetings.systemMessages",
 	});
-	const onChangeCallback = (clearAll: boolean, types: string[]) => {
+	const onChangeCallback = (clearAll: boolean, items: IValueParams[]) => {
 		dispatch(
 			updateChatSettingsByIdAsync({
 				token: token!,
@@ -24,13 +26,13 @@ const System = () => {
 				config: {
 					clear_system_messages: {
 						clear_all: clearAll,
-						message_types: types,
+						message_types: items.map((item) => item.value),
 					},
 				},
 			})
 		);
 	};
-	const clearSystemMessagesOptions = [
+	const clearSystemMessagesOptions: IValueParams[] = [
 		{
 			value: "new_member",
 			isChecked:
