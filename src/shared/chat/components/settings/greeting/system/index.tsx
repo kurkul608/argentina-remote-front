@@ -48,7 +48,7 @@ const System = () => {
 	return (
 		<IndeterminateCheckboxWidget
 			values={systemMessageValues}
-			name={t("clearSystemMessage.title")}
+			title={t("clearSystemMessage.title") || ""}
 			description={t("clearSystemMessage.description") || ""}
 			mainBoxTitle={t("clearSystemMessage.option")}
 			onChangeCb={onChangeCallback}
