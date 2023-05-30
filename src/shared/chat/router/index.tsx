@@ -8,6 +8,7 @@ import { CircularProgress } from "@mui/material";
 
 const ChatListPage = lazy(() => import("shared/chat/pages/list"));
 const ChatPage = lazy(() => import("shared/chat/pages/chat"));
+const ChatIdPage = lazy(() => import("shared/chat/components/chat"));
 
 export const chatRoute: RouteObject = {
 	path: ChatRoutesEnum.chat,
@@ -22,11 +23,16 @@ export const chatRoute: RouteObject = {
 		},
 		{
 			path: ChatRoutesEnum.chatId,
+			element: (
+				<Suspense fallback={<CircularProgress />}>
+					<ChatPage />
+				</Suspense>
+			),
 			children: [
 				{
 					element: (
 						<Suspense fallback={<CircularProgress />}>
-							<ChatPage />
+							<ChatIdPage />
 						</Suspense>
 					),
 					index: true,
