@@ -51,7 +51,7 @@ export const chatSettingsSlice = createSlice({
 	name: "chat/settings",
 	initialState,
 	reducers: {
-		setDefault: (state) => {
+		clearSettings: (state) => {
 			state.config = initialState.config;
 		},
 		updateToggleFiled: (
@@ -142,5 +142,5 @@ export const chatSettingsSlice = createSlice({
 	},
 });
 
-export const { setDefault, updateToggleFiled } = chatSettingsSlice.actions;
+export const { clearSettings, updateToggleFiled } = chatSettingsSlice.actions;
 export default chatSettingsSlice.reducer;
