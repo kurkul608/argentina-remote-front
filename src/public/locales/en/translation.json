@@ -130,6 +130,10 @@
 						"auto_delete_timer_changed": "Admin changed auto-delete timer"
 					}
 				}
+			},
+			"botValidation": {
+				"widgetName": "Bot validation enable",
+				"switchDescription": "Select this option if you want bots added by ordinary users to be blocked and not be able to collect information from your chat room"
 			}
 		}
 	},

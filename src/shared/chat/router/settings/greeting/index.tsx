@@ -5,8 +5,8 @@ import { CircularProgress } from "@mui/material";
 
 const GreetingsPage = lazy(() => import("shared/chat/pages/settings/greeting"));
 
-const Message = lazy(
-	() => import("shared/chat/components/settings/greeting/message")
+const BotValidation = lazy(
+	() => import("shared/chat/components/settings/greeting/bot-validation")
 );
 
 const System = lazy(
@@ -22,10 +22,10 @@ export const greetingRoute: RouteObject = {
 	),
 	children: [
 		{
-			path: GreetingRoutes.message,
+			path: GreetingRoutes.botValidation,
 			element: (
 				<Suspense fallback={<CircularProgress />}>
-					<Message />
+					<BotValidation />
 				</Suspense>
 			),
 		},

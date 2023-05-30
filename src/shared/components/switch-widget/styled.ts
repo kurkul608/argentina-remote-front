@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box/Box";
+import Switch from "@mui/material/Switch";
 
 export const StyledWidget = styled("div")`
 	max-width: 1000px;
@@ -21,3 +22,5 @@ export const StyledBox = styled(Box)`
 	display: flex;
 	align-items: center;
 `;
+
+export const StyledSwitch = styled(Switch)``;
