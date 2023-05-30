@@ -5,14 +5,9 @@ import { IRootState } from "redux/store";
 import { useAppSelector } from "redux/hooks";
 import { useTranslation } from "react-i18next";
 import { NavButton } from "./nav-button";
-import { Home } from "@mui/icons-material";
-import { ListItemIcon } from "@mui/material";
 import List from "@mui/material/List";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ScheduleIcon from "@mui/icons-material/Schedule";
 import { AsideCollapse } from "shared/layout/aside/components/collapse";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { routeExactMatchV2 } from "shared/router/services/route-exact";
 import { getModerationRouteService } from "shared/chat/services/router/settings/moderation/get-moderation-route.service";
 import { getGreetingRouteService } from "shared/chat/services/router/settings/greeting/get-greeting-route.service";
@@ -20,7 +15,12 @@ import { getMemberRightsRouteService } from "shared/chat/services/router/setting
 import { getChatRouteService } from "shared/chat/services/router/get-chat-route.service";
 import { ChatRoutesEnum } from "shared/chat/router/chat.enum";
 import { getSettingsRouteService } from "shared/chat/services/router/settings/get-settings-route.service";
-
+import { routeFinder } from "shared/router/services/route-finder";
+import SettingsIcon from "@mui/icons-material/Settings";
+import InfoIcon from "@mui/icons-material/Info";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import MessageIcon from "@mui/icons-material/Message";
+import AddModeratorIcon from "@mui/icons-material/AddModerator";
 const selector = (state: IRootState) => ({
 	chatId: state.chat.chat?._id,
 });
@@ -32,13 +32,15 @@ export const ChatBlock = () => {
 
 	const isHidden = !chatId;
 	const locate = useLocation();
+	const { chatId: routeChatId } = useParams();
+	const inChat = routeFinder(locate.pathname, routeChatId);
 	const inSettings = chatId
 		? routeExactMatchV2(
 				locate.pathname,
 				routeBuilderWithReplace(getSettingsRouteService(), "chatId", chatId)
 		  )
 		: false;
-	return chatId ? (
+	return chatId && inChat ? (
 		<ChatAside isHidden={isHidden}>
 			<NavButton
 				to={routeBuilderWithReplace(
@@ -46,19 +48,19 @@ export const ChatBlock = () => {
 					"chatId",
 					chatId
 				)}
-				icon={<Home />}
+				icon={<InfoIcon />}
 				text={t("chatCategories.info")}
 				end
 			/>
 			<AsideCollapse
-				icon={<Home />}
+				icon={<SettingsIcon />}
 				title={t("chatCategories.settings")}
 				expandByDefault={inSettings}
 			>
 				<List component="div" disablePadding>
 					<NavButton
 						text={t("settings.memberRights")}
-						icon={<DraftsIcon />}
+						icon={<ManageAccountsIcon />}
 						to={routeBuilderWithReplace(
 							getMemberRightsRouteService(),
 							"chatId",
@@ -68,7 +70,7 @@ export const ChatBlock = () => {
 					/>
 					<NavButton
 						text={t("settings.greeting")}
-						icon={<CheckCircleOutlineIcon />}
+						icon={<MessageIcon />}
 						to={routeBuilderWithReplace(
 							getGreetingRouteService(),
 							"chatId",
@@ -78,11 +80,7 @@ export const ChatBlock = () => {
 					/>
 					<NavButton
 						text={t("settings.moderation")}
-						icon={
-							<ListItemIcon>
-								<ScheduleIcon />
-							</ListItemIcon>
-						}
+						icon={<AddModeratorIcon />}
 						to={routeBuilderWithReplace(
 							getModerationRouteService(),
 							"chatId",

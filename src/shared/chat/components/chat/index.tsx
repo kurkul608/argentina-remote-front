@@ -1,68 +1,40 @@
-import React, { useEffect } from "react";
-import { Widget } from "shared/components/widget";
-import {
-	LineDescription,
-	LineTitle,
-	SettingLine,
-	SettingsUL,
-} from "shared/chat/components/chat/styled";
-import { useTranslation } from "react-i18next";
+import React, { Suspense } from "react";
+import { useAppSelector } from "redux/hooks";
 import { useParams } from "react-router";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { getChatAsync } from "shared/chat/redux/chat-info-page/chat.slice";
-import { getAuthToken } from "helpers/storage-parser";
+import PageWithBreadcrumbs from "shared/components/page-with-breadcrumbs";
+import Typography from "@mui/material/Typography";
+import { WidgetWrapper } from "shared/components/widget/components/widget-wrapper";
+import { ICrumbsDecorator } from "shared/components/breadcrumbs";
 import { IRootState } from "redux/store";
-import { getChatSettingsAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
-import { getChatAdminsAsync } from "shared/chat/redux/chat-settings/user-rights.slice";
+import { CircularProgress } from "@mui/material";
+import ChatTopBar from "shared/chat/components/others/top-bar";
+import ChatInfoWidget from "shared/chat/components/chat/chat-info";
 
 const selector = (state: IRootState) => ({
-	chatInfo: state.chat.chat?.tgChatInfo.chatInfo,
-	chatMembersCount: state.chat.chat?.tgChatInfo.chatMembersCount,
-	chatID: state.chat.chat?._id,
-	auth: state.auth,
+	chatTitle: state.chat.chat?.tgChatInfo.chatInfo.title,
 });
-const ChatInfoWidget = () => {
-	const { t } = useTranslation("translation", {
-		keyPrefix: "chatInfoWidget",
-	});
+
+const ChatIdPage = () => {
+	const { chatTitle } = useAppSelector(selector);
 	const { chatId } = useParams();
-
-	const { chatInfo, chatMembersCount, auth, chatID } = useAppSelector(selector);
-
-	const dispatch = useAppDispatch();
-	const token = getAuthToken(auth)!;
-
-	useEffect(() => {
-		if (chatId) {
-			if (chatId !== chatID) {
-				Promise.all([
-					dispatch(getChatAsync({ id: chatId, token })),
-					dispatch(getChatSettingsAsync({ id: chatId, token })),
-					dispatch(getChatAdminsAsync({ token: token, id: chatId })),
-				]);
-			}
-		}
-	}, []);
-
-	const count = chatMembersCount;
+	const decorator: ICrumbsDecorator = {};
+	if (chatId && chatTitle) {
+		decorator[chatId] = chatTitle;
+	}
 	return (
-		<Widget name={t("infoWidgetTitle") as string}>
-			<SettingsUL>
-				<SettingLine>
-					<LineTitle>{t("id")}</LineTitle>
-					<LineDescription>{chatInfo?.id}</LineDescription>
-				</SettingLine>
-				<SettingLine>
-					<LineTitle>{t("chatTitle")}</LineTitle>
-					<LineDescription>{chatInfo?.title}</LineDescription>
-				</SettingLine>
-				<SettingLine>
-					<LineTitle>{t("count")}</LineTitle>
-					<LineDescription>{count}</LineDescription>
-				</SettingLine>
-			</SettingsUL>
-		</Widget>
+		<PageWithBreadcrumbs
+			title={<Typography variant={"h3"}>{chatTitle}</Typography>}
+			isLoading={!chatTitle}
+			decorator={decorator}
+			topBar={<ChatTopBar />}
+		>
+			<Suspense fallback={<CircularProgress />}>
+				<WidgetWrapper>
+					<ChatInfoWidget />
+				</WidgetWrapper>
+			</Suspense>
+		</PageWithBreadcrumbs>
 	);
 };
 
-export default ChatInfoWidget;
+export default ChatIdPage;

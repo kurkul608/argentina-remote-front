@@ -2,6 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 module.exports = {
 	mode: "development",
@@ -58,6 +59,7 @@ module.exports = {
 			title: "Finance App",
 			template: "./src/public/index.html",
 		}),
+		new Dotenv(),
 		new CleanWebpackPlugin(),
 		new ForkTsCheckerWebpackPlugin(),
 		new CopyWebpackPlugin({

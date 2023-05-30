@@ -1,89 +1,57 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ChatSettings } from "shared/chat/types/chat-settings/chat-settings";
-import { getSettings } from "shared/chat/services/data";
+import {
+	getSettingsByChatId,
+	getSettingsById,
+	UpdateSettings,
+	updateSettings,
+} from "shared/chat/services/data";
 import { WritableDraft } from "immer/dist/types/types-external";
+import { fromSettingsDtoService } from "shared/chat/services/from-settings-dto.service";
+import { ChatSettingsDtoInterface } from "shared/chat/types/chat-settings/chat-settings.dto.interface";
 
 export interface IChatSettings {
 	config: ChatSettings;
+	isLoading: boolean;
 }
 export interface GetChatAsyncParams {
 	token: string;
 	id: string;
 }
+
+export interface UpdateChatParams extends GetChatAsyncParams {
+	config: UpdateSettings;
+}
 export const getChatSettingsAsync = createAsyncThunk(
 	"chats/getSettings",
 	async ({ token, id }: GetChatAsyncParams) => {
-		return (await getSettings(id, token)) as ChatSettings;
+		return await getSettingsByChatId(id, token);
+	}
+);
+export const getChatSettingsByIdAsync = createAsyncThunk(
+	"chats/getSettingsById",
+	async ({ token, id }: GetChatAsyncParams) => {
+		return await getSettingsById(id, token);
+	}
+);
+
+export const updateChatSettingsByIdAsync = createAsyncThunk(
+	"chats/updateSettingsById",
+	async ({ token, id, config }: UpdateChatParams) => {
+		return await updateSettings(id, token, config);
 	}
 );
 
 const initialState: IChatSettings = {
-	config: {
-		userRights: {
-			adminList: [],
-			changeBotSettingsAllowedList: [],
-			allowChatAdminCallCommands: false,
-			notAffectByRulesList: [],
-			useBotCommandsList: [],
-		},
-		greetings: {
-			message: [],
-			misc: false,
-			leftMembers: false,
-			systemMessages: false,
-		},
-		moderation: {
-			rulesMessage: [],
-			newcomers: {
-				chatTimeout: {
-					countTime: 0,
-					time: "minute",
-				},
-				timeToChangeUsername: {
-					countTime: 0,
-					time: "minute",
-				},
-			},
-			security: {
-				faceControlUsers: false,
-				faceControlMaxNumbersWarning: 2,
-				faceControlUsernameMinLength: 0,
-				faceControlUsernameSubstringList: [],
-				faceControlBanMessage: "",
-				faceControlBanTime: {
-					countTime: 0,
-					time: "minute",
-				},
-				faceControlPreventRTL: false,
-				faceControlPreventHieroglyphs: false,
-				faceControlUserLoginControl: false,
-				faceControlRTLPercent: 0,
-				faceControlHieroglyphsPercent: 0,
-				faceControlUsernameMaxLength: 20,
-				faceControlBreakingUsername: false,
-				faceControlBanType: "no",
-				faceControlCheckTimeout: {
-					countTime: 0,
-					time: "minute",
-				},
-				faceControlSubscriptionChannels: [],
-			},
-			report: {
-				reportIsEnable: false,
-				additionalUserNotificationList: false,
-				deleteReportMessage: false,
-				reportReportOnAdmins: false,
-				notifyAdmins: false,
-			},
-		},
-	},
+	config: {},
+	isLoading: false,
 };
 
 export const chatSettingsSlice = createSlice({
 	name: "chat/settings",
 	initialState,
 	reducers: {
-		setDefault: (state) => {
+		clearSettings: (state) => {
 			state.config = initialState.config;
 		},
 		updateToggleFiled: (
@@ -131,12 +99,48 @@ export const chatSettingsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(
 			getChatSettingsAsync.fulfilled,
-			(state, action: PayloadAction<ChatSettings>) => {
-				state.config = action.payload;
+			(state, action: PayloadAction<ChatSettingsDtoInterface>) => {
+				state.config = fromSettingsDtoService(action.payload);
+				state.isLoading = false;
 			}
 		);
+		builder.addCase(getChatSettingsAsync.pending, (state) => {
+			state.config = {};
+			state.isLoading = true;
+		});
+		builder.addCase(getChatSettingsAsync.rejected, (state) => {
+			state.isLoading = false;
+		});
+		builder.addCase(
+			getChatSettingsByIdAsync.fulfilled,
+			(state, action: PayloadAction<ChatSettingsDtoInterface>) => {
+				state.config = fromSettingsDtoService(action.payload);
+				state.isLoading = false;
+			}
+		);
+		builder.addCase(getChatSettingsByIdAsync.pending, (state) => {
+			state.config = {};
+			state.isLoading = true;
+		});
+		builder.addCase(getChatSettingsByIdAsync.rejected, (state) => {
+			state.isLoading = false;
+		});
+		builder.addCase(
+			updateChatSettingsByIdAsync.fulfilled,
+			(state, action: PayloadAction<ChatSettingsDtoInterface>) => {
+				state.config = fromSettingsDtoService(action.payload);
+				state.isLoading = false;
+			}
+		);
+		builder.addCase(updateChatSettingsByIdAsync.pending, (state) => {
+			state.config = {};
+			state.isLoading = true;
+		});
+		builder.addCase(updateChatSettingsByIdAsync.rejected, (state) => {
+			state.isLoading = false;
+		});
 	},
 });
 
-export const { setDefault, updateToggleFiled } = chatSettingsSlice.actions;
+export const { clearSettings, updateToggleFiled } = chatSettingsSlice.actions;
 export default chatSettingsSlice.reducer;
