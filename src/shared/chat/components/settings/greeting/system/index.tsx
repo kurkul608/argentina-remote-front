@@ -3,7 +3,10 @@ import { useTranslation } from "react-i18next";
 import { IRootState } from "redux/store";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateChatSettingsByIdAsync } from "shared/chat/redux/chat-settings/chat-settings.slice";
-import { systemMessage } from "shared/chat/constants/settings/greetings/system/system-message";
+import {
+	systemMessage,
+	SystemMessageType,
+} from "shared/chat/constants/settings/greetings/system/system-message";
 import IndeterminateCheckboxWidget, {
 	IOption,
 } from "shared/components/ideterminate-checkbox-widget";
@@ -19,7 +22,10 @@ const System = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "settings.greetings.systemMessages",
 	});
-	const onChangeCallback = (clearAll: boolean, items: IOption[]) => {
+	const onChangeCallback = (
+		clearAll: boolean,
+		items: IOption<SystemMessageType>[]
+	) => {
 		dispatch(
 			updateChatSettingsByIdAsync({
 				token: token!,
@@ -33,7 +39,7 @@ const System = () => {
 			})
 		);
 	};
-	const systemMessageValues: IOption[] = systemMessage.map((value) => ({
+	const systemMessageValues = systemMessage.map((value: SystemMessageType) => ({
 		value,
 		isChecked:
 			config.clearSystemMessages?.messageTypes.includes(value) || false,

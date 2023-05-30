@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { Widget } from "shared/components/widget";
 import Typography from "@mui/material/Typography/Typography";
 import Box from "@mui/material/Box/Box";
 
-export interface IOption {
-	title: string;
+export interface IOption<T> {
+	title?: string;
 	isChecked: boolean;
-	value: string;
+	value: T;
 }
 
-interface IndeterminateCheckboxWidgetProps<T extends IOption> {
-	values: T[];
+interface IndeterminateCheckboxWidgetProps<T, K extends IOption<T>> {
+	values: K[];
 	name: string;
 	description?: string;
 	mainBoxTitle: string;
-	onChangeCb: (main: boolean, arrayItems: T[]) => void;
+	onChangeCb: (main: boolean, arrayItems: K[]) => void;
 }
 
 const isChecked = (arr: boolean[]): boolean => {
@@ -26,11 +26,11 @@ const isIndeterminate = (arr: boolean[]): boolean => {
 	return filteredArrLength > 0 && filteredArrLength < arr.length;
 };
 
-const fromBooleanToItems = <T extends IOption>(
-	arrItem: T[],
+const fromBooleanToItems = <T, K extends IOption<T>>(
+	arrItem: K[],
 	arrBoolean: boolean[]
-): T[] => {
-	const result: T[] = [];
+): K[] => {
+	const result: K[] = [];
 	arrItem.forEach((item, index) => {
 		if (arrBoolean[index]) {
 			result.push(item);
@@ -39,18 +39,21 @@ const fromBooleanToItems = <T extends IOption>(
 	return result;
 };
 
-const IndeterminateCheckboxWidget = <T extends IOption>({
+const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 	values,
 	name,
 	description,
 	mainBoxTitle,
 	onChangeCb,
-}: IndeterminateCheckboxWidgetProps<T>) => {
+}: IndeterminateCheckboxWidgetProps<T, K>) => {
 	const initialChecked = values.map((val) => val.isChecked);
 	const [checkedArr, setCheckedArr] = useState(initialChecked);
 
 	const mainCheckBoxOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setCheckedArr(new Array(values.length).fill(e.target.checked));
+		const newCheckedArr = new Array(values.length).fill(e.target.checked);
+		const enabledValues: K[] = fromBooleanToItems(values, newCheckedArr);
+		onChangeCb(isChecked(checkedArr), enabledValues);
+		setCheckedArr(newCheckedArr);
 	};
 
 	const subCheckBoxOnChange = (
@@ -63,13 +66,10 @@ const IndeterminateCheckboxWidget = <T extends IOption>({
 			}
 			return checked;
 		});
+		const enabledValues: K[] = fromBooleanToItems(values, copyArr);
+		onChangeCb(isChecked(checkedArr), enabledValues);
 		setCheckedArr(copyArr);
 	};
-
-	useEffect(() => {
-		const enabledValues: T[] = fromBooleanToItems(values, checkedArr);
-		onChangeCb(isChecked(checkedArr), enabledValues);
-	}, [checkedArr]);
 
 	return (
 		<Widget name={name}>
