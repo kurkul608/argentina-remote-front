@@ -4,13 +4,13 @@ import { Widget } from "shared/components/widget";
 import Typography from "@mui/material/Typography/Typography";
 import Box from "@mui/material/Box/Box";
 
-export interface IValueParams {
+export interface IOption {
 	title: string;
 	isChecked: boolean;
 	value: string;
 }
 
-interface IndeterminateCheckboxWidgetProps<T extends IValueParams> {
+interface IndeterminateCheckboxWidgetProps<T extends IOption> {
 	values: T[];
 	name: string;
 	description?: string;
@@ -26,7 +26,7 @@ const isIndeterminate = (arr: boolean[]): boolean => {
 	return filteredArrLength > 0 && filteredArrLength < arr.length;
 };
 
-const fromBooleanToItems = <T extends IValueParams>(
+const fromBooleanToItems = <T extends IOption>(
 	arrItem: T[],
 	arrBoolean: boolean[]
 ): T[] => {
@@ -39,7 +39,7 @@ const fromBooleanToItems = <T extends IValueParams>(
 	return result;
 };
 
-const IndeterminateCheckboxWidget = <T extends IValueParams>({
+const IndeterminateCheckboxWidget = <T extends IOption>({
 	values,
 	name,
 	description,
