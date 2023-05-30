@@ -1,6 +1,6 @@
 import React from "react";
 import { IContentProps, TableWidget } from "shared/components/table-widget";
-import { SwitchWidget } from "shared/components/switch-widget";
+import Switch from "shared/components/switch-widget";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { updateToggleFiled } from "shared/chat/redux/chat-settings/chat-settings.slice";
 import { IRootState } from "redux/store";
@@ -57,8 +57,7 @@ const RightsAdmin = () => {
 			}}
 		>
 			<TableWidget title={"Admin List"} content={adminChat} />
-			<SwitchWidget
-				name={"Allow chat admins to call bot commands"}
+			<Switch
 				description={"Allow chat admins to call bot commands"}
 				value={userRights.allowChatAdminCallCommands}
 				callback={callBack}

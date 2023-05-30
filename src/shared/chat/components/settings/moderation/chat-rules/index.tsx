@@ -1,6 +1,6 @@
 import React from "react";
 import { TableWidget } from "shared/components/table-widget";
-import { SwitchWidget } from "shared/components/switch-widget";
+import Switch from "shared/components/switch-widget";
 import Box from "@mui/material/Box";
 
 const ChatRules = () => {
@@ -17,10 +17,7 @@ const ChatRules = () => {
 				title={"Admin List"}
 				content={[{ content: "ad", status: "ad" }]}
 			/>
-			<SwitchWidget
-				name={"Allow chat admins to call bot commands"}
-				description={"Allow chat admins to call bot commands"}
-			/>
+			<Switch description={"Allow chat admins to call bot commands"} />
 		</Box>
 	);
 };

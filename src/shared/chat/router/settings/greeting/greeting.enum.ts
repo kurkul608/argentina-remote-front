@@ -1,6 +1,6 @@
 export enum GreetingRoutes {
 	greeting = "greeting",
-	message = "message",
+	botValidation = "bot-validation",
 	messages = "system-messages",
 	members = "left-members",
 	misc = "misc",
