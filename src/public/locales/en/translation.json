@@ -122,12 +122,12 @@
 					"description": "Bot will be delete system messages from the chat",
 					"option": "Clear all types of the system messages",
 					"systemMessages": {
-						"newMember": "New member join the chat",
-						"leftMember": "Member left the chat",
-						"pinnedMessage": "Admin pinned the message",
-						"videoCallStart": "Admin started video call",
-						"videoCallEnd": "Admin ended video call",
-						"autoDeleteTimerChanged": "Admin changed auto-delete timer"
+						"new_member": "New member join the chat",
+						"left_member": "Member left the chat",
+						"pinned_message": "Admin pinned the message",
+						"video_call_start": "Admin started video call",
+						"video_call_end": "Admin ended video call",
+						"auto_delete_timer_changed": "Admin changed auto-delete timer"
 					}
 				}
 			}

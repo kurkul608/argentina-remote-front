@@ -1,11 +1,10 @@
-import {
-	IChatSettingsGreetings,
-	IChatSettingsModeration,
-	IChatSettingsUserRights,
-} from "shared/chat/types/chat-settings/chat-sub-settings";
+import { SystemMessageType } from "shared/chat/constants/settings/greetings/system/system-message";
 
 export interface ChatSettings {
-	userRights: IChatSettingsUserRights;
-	greetings: IChatSettingsGreetings;
-	moderation?: IChatSettingsModeration;
+	removeBots?: boolean;
+	clearSystemMessages?: {
+		clearAll: boolean;
+		messageTypes: SystemMessageType[];
+	};
+	_id?: string;
 }
