@@ -2,19 +2,7 @@ import React, { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { Widget } from "shared/components/widget";
-import {
-	ChatListWrapper,
-	ChatPhoto,
-	ChatPhotoWrapper,
-	ChatsWrapper,
-	ChatTitle,
-	ChatTitleWrapper,
-	ChatWrapper,
-	StyledChatList,
-	Subscribers,
-	SvgWrapper,
-	TextWrapper,
-} from "shared/chat/components/list/styled";
+import * as ST from "shared/chat/components/list/styled";
 import { getAllChats } from "shared/chat/redux/chat-page/chat-list.slice";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
 import { getAuthToken } from "helpers/storage-parser";
@@ -29,6 +17,7 @@ import { Icon, IconName } from "shared/components/icon";
 import { IChat } from "shared/chat/types/chat.interface";
 import { getSettingsRouteService } from "shared/chat/services/router/settings/get-settings-route.service";
 import { getChatRouteService } from "shared/chat/services/router/get-chat-route.service";
+import { ChatRoutesEnum } from "shared/chat/router/chat.enum";
 
 const ChatListWidget = () => {
 	const dispatch = useAppDispatch();
@@ -64,10 +53,15 @@ const ChatListWidget = () => {
 	const handleOnClick = useCallback(
 		(chat: IChat) =>
 			navigate(
-				routeBuilderWithReplace(getChatRouteService(), "chatId", chat._id)
+				routeBuilderWithReplace(
+					getChatRouteService(ChatRoutesEnum.chatId),
+					"chatId",
+					chat._id
+				)
 			),
 		[navigate]
 	);
+
 	const handleOnClickSettings = useCallback(
 		(chat: IChat) =>
 			navigate(
@@ -76,47 +70,49 @@ const ChatListWidget = () => {
 		[navigate]
 	);
 	return (
-		<StyledChatList>
+		<ST.StyledChatList>
 			<InfiniteScroll
 				loader={<CircularProgress />}
 				endMessage={<span>All chats was loaded</span>}
 				isLoading={isLoading}
 				callback={onScroll}
 			>
-				<ChatsWrapper>
+				<ST.ChatsWrapper>
 					{list.map((chat) => (
-						<ChatListWrapper key={`widget-chat-list--${chat._id}`}>
+						<ST.ChatListWrapper key={`widget-chat-list--${chat._id}`}>
 							<Widget onClick={() => handleOnClick(chat)}>
-								<ChatWrapper>
-									<TextWrapper>
-										<ChatPhotoWrapper>
-											<ChatPhoto chatPhoto={chat.tgChatInfo.photos.small}>
+								<ST.ChatWrapper>
+									<ST.TextWrapper>
+										<ST.ChatPhotoWrapper>
+											<ST.ChatPhoto chatPhoto={chat.tgChatInfo.photos.small}>
 												{!chat.tgChatInfo.photos.small &&
 													chat.tgChatInfo.chatInfo.title[0].toUpperCase()}
-											</ChatPhoto>
-										</ChatPhotoWrapper>
-										<ChatTitleWrapper>
-											<ChatTitle>{chat.tgChatInfo.chatInfo.title}</ChatTitle>
-											<Subscribers>{`${chat.tgChatInfo.chatMembersCount} ${t(
+											</ST.ChatPhoto>
+										</ST.ChatPhotoWrapper>
+										<ST.ChatTitleWrapper>
+											<ST.ChatTitle>
+												{chat.tgChatInfo.chatInfo.title}
+											</ST.ChatTitle>
+											<ST.Subscribers>{`${chat.tgChatInfo.chatMembersCount} ${t(
 												"count"
-											)}`}</Subscribers>
-										</ChatTitleWrapper>
-									</TextWrapper>
-									<SvgWrapper
+											)}`}</ST.Subscribers>
+										</ST.ChatTitleWrapper>
+									</ST.TextWrapper>
+									<ST.SvgWrapper
 										onClick={(e) => {
 											e.stopPropagation();
 											handleOnClickSettings(chat);
 										}}
 									>
 										<Icon name={IconName.settings} />
-									</SvgWrapper>
-								</ChatWrapper>
+									</ST.SvgWrapper>
+								</ST.ChatWrapper>
 							</Widget>
-						</ChatListWrapper>
+						</ST.ChatListWrapper>
 					))}
-				</ChatsWrapper>
+				</ST.ChatsWrapper>
 			</InfiniteScroll>
-		</StyledChatList>
+		</ST.StyledChatList>
 	);
 };
 
