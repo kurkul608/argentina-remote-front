@@ -9,7 +9,8 @@ import {
 } from "shared/chat/constants/settings/greetings/system/system-message";
 import IndeterminateCheckboxWidget, {
 	IOption,
-} from "shared/components/ideterminate-checkbox-widget";
+} from "shared/components/ideterminate-checkbox";
+import { Widget } from "shared/components/widget";
 
 const selector = (state: IRootState) => ({
 	token: state.auth.token,
@@ -46,13 +47,14 @@ const System = () => {
 		title: t(`clearSystemMessage.systemMessages.${value}`),
 	}));
 	return (
-		<IndeterminateCheckboxWidget
-			values={systemMessageValues}
-			title={t("clearSystemMessage.title") || ""}
-			description={t("clearSystemMessage.description") || ""}
-			mainBoxTitle={t("clearSystemMessage.option")}
-			onChangeCb={onChangeCallback}
-		/>
+		<Widget name={t("clearSystemMessage.title")}>
+			<IndeterminateCheckboxWidget
+				values={systemMessageValues}
+				description={t("clearSystemMessage.description") || ""}
+				mainBoxTitle={t("clearSystemMessage.option")}
+				onChangeCb={onChangeCallback}
+			/>
+		</Widget>
 	);
 };
 

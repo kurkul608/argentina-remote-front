@@ -11,7 +11,6 @@ export interface IOption<T> {
 
 interface IndeterminateCheckboxWidgetProps<T, K extends IOption<T>> {
 	values: K[];
-	title?: string;
 	description?: string;
 	mainBoxTitle: string;
 	onChangeCb: (main: boolean, arrayItems: K[]) => void;
@@ -40,7 +39,6 @@ const fromBooleanToItems = <T, K extends IOption<T>>(
 
 const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 	values,
-	title,
 	description,
 	mainBoxTitle,
 	onChangeCb,
@@ -72,7 +70,6 @@ const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 
 	return (
 		<Box>
-			<Typography variant={"h5"}>{title}</Typography>
 			<Typography>{description}</Typography>
 			<FormControlLabel
 				label={mainBoxTitle}
