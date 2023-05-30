@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { Widget } from "shared/components/widget";
 import Typography from "@mui/material/Typography/Typography";
 import Box from "@mui/material/Box/Box";
 
@@ -12,7 +11,7 @@ export interface IOption<T> {
 
 interface IndeterminateCheckboxWidgetProps<T, K extends IOption<T>> {
 	values: K[];
-	name: string;
+	title?: string;
 	description?: string;
 	mainBoxTitle: string;
 	onChangeCb: (main: boolean, arrayItems: K[]) => void;
@@ -41,7 +40,7 @@ const fromBooleanToItems = <T, K extends IOption<T>>(
 
 const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 	values,
-	name,
+	title,
 	description,
 	mainBoxTitle,
 	onChangeCb,
@@ -72,7 +71,8 @@ const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 	};
 
 	return (
-		<Widget name={name}>
+		<Box>
+			<Typography variant={"h5"}>{title}</Typography>
 			<Typography>{description}</Typography>
 			<FormControlLabel
 				label={mainBoxTitle}
@@ -100,7 +100,7 @@ const IndeterminateCheckboxWidget = <T, K extends IOption<T>>({
 					);
 				})}
 			</Box>
-		</Widget>
+		</Box>
 	);
 };
 

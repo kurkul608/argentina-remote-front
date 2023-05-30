@@ -5,6 +5,8 @@ export const systemMessage: SystemMessageType[] = [
 	"video_call_end",
 	"auto_delete_timer_changed",
 	"pinned_message",
+	"new_chat_photo",
+	"new_chat_title",
 ];
 
 export type SystemMessageType =
@@ -13,4 +15,6 @@ export type SystemMessageType =
 	| "video_call_start"
 	| "video_call_end"
 	| "auto_delete_timer_changed"
-	| "pinned_message";
+	| "pinned_message"
+	| "new_chat_photo"
+	| "new_chat_title";

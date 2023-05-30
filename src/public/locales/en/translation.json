@@ -127,7 +127,9 @@
 						"pinned_message": "Admin pinned the message",
 						"video_call_start": "Admin started video call",
 						"video_call_end": "Admin ended video call",
-						"auto_delete_timer_changed": "Admin changed auto-delete timer"
+						"auto_delete_timer_changed": "Admin changed auto-delete timer",
+					  	"new_chat_photo": "Admin changed photo in the chat",
+					  	"new_chat_title": "Admin changed title in the chat"
 					}
 				}
 			}
