@@ -1,7 +1,7 @@
 import React from "react";
-import { ITabMenu, TabMenu } from "shared/components/tab-menu";
-import * as ST from "./styled";
+import TabMenu, { ITabMenu } from "shared/components/tabs/tab-menu";
 import { RoutesType } from "shared/router/route.enum";
+import Box from "@mui/material/Box";
 
 interface IOwnProps {
 	tabConfig: ITabMenu[];
@@ -9,13 +9,13 @@ interface IOwnProps {
 	baseRoute: RoutesType[];
 	id: string | number;
 }
-const TabWrapper = ({ tabConfig, id, children, baseRoute }: IOwnProps) => {
+const Tabs = ({ tabConfig, id, children, baseRoute }: IOwnProps) => {
 	return (
-		<ST.TabMenuWrapper>
+		<Box sx={{ display: "flex", flexDirection: "column", gap: "0.35em" }}>
 			<TabMenu items={tabConfig} baseRoute={baseRoute} id={id} />
 			{children}
-		</ST.TabMenuWrapper>
+		</Box>
 	);
 };
 
-export default TabWrapper;
+export default Tabs;
