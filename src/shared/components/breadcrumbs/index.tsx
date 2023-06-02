@@ -1,13 +1,10 @@
 import React from "react";
 import { LinkParserService } from "./services/link-parser.service";
 import { useNavigate } from "react-router";
-import {
-	Breadcrumb,
-	BreadcrumbsWrapper,
-	BreadcrumbWrapper,
-	Separator,
-} from "./style";
 import { LineDecorator } from "shared/components/breadcrumbs/services/line-decorator.service";
+import Typography from "@mui/material/Typography";
+import MUIBreadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 
 export interface ICrumbsDecorator {
 	[x: string]: string;
@@ -15,30 +12,34 @@ export interface ICrumbsDecorator {
 
 interface IBreadcrumbs {
 	link: string;
-	separator?: string;
 	decorateCrumbs?: ICrumbsDecorator;
 }
-export const Breadcrumbs = ({
-	link,
-	separator,
-	decorateCrumbs,
-}: IBreadcrumbs) => {
+
+export const Breadcrumbs = ({ link, decorateCrumbs }: IBreadcrumbs) => {
 	const navigate = useNavigate();
 	const links = LinkParserService(link);
-	return (
-		<BreadcrumbsWrapper>
-			{links.map((value, i, arr) => (
-				<BreadcrumbWrapper key={`beadcrumb-wrapper--${value}`}>
-					<Breadcrumb onClick={() => navigate(value, { replace: true })}>
-						{decorateCrumbs
-							? LineDecorator(value.split("/").pop() || "", decorateCrumbs)
-							: value.split("/").pop()}
-					</Breadcrumb>
-					{i < arr.length - 1 ? (
-						<Separator>{separator || "/"}</Separator>
-					) : null}
-				</BreadcrumbWrapper>
-			))}
-		</BreadcrumbsWrapper>
-	);
+
+	const getLinks = (links: string[]) =>
+		links.map((link, index) => {
+			return index !== links.length - 1 ? (
+				<Link
+					sx={{ cursor: "pointer" }}
+					underline="hover"
+					color="inherit"
+					onClick={() => navigate(link)}
+					key={`beadcrumb-link--${link}`}
+				>
+					{decorateCrumbs
+						? LineDecorator(link.split("/").pop() || "", decorateCrumbs)
+						: link.split("/").pop()}
+				</Link>
+			) : (
+				<Typography color="text.primary" key={`beadcrumb-link--${link}`}>
+					{decorateCrumbs
+						? LineDecorator(link.split("/").pop() || "", decorateCrumbs)
+						: link.split("/").pop()}
+				</Typography>
+			);
+		});
+	return <MUIBreadcrumbs>{getLinks(links)}</MUIBreadcrumbs>;
 };
