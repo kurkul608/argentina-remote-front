@@ -23,6 +23,10 @@ export interface UpdateSettings {
 		clear_all: boolean;
 		message_types: SystemMessageType[];
 	};
+	clear_messages_by_channel?: {
+		isEnable: boolean;
+		text?: string;
+	};
 }
 
 export const getChatsList = (token: string, query: AllChatsQuery) =>
