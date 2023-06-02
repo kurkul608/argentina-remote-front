@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ITabMenu } from "shared/components/tab-menu";
+import { ITabMenu } from "shared/components/tabs/tab-menu";
 import { Outlet, useMatch } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
@@ -7,7 +7,7 @@ import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 import { getModerationRouteService } from "shared/chat/services/router/settings/moderation/get-moderation-route.service";
 import { ModerationRoutes } from "shared/chat/router/settings/moderation/moderation.enum";
-import TabWrapper from "shared/components/tab-wrapper";
+import TabWrapper from "shared/components/tabs";
 
 const selector = (state: IRootState) => ({
 	chatId: state.chat.chat?._id,

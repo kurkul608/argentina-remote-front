@@ -23,21 +23,20 @@ export const Layout = () => {
 					overflow: "auto",
 				}}
 			>
-				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+				<Container
+					maxWidth="lg"
+					sx={{
+						mt: 4,
+						mb: 4,
+						display: "flex",
+						flexDirection: "column",
+						gap: "0.35em",
+					}}
+				>
 					<Toolbar />
 					<Outlet />
 				</Container>
 			</Box>
-			{/*<Header*/}
-			{/*	isAsideVisible={isAsideVisible}*/}
-			{/*	isAsideVisibleHandler={isAsideVisibleHandler}*/}
-			{/*/>*/}
-			{/*<div style={{ display: "flex" }}>*/}
-			{/*	{(!isMobile || isAsideVisible) && <Aside />}*/}
-			{/*	<Main>*/}
-			{/*		<Outlet />*/}
-			{/*	</Main>*/}
-			{/*</div>*/}
 		</>
 	);
 };
