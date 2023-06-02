@@ -16,6 +16,7 @@ export const Description = styled("div")`
 export const Wrapper = styled("div")`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 `;
 
 export const StyledBox = styled(Box)`

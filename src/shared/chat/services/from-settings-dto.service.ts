@@ -9,5 +9,16 @@ export const fromSettingsDtoService = (
 		clearAll: dto.clear_system_messages!.clear_all,
 		messageTypes: dto.clear_system_messages!.message_types,
 	},
+	...(dto.greeting
+		? {
+				greeting: {
+					isEnable: dto.greeting.is_enable,
+					message: dto.greeting.message,
+					previousGreetings: dto.greeting.previous_greetings,
+					clearTime: dto.greeting.clear_time,
+					clearLastMessage: dto.greeting.clear_last_message,
+				},
+		  }
+		: {}),
 	_id: dto._id,
 });

@@ -23,6 +23,13 @@ export interface UpdateSettings {
 		clear_all: boolean;
 		message_types: SystemMessageType[];
 	};
+	greeting?: {
+		is_enable: boolean;
+		previous_greetings?: number[];
+		clear_last_message?: boolean;
+		message?: string;
+		clear_time?: string;
+	};
 }
 
 export const getChatsList = (token: string, query: AllChatsQuery) =>

@@ -6,5 +6,12 @@ export interface ChatSettings {
 		clearAll: boolean;
 		messageTypes: SystemMessageType[];
 	};
+	greeting?: {
+		isEnable: boolean;
+		previousGreetings?: number[];
+		clearLastMessage?: boolean;
+		message?: string;
+		clearTime?: string;
+	};
 	_id?: string;
 }

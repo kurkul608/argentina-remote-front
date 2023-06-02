@@ -136,6 +136,19 @@
 			"botValidation": {
 				"widgetName": "Bot validation enable",
 				"switchDescription": "Select this option if you want bots added by ordinary users to be blocked and not be able to collect information from your chat room"
+			},
+			"greetingMessage": {
+				"widgetName": "Greeting message",
+				"isEnabledTitle": "Turn on greeting message function",
+				"isEnabledDescription": "If you enable this setting, the bot will welcome new users who enter the chat room",
+				"deletePreviousTitle": "Delete previous greeting message",
+				"deletePreviousDescription": "If you enable this setting, then as soon as a new user enters the chat room, the bot will automatically delete the previous message",
+				"accordionTitle": "Advanced settings",
+				"greetingMessageTitle": "Custom greeting message",
+				"greetingMessageDescription": "You can set your own custom welcome message for new members",
+				"greetingMessageLabel": "Enter a custom greeting",
+				"clearTimeTitle": "Time of automatic deletion of the welcome message",
+				"clearTimeDescription": "By selecting this field - the bot will delete welcome messages after the selected time"
 			}
 		}
 	},
