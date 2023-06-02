@@ -1,27 +1,13 @@
-import { Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Widget } from "shared/components/widget";
-import {
-	Description,
-	StyledBox,
-	StyledWidget,
-	Wrapper,
-} from "shared/components/switch-widget/styled";
+import * as ST from "shared/components/switch-widget/styled";
 
 export interface SwitchWidgetProps {
-	name: string;
 	description: string;
-	switchDescription?: string;
 	value?: boolean;
 	callback?: (value: boolean) => void;
 }
 
-export const SwitchWidget = ({
-	name,
-	description,
-	value,
-	callback,
-}: SwitchWidgetProps) => {
+const Switch = ({ description, value, callback }: SwitchWidgetProps) => {
 	const [isEnabled, setIsEnabled] = useState(value || false);
 	const handleOnClick = () => setIsEnabled(!isEnabled);
 	useEffect(() => {
@@ -29,16 +15,16 @@ export const SwitchWidget = ({
 	}, [isEnabled]);
 	return (
 		<>
-			<StyledWidget>
-				<Widget name={name}>
-					<Wrapper>
-						<Description>{description}</Description>
-						<StyledBox>
-							<Switch onClick={handleOnClick} checked={isEnabled} />
-						</StyledBox>
-					</Wrapper>
-				</Widget>
-			</StyledWidget>
+			<ST.StyledWidget>
+				<ST.Wrapper>
+					<ST.Description>{description}</ST.Description>
+					<ST.StyledBox>
+						<ST.StyledSwitch onClick={handleOnClick} checked={isEnabled} />
+					</ST.StyledBox>
+				</ST.Wrapper>
+			</ST.StyledWidget>
 		</>
 	);
 };
+
+export default Switch;
