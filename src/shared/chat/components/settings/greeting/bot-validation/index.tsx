@@ -37,7 +37,7 @@ const BotValidation = () => {
 		<Widget name={t("widgetName")}>
 			<Switch
 				description={t("switchDescription")}
-				value={removeBots}
+				value={!!removeBots}
 				callback={changeHandler}
 			/>
 		</Widget>
