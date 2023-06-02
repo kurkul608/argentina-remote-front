@@ -4,7 +4,7 @@ import { ActivityRoutes } from "shared/chat/router/settings/activity/activity.en
 import { CircularProgress } from "@mui/material";
 
 const ChatActivityPage = lazy(
-	() => import("shared/chat/pages/settings/acticity")
+	() => import("shared/chat/pages/settings/activity")
 );
 
 export const activityRoute: RouteObject = {
