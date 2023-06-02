@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { routeBuilderWithReplace } from "shared/router/services/route-builder";
 import { Tabs } from "@mui/material";
 import { RoutesType } from "shared/router/route.enum";
@@ -36,6 +36,17 @@ const TabMenu = ({ baseRoute, items, id }: ITabMenuProps) => {
 		);
 		navigate(to);
 	};
+
+	useEffect(() => {
+		if (selectedTab < 0 && items.length && id) {
+			const to = routeBuilderWithReplace(
+				[...baseRoute, items[0].route],
+				"chatId",
+				id
+			);
+			navigate(to);
+		}
+	}, [id, pathname]);
 
 	return (
 		<Box
