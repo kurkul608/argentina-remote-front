@@ -24,8 +24,8 @@ const GreetingsPage = () => {
 			name: "System messages",
 		},
 		{
-			route: GreetingRoutes.members,
-			name: "Left Members",
+			route: GreetingRoutes.greetingMessage,
+			name: "Greeting message",
 		},
 		{ route: GreetingRoutes.misc, name: "Misc" },
 	];

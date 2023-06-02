@@ -12,6 +12,9 @@ const BotValidation = lazy(
 const System = lazy(
 	() => import("shared/chat/components/settings/greeting/system")
 );
+const GreetingMessage = lazy(
+	() => import("shared/chat/components/settings/greeting/greeting-message")
+);
 
 export const greetingRoute: RouteObject = {
 	path: GreetingRoutes.greeting,
@@ -38,8 +41,12 @@ export const greetingRoute: RouteObject = {
 			),
 		},
 		{
-			path: GreetingRoutes.members,
-			element: <div>Left</div>,
+			path: GreetingRoutes.greetingMessage,
+			element: (
+				<Suspense fallback={<CircularProgress />}>
+					<GreetingMessage />
+				</Suspense>
+			),
 		},
 		{
 			path: GreetingRoutes.misc,

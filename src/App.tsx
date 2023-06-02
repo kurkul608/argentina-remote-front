@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-// import { ThemeProvider } from "styled-components";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import GlobalStyles from "./global";
-// import { Theme } from "constants/theme";
 import Box from "@mui/material/Box";
 import { CssBaseline, GlobalStyles, PaletteMode } from "@mui/material";
 import { RouterProvider } from "react-router";
@@ -77,12 +76,14 @@ export const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Box sx={{ display: "flex" }}>
-				<CssBaseline />
-				<Resizer />
-				<GlobalStyles styles={globalStyle} />
-				<RouterProvider router={router} />
-			</Box>
+			<LocalizationProvider dateAdapter={AdapterMoment}>
+				<Box sx={{ display: "flex" }}>
+					<CssBaseline />
+					<Resizer />
+					<GlobalStyles styles={globalStyle} />
+					<RouterProvider router={router} />
+				</Box>
+			</LocalizationProvider>
 		</ThemeProvider>
 	);
 };
