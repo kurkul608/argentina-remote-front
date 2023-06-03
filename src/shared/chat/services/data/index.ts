@@ -3,7 +3,6 @@ import { ITableDataInterface } from "interfaces/dto/table-data.interface";
 import { IChatDto } from "shared/chat/types/chat-dto.interface";
 import { ChatAdminsDtoInterface } from "shared/chat/types/chat-settings/chat-admins-dto.interface";
 import { ChatSettingsDtoInterface } from "shared/chat/types/chat-settings/chat-settings.dto.interface";
-import { SystemMessageType } from "shared/chat/constants/settings/greetings/system/system-message";
 
 export interface AllChatsQuery {
 	[key: string]: number | boolean | undefined | string;
@@ -17,20 +16,7 @@ export interface ChatChangeVisibleQuery {
 	isHidden: boolean;
 }
 
-export interface UpdateSettings {
-	remove_bots?: boolean;
-	clear_system_messages?: {
-		clear_all: boolean;
-		message_types: SystemMessageType[];
-	};
-	greeting?: {
-		is_enable: boolean;
-		previous_greetings?: number[];
-		clear_last_message?: boolean;
-		message?: string;
-		clear_time?: string;
-	};
-}
+export type UpdateSettings = Partial<ChatSettingsDtoInterface>;
 
 export const getChatsList = (token: string, query: AllChatsQuery) =>
 	get<ITableDataInterface<IChatDto>>("chats", {

@@ -6,8 +6,12 @@ import { CircularProgress } from "@mui/material";
 const ModerationPage = lazy(
 	() => import("shared/chat/pages/settings/moderation")
 );
+
 const ChatRules = lazy(
 	() => import("shared/chat/components/settings/moderation/chat-rules")
+);
+const MessagesFilters = lazy(
+	() => import("shared/chat/components/settings/moderation/messages-filters")
 );
 
 export const moderationRoute: RouteObject = {
@@ -28,7 +32,11 @@ export const moderationRoute: RouteObject = {
 		},
 		{
 			path: ModerationRoutes.filters,
-			element: <div>Filters</div>,
+			element: (
+				<Suspense fallback={<CircularProgress />}>
+					<MessagesFilters />
+				</Suspense>
+			),
 		},
 	],
 };

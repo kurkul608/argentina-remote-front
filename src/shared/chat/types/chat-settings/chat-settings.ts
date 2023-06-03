@@ -13,5 +13,10 @@ export interface ChatSettings {
 		message?: string;
 		clearTime?: string;
 	};
+	stickerCleaner?: {
+		removeStickers: boolean;
+		removeGif: boolean;
+		removeEmoji: boolean;
+	};
 	_id?: string;
 }

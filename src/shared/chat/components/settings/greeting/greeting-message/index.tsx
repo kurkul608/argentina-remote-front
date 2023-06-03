@@ -48,6 +48,7 @@ const GreetingMessage = () => {
 			message: greeting?.message,
 			clearTime: greeting?.clearTime,
 		},
+		enableReinitialize: true,
 		onSubmit: (values) => {
 			!isLoading &&
 				dispatch(
