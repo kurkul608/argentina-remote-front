@@ -171,10 +171,20 @@
 					"addNewLabel": "Напишите новое запрещенное слово",
 					"addNewButton": "Добавить новое запрещенное слово"
 				}
+			},
+			"members-rights": {
+				"deleteMessagesByChannel": {
+					"title": "Удалять сообщения написанные от имени канала",
+					"description": "Бот будет удалять сообщения отправленные пользователями от лица каналов",
+					"accordionTitle": "Продвинутые настройки",
+					"messageAfterDeleteTitle": "Сообщение после удаления сообщения",
+					"messageAfterDeleteDescription": "Бот отправит сообщение когда удалит сообщение пользователя",
+					"messageAfterDeleteLabel": "Введите текст сообщения"
+				}
 			}
 		}
-		},
-  "options": {
-	"select": "Выберите опции ниже"
-  }
+	},
+	"options": {
+		"select": "Выберите опции ниже"
+	}
 }

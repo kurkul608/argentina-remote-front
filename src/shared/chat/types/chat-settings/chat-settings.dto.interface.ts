@@ -19,6 +19,10 @@ export interface ChatSettingsDtoInterface {
 		remove_gif: boolean;
 		remove_emoji: boolean;
 	};
+	clear_messages_by_channel: {
+		isEnable: boolean;
+		text?: string;
+	};
 	ban_words?: {
 		is_enabled: boolean;
 		dictionary: string[];

@@ -18,6 +18,10 @@ export interface ChatSettings {
 		removeGif: boolean;
 		removeEmoji: boolean;
 	};
+	clearMessagesByChannel?: {
+		isEnable: boolean;
+		text?: string;
+	};
 	banWords?: {
 		isEnabled: boolean;
 		dictionary: string[];
