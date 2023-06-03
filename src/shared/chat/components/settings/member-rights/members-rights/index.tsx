@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TableWidget } from "shared/components/table-widget";
 import Box from "@mui/material/Box";
 import { Widget } from "shared/components/widget";
@@ -17,14 +17,21 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 const selector = (state: IRootState) => ({
+	clearMessagesByChannel:
+		state.chatSettings.chatSettingsReducer.config.clearMessagesByChannel,
 	config: state.chatSettings.chatSettingsReducer.config,
 	token: state.auth.token,
 	isLoading: state.chatSettings.chatSettingsReducer.isLoading,
 });
 
 const RightsMembers = () => {
-	const { config, token, isLoading } = useAppSelector(selector);
+	const { clearMessagesByChannel, token, isLoading, config } =
+		useAppSelector(selector);
 	const dispatch = useAppDispatch();
+	const [initialState, setInitialState] = useState({
+		isEnable: false,
+		text: "",
+	});
 
 	const { t } = useTranslation("translation", {
 		keyPrefix: "settings.moderation.members-rights.deleteMessagesByChannel",
@@ -32,10 +39,7 @@ const RightsMembers = () => {
 
 	const { submitForm, values, handleChange, handleSubmit, errors, touched } =
 		useFormik({
-			initialValues: {
-				isEnable: !!config.clearMessagesByChannel?.isEnable,
-				text: config.clearMessagesByChannel?.text,
-			},
+			initialValues: initialState,
 			enableReinitialize: true,
 			onSubmit: (values) => {
 				!isLoading &&
@@ -58,7 +62,13 @@ const RightsMembers = () => {
 		handleChange(event);
 		submitForm();
 	};
-
+	useEffect(() => {
+		if (clearMessagesByChannel)
+			setInitialState({
+				isEnable: clearMessagesByChannel.isEnable,
+				text: clearMessagesByChannel.text || "",
+			});
+	}, [clearMessagesByChannel]);
 	return (
 		<Box
 			sx={{
@@ -94,7 +104,7 @@ const RightsMembers = () => {
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box>
-								<Typography color={"text.primary"}>
+								<Typography color={"text.secondary"}>
 									{t("messageAfterDeleteDescription")}
 								</Typography>
 								<TextField
@@ -123,6 +133,7 @@ const RightsMembers = () => {
 					</Accordion>
 				</Box>
 			</Widget>
+
 			<TableWidget
 				title={"Users who change the bot settings on the site"}
 				description={
