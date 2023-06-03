@@ -43,6 +43,7 @@ const RightsMembers = () => {
 			enableReinitialize: true,
 			onSubmit: (values) => {
 				!isLoading &&
+					clearMessageByChannel &&
 					dispatch(
 						updateChatSettingsByIdAsync({
 							token: token!,
