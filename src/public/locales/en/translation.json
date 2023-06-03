@@ -150,6 +150,19 @@
 				"clearTimeTitle": "Time of automatic deletion of the welcome message",
 				"clearTimeDescription": "By selecting this field - the bot will delete welcome messages after the selected time"
 			}
+		},
+		"moderation": {
+			"messagesFilters": {
+				"stickerCleaner": {
+					"widgetName": "Sticker filtering",
+					"removeStickerTitle": "Remove stickers",
+					"removeStickerDescription": "If the setting is enabled, the bot will delete all messages with stickers from the chat",
+					"removeStickerGif": "Remove GIF",
+					"removeGifDescription": "If the setting is enabled, the bot will delete all messages with GIFs from chat",
+					"removeStickerEmoji": "Remove custom Emoji",
+					"removeEmojiDescription": "If the setting is enabled, the bot will delete all messages with custom Emoji from chat"
+				}
+			}
 		}
 	},
   "options": {

@@ -14,4 +14,9 @@ export interface ChatSettingsDtoInterface {
 		message?: string;
 		clear_time?: string;
 	};
+	sticker_cleaner?: {
+		remove_stickers: boolean;
+		remove_gif: boolean;
+		remove_emoji: boolean;
+	};
 }

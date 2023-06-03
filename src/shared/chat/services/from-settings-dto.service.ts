@@ -20,5 +20,14 @@ export const fromSettingsDtoService = (
 				},
 		  }
 		: {}),
+	...(dto.sticker_cleaner
+		? {
+				stickerCleaner: {
+					removeEmoji: dto.sticker_cleaner.remove_emoji,
+					removeStickers: dto.sticker_cleaner.remove_stickers,
+					removeGif: dto.sticker_cleaner.remove_gif,
+				},
+		  }
+		: {}),
 	_id: dto._id,
 });
