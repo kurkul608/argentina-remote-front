@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Widget } from "shared/components/widget";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -26,39 +26,31 @@ const StickersCleaner = () => {
 		keyPrefix: "settings.moderation.messagesFilters.stickerCleaner",
 	});
 
-	const { handleSubmit, submitForm, handleChange, setFieldValue, values } =
-		useFormik({
-			initialValues: {
-				removeStickers: !!stickerCleaner?.removeStickers,
-				removeGif: !!stickerCleaner?.removeGif,
-				removeEmoji: !!stickerCleaner?.removeEmoji,
-			},
-			onSubmit: (values) => {
-				!isLoading &&
-					stickerCleaner &&
-					dispatch(
-						updateChatSettingsByIdAsync({
-							token: token!,
-							id: settingsId!,
-							config: {
-								sticker_cleaner: {
-									remove_stickers: values.removeStickers,
-									remove_gif: values.removeGif,
-									remove_emoji: values.removeEmoji,
-								},
+	const { handleSubmit, submitForm, handleChange, values } = useFormik({
+		initialValues: {
+			removeStickers: !!stickerCleaner?.removeStickers,
+			removeGif: !!stickerCleaner?.removeGif,
+			removeEmoji: !!stickerCleaner?.removeEmoji,
+		},
+		enableReinitialize: true,
+		onSubmit: (values) => {
+			!isLoading &&
+				stickerCleaner &&
+				dispatch(
+					updateChatSettingsByIdAsync({
+						token: token!,
+						id: settingsId!,
+						config: {
+							sticker_cleaner: {
+								remove_stickers: values.removeStickers,
+								remove_gif: values.removeGif,
+								remove_emoji: values.removeEmoji,
 							},
-						})
-					);
-			},
-		});
-
-	useEffect(() => {
-		if (stickerCleaner) {
-			setFieldValue("removeStickers", stickerCleaner.removeStickers);
-			setFieldValue("removeGif", stickerCleaner.removeGif);
-			setFieldValue("removeEmoji", stickerCleaner.removeEmoji);
-		}
-	}, [stickerCleaner]);
+						},
+					})
+				);
+		},
+	});
 
 	const switchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		handleChange(event);

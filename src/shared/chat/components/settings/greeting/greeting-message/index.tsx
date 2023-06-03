@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Widget } from "shared/components/widget";
 import Box from "@mui/material/Box";
 import Switch from "shared/components/switch-widget";
@@ -48,6 +48,7 @@ const GreetingMessage = () => {
 			message: greeting?.message,
 			clearTime: greeting?.clearTime,
 		},
+		enableReinitialize: true,
 		onSubmit: (values) => {
 			!isLoading &&
 				dispatch(
@@ -67,16 +68,6 @@ const GreetingMessage = () => {
 				);
 		},
 	});
-
-	useEffect(() => {
-		if (greeting) {
-			setFieldValue("isEnable", greeting.isEnable);
-			setFieldValue("clearLastMessage", greeting.clearLastMessage);
-			setFieldValue("previousGreetings", greeting.previousGreetings);
-			setFieldValue("message", greeting.message);
-			setFieldValue("clearTime", greeting.clearTime);
-		}
-	}, [greeting]);
 
 	const switchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		handleChange(event);
