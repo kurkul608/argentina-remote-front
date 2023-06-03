@@ -9,6 +9,10 @@ export const fromSettingsDtoService = (
 		clearAll: dto.clear_system_messages!.clear_all,
 		messageTypes: dto.clear_system_messages!.message_types,
 	},
+	clearMessagesByChannel: {
+		isEnable: dto.clear_messages_by_channel.isEnable,
+		text: dto.clear_messages_by_channel.text,
+	},
 	...(dto.greeting
 		? {
 				greeting: {

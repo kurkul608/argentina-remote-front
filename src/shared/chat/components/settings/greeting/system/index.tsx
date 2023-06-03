@@ -9,7 +9,7 @@ import {
 } from "shared/chat/constants/settings/greetings/system/system-message";
 import IndeterminateCheckboxWidget, {
 	IOption,
-} from "shared/components/ideterminate-checkbox-widget";
+} from "shared/components/ideterminate-checkbox";
 import { Widget } from "shared/components/widget";
 
 const selector = (state: IRootState) => ({

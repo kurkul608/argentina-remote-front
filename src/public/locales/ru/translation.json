@@ -162,10 +162,20 @@
 					"removeStickerEmoji": "Удалять кастомные Emoji",
 					"removeEmojiDescription": "Если настройка будет включена, то бот будет удалять все сообщения с кастомными Emoji из чата"
 				}
+			},
+			"members-rights": {
+				"deleteMessagesByChannel": {
+					"title": "Удалять сообщения написанные от имени канала",
+					"description": "Бот будет удалять сообщения отправленные пользователями от лица каналов",
+					"accordionTitle": "Продвинутые настройки",
+					"messageAfterDeleteTitle": "Сообщение после удаления сообщения",
+					"messageAfterDeleteDescription": "Бот отправит сообщение когда удалит сообщение пользователя",
+					"messageAfterDeleteLabel": "Введите текст сообщения"
+				}
 			}
 		}
-		},
-  "options": {
-	"select": "Выберите опции ниже"
-  }
+	},
+	"options": {
+		"select": "Выберите опции ниже"
+	}
 }

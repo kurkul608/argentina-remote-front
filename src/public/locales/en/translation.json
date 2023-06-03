@@ -163,6 +163,18 @@
 					"removeEmojiDescription": "If the setting is enabled, the bot will delete all messages with custom Emoji from chat"
 				}
 			}
+		},
+		"moderation": {
+			"members-rights": {
+				"deleteMessagesByChannel": {
+					"title": "Clear messages sent on behalf of a channel",
+					"description": "The bot will delete messages sent by users on behalf of channels",
+					"accordionTitle": "Advanced settings",
+					"messageAfterDeleteTitle": "Message after deleting a message",
+					"messageAfterDeleteDescription": "The bot will send a message after delete the user's message",
+					"messageAfterDeleteLabel": "Enter a custom greeting"
+				}
+			}
 		}
 	},
   "options": {
