@@ -72,6 +72,7 @@ const StickersCleaner = () => {
 						value={values.removeStickers}
 						id="removeStickers"
 						name="removeStickers"
+						disabled={isLoading}
 						onChange={switchChange}
 					/>
 				</Box>
@@ -82,6 +83,7 @@ const StickersCleaner = () => {
 					<Switch
 						description={t("removeGifDescription")}
 						value={values.removeGif}
+						disabled={isLoading}
 						id="removeGif"
 						name="removeGif"
 						onChange={switchChange}
@@ -94,6 +96,7 @@ const StickersCleaner = () => {
 					<Switch
 						description={t("removeEmojiDescription")}
 						value={values.removeEmoji}
+						disabled={isLoading}
 						id="removeEmoji"
 						name="removeEmoji"
 						onChange={switchChange}

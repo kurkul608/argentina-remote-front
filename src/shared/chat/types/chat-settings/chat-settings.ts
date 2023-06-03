@@ -18,5 +18,9 @@ export interface ChatSettings {
 		removeGif: boolean;
 		removeEmoji: boolean;
 	};
+	banWords?: {
+		isEnabled: boolean;
+		dictionary: string[];
+	};
 	_id?: string;
 }
