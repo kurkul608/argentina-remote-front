@@ -161,6 +161,15 @@
 					"removeGifDescription": "If the setting is enabled, the bot will delete all messages with GIFs from chat",
 					"removeStickerEmoji": "Remove custom Emoji",
 					"removeEmojiDescription": "If the setting is enabled, the bot will delete all messages with custom Emoji from chat"
+				},
+				"banWords": {
+					"widgetName": "Ban words",
+					"enableTitle": "Enable filtering by banned words",
+					"enableDescription": "If you enable this feature, the bot will check every message sent by a user for banned words from your dictionary",
+					"banWordsTitle": "Dictionary of banned words",
+					"addNewTitle": "Add a new banned word",
+					"addNewLabel": "Write a new banned word",
+					"addNewButton": "Add a new banned word"
 				}
 			}
 		}

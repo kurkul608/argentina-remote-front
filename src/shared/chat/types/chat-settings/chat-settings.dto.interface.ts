@@ -19,4 +19,8 @@ export interface ChatSettingsDtoInterface {
 		remove_gif: boolean;
 		remove_emoji: boolean;
 	};
+	ban_words?: {
+		is_enabled: boolean;
+		dictionary: string[];
+	};
 }
