@@ -19,13 +19,13 @@ import TextField from "@mui/material/TextField";
 const selector = (state: IRootState) => ({
 	clearMessagesByChannel:
 		state.chatSettings.chatSettingsReducer.config.clearMessagesByChannel,
-	config: state.chatSettings.chatSettingsReducer.config,
+	settingsId: state.chatSettings.chatSettingsReducer.config._id,
 	token: state.auth.token,
 	isLoading: state.chatSettings.chatSettingsReducer.isLoading,
 });
 
 const RightsMembers = () => {
-	const { clearMessagesByChannel, token, isLoading, config } =
+	const { clearMessagesByChannel, token, isLoading, settingsId } =
 		useAppSelector(selector);
 	const dispatch = useAppDispatch();
 	const [initialState, setInitialState] = useState({
@@ -46,7 +46,7 @@ const RightsMembers = () => {
 					dispatch(
 						updateChatSettingsByIdAsync({
 							token: token!,
-							id: config._id!,
+							id: settingsId!,
 							config: {
 								clear_messages_by_channel: {
 									isEnable: values.isEnable,
