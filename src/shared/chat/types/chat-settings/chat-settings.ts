@@ -22,5 +22,9 @@ export interface ChatSettings {
 		isEnable: boolean;
 		text?: string;
 	};
+	banWords?: {
+		isEnabled: boolean;
+		dictionary: string[];
+	};
 	_id?: string;
 }

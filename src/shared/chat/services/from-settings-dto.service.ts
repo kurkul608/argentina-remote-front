@@ -33,5 +33,13 @@ export const fromSettingsDtoService = (
 				},
 		  }
 		: {}),
+	...(dto.ban_words
+		? {
+				banWords: {
+					dictionary: dto.ban_words.dictionary,
+					isEnabled: dto.ban_words.is_enabled,
+				},
+		  }
+		: {}),
 	_id: dto._id,
 });
