@@ -1,8 +1,7 @@
 import React from "react";
 import { IContentProps, TableWidget } from "shared/components/table-widget";
 import Switch from "shared/components/switch-widget";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { updateToggleFiled } from "shared/chat/redux/chat-settings/chat-settings.slice";
+import { useAppSelector } from "redux/hooks";
 import { IRootState } from "redux/store";
 import { ChatMemberAdministrator } from "typegram";
 import Box from "@mui/material/Box";
@@ -15,15 +14,6 @@ const selector = (state: IRootState) => ({
 
 const RightsAdmin = () => {
 	const { userRights } = useAppSelector(selector);
-	const dispatch = useAppDispatch();
-	const callBack = (value: boolean) => {
-		dispatch(
-			updateToggleFiled({
-				field: "userRights.allowChatAdminCallCommands",
-				value,
-			})
-		);
-	};
 
 	const adminChat: IContentProps[] = userRights.adminList.map((user) => {
 		const misc: { [index: string]: boolean } = {};
@@ -60,7 +50,7 @@ const RightsAdmin = () => {
 			<Switch
 				description={"Allow chat admins to call bot commands"}
 				value={userRights.allowChatAdminCallCommands}
-				callback={callBack}
+				// callback={callBack}
 			/>
 		</Box>
 	);
