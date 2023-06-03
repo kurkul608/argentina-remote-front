@@ -10,6 +10,7 @@ const MembersRights = lazy(
 const RightsAdmin = lazy(
 	() => import("shared/chat/components/settings/member-rights/admin-rights")
 );
+
 const RightsMembers = lazy(
 	() => import("shared/chat/components/settings/member-rights/members-rights")
 );

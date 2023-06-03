@@ -150,7 +150,20 @@
 				"clearTimeTitle": "Время автоматического удаления приветственного сообщения",
 				"clearTimeDescription": "Вы можете установить время, через которое бот будет удалять приветственные сообщения"
 			}
+			},
+		"moderation": {
+			"messagesFilters": {
+				"stickerCleaner": {
+					"widgetName": "Фильтрация стикеров",
+					"removeStickerTitle": "Удалять стикеры",
+					"removeStickerDescription": "Если настройка будет включена, то бот будет удалять все сообщения со стикерами из чата",
+					"removeStickerGif": "Удалять GIF",
+					"removeGifDescription": "Если настройка будет включена, то бот будет удалять все сообщения с GIF из чата",
+					"removeStickerEmoji": "Удалять кастомные Emoji",
+					"removeEmojiDescription": "Если настройка будет включена, то бот будет удалять все сообщения с кастомными Emoji из чата"
+				}
 			}
+		}
 		},
   "options": {
 	"select": "Выберите опции ниже"

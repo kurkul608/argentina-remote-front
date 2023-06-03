@@ -23,15 +23,15 @@ const ModerationPage = () => {
 
 	const tabConfig: ITabMenu[] = [
 		{ route: ModerationRoutes.rules, name: "Rules" },
-		{ route: ModerationRoutes.filters, name: "Filters" },
-		{ route: ModerationRoutes.report, name: "Report" },
-		{ route: ModerationRoutes.newcomers, name: "Newcomers" },
-		{ route: ModerationRoutes.commands, name: "Commands" },
-		{
-			route: ModerationRoutes.warning,
-			name: "Warning System",
-		},
-		{ route: ModerationRoutes.extra, name: "Extra" },
+		{ route: ModerationRoutes.filters, name: "Messages Filters" },
+		// { route: ModerationRoutes.report, name: "Report" },
+		// { route: ModerationRoutes.newcomers, name: "Newcomers" },
+		// { route: ModerationRoutes.commands, name: "Commands" },
+		// {
+		// 	route: ModerationRoutes.warning,
+		// 	name: "Warning System",
+		// },
+		// { route: ModerationRoutes.extra, name: "Extra" },
 	];
 
 	useEffect(() => {

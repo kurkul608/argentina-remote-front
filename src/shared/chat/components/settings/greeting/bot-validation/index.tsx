@@ -18,6 +18,7 @@ const BotValidation = () => {
 	});
 
 	const { removeBots, settingsId, isLoading, token } = useAppSelector(selector);
+
 	const dispatch = useAppDispatch();
 
 	const changeHandler = () => {
