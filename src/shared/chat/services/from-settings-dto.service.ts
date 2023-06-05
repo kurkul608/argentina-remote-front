@@ -13,6 +13,11 @@ export const fromSettingsDtoService = (
 		isEnable: dto.clear_messages_by_channel.isEnable,
 		text: dto.clear_messages_by_channel.text,
 	},
+	messageCharacterLimit: {
+		isEnable: dto.message_character_limit.is_enable,
+		characterLimit: dto.message_character_limit.character_limit,
+		message: dto.message_character_limit.message,
+	},
 	...(dto.greeting
 		? {
 				greeting: {

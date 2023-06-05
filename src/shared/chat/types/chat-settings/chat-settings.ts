@@ -18,6 +18,11 @@ export interface ChatSettings {
 		removeGif: boolean;
 		removeEmoji: boolean;
 	};
+	messageCharacterLimit?: {
+		isEnable: boolean;
+		characterLimit?: number;
+		message?: string;
+	};
 	clearMessagesByChannel?: {
 		isEnable: boolean;
 		text?: string;

@@ -23,6 +23,11 @@ export interface ChatSettingsDtoInterface {
 		isEnable: boolean;
 		text?: string;
 	};
+	message_character_limit: {
+		is_enable: boolean;
+		character_limit?: number;
+		message?: string;
+	};
 	ban_words?: {
 		is_enabled: boolean;
 		dictionary: string[];
