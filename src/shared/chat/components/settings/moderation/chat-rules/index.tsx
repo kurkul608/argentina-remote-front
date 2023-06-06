@@ -100,6 +100,7 @@ const ChatRules = () => {
 							description={t("widgetDescription")}
 							value={!!values.isEnable}
 							onChange={switchChange}
+							disabled={isLoading}
 						/>
 						<Accordion>
 							<AccordionSummary
@@ -148,6 +149,7 @@ const ChatRules = () => {
 									type={"submit"}
 									fullWidth
 									sx={{ marginTop: 1 }}
+									disabled={isLoading}
 								>
 									Save
 								</Button>
