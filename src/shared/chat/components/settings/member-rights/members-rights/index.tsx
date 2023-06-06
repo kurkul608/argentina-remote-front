@@ -34,7 +34,7 @@ const RightsMembers = () => {
 	});
 
 	const { t } = useTranslation("translation", {
-		keyPrefix: "settings.moderation.members-rights.deleteMessagesByChannel",
+		keyPrefix: "settings.members-rights.members.deleteMessagesByChannel",
 	});
 
 	const { submitForm, values, handleChange, handleSubmit, errors, touched } =
