@@ -133,7 +133,6 @@ export const chatSettingsSlice = createSlice({
 			}
 		);
 		builder.addCase(updateChatSettingsByIdAsync.pending, (state) => {
-			state.config = {};
 			state.isLoading = true;
 		});
 		builder.addCase(updateChatSettingsByIdAsync.rejected, (state) => {
