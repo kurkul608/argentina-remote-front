@@ -14,6 +14,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useTranslation } from "react-i18next";
+import { boolean, number, object, string } from "yup";
 
 const selector = (state: IRootState) => ({
 	messageCharacterLimit:
@@ -27,6 +28,13 @@ const ChatRules = () => {
 	const { t } = useTranslation("translation", {
 		keyPrefix: "settings.moderation.rules.messageLengthLimit",
 	});
+
+	const messageLengthLimitSchema = object({
+		isEnable: boolean().required(),
+		characterLimit: number().positive().integer(),
+		message: string(),
+	});
+
 	const { messageCharacterLimit, token, isLoading, settingsId } =
 		useAppSelector(selector);
 	const dispatch = useAppDispatch();
@@ -38,6 +46,7 @@ const ChatRules = () => {
 				characterLimit: messageCharacterLimit?.characterLimit,
 				message: messageCharacterLimit?.message,
 			},
+			validationSchema: messageLengthLimitSchema,
 			enableReinitialize: true,
 			onSubmit: (values) => {
 				!isLoading &&
@@ -99,9 +108,13 @@ const ChatRules = () => {
 										id="characterLimit"
 										name="characterLimit"
 										onChange={handleChange}
-										inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+										inputProps={{
+											inputMode: "numeric",
+											pattern: "[0-9]*",
+											min: 1,
+										}}
 										value={values.characterLimit}
-										helperText={touched.message && errors.message}
+										helperText={touched.characterLimit && errors.characterLimit}
 										fullWidth
 										InputLabelProps={{ shrink: true }}
 										label={t("limitSymbolsLabel")}
