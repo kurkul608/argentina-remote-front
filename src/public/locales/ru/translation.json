@@ -114,6 +114,18 @@
 		}
 	},
 	"settings": {
+		"members-rights": {
+			"members": {
+				"deleteMessagesByChannel": {
+					"title": "Удалять сообщения написанные от имени канала",
+					"description": "Бот будет удалять сообщения отправленные пользователями от лица каналов",
+					"accordionTitle": "Продвинутые настройки",
+					"messageAfterDeleteTitle": "Сообщение после удаления сообщения",
+					"messageAfterDeleteDescription": "Бот отправит сообщение когда удалит сообщение пользователя",
+					"messageAfterDeleteLabel": "Введите текст сообщения"
+				}
+			}
+		},
 		"greetings": {
 			"systemMessages": {
 				"clearSystemMessage": {
@@ -172,14 +184,13 @@
 					"addNewButton": "Добавить новое запрещенное слово"
 				}
 			},
-			"members-rights": {
-				"deleteMessagesByChannel": {
-					"title": "Удалять сообщения написанные от имени канала",
-					"description": "Бот будет удалять сообщения отправленные пользователями от лица каналов",
-					"accordionTitle": "Продвинутые настройки",
-					"messageAfterDeleteTitle": "Сообщение после удаления сообщения",
-					"messageAfterDeleteDescription": "Бот отправит сообщение когда удалит сообщение пользователя",
-					"messageAfterDeleteLabel": "Введите текст сообщения"
+			"rules": {
+				"messageLengthLimit": {
+					"widgetName": "Ограничить длину сообщения",
+					"widgetDescription": "Бот будет удалять сообщения больше указанной длинны в символах",
+					"accordionTitle": "Дополнительные настройки",
+					"limitSymbolsLabel": "Введите лимит",
+					"messageLabel": "Введите сообщение"
 				}
 			}
 		}

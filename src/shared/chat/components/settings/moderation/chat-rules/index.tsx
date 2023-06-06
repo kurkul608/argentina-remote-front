@@ -13,6 +13,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
+import { useTranslation } from "react-i18next";
 
 const selector = (state: IRootState) => ({
 	messageCharacterLimit:
@@ -23,6 +24,9 @@ const selector = (state: IRootState) => ({
 });
 
 const ChatRules = () => {
+	const { t } = useTranslation("translation", {
+		keyPrefix: "settings.moderation.rules.messageLengthLimit",
+	});
 	const { messageCharacterLimit, token, isLoading, settingsId } =
 		useAppSelector(selector);
 	const dispatch = useAppDispatch();
@@ -58,7 +62,6 @@ const ChatRules = () => {
 		handleChange(event);
 		submitForm();
 	};
-
 	return (
 		<Box
 			sx={{
@@ -68,18 +71,17 @@ const ChatRules = () => {
 				gap: "20px",
 			}}
 		>
-			<Widget>
+			<Widget name={t("widgetName")}>
 				<Box
 					component={"form"}
 					sx={{ display: "flex", flexDirection: "column", gap: 2 }}
 					onSubmit={handleSubmit}
 				>
 					<Box>
-						<Typography>Title</Typography>
 						<Switch
 							id="isEnable"
 							name="isEnable"
-							description={"Allow chat admins to call bot commands"}
+							description={t("widgetDescription")}
 							value={!!values.isEnable}
 							onChange={switchChange}
 						/>
@@ -89,7 +91,7 @@ const ChatRules = () => {
 								aria-controls="panel1a-content"
 								id="panel1a-header"
 							>
-								<Typography>{"фыв"}</Typography>
+								<Typography>{t("accordionTitle")}</Typography>
 							</AccordionSummary>
 							<AccordionDetails>
 								<Box sx={{ display: "flex", gap: 1 }}>
@@ -102,7 +104,7 @@ const ChatRules = () => {
 										helperText={touched.message && errors.message}
 										fullWidth
 										InputLabelProps={{ shrink: true }}
-										label={"symbols"}
+										label={t("limitSymbolsLabel")}
 										type="number"
 									/>
 									<TextField
@@ -113,7 +115,7 @@ const ChatRules = () => {
 										helperText={touched.message && errors.message}
 										fullWidth
 										InputLabelProps={{ shrink: true }}
-										label={"message"}
+										label={t("messageLabel")}
 									/>
 								</Box>
 								<Button
