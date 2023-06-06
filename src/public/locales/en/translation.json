@@ -162,6 +162,14 @@
 					"removeStickerEmoji": "Remove custom Emoji",
 					"removeEmojiDescription": "If the setting is enabled, the bot will delete all messages with custom Emoji from chat"
 				},
+				"deleteMessagesByChannel": {
+					"title": "Clear messages sent on behalf of a channel",
+					"description": "The bot will delete messages sent by users on behalf of channels",
+					"accordionTitle": "Advanced settings",
+					"messageAfterDeleteTitle": "Message after deleting a message",
+					"messageAfterDeleteDescription": "The bot will send a message after delete the user's message",
+					"messageAfterDeleteLabel": "Enter a custom greeting"
+				},
 				"banWords": {
 					"widgetName": "Ban words",
 					"enableTitle": "Enable filtering by banned words",
@@ -170,18 +178,6 @@
 					"addNewTitle": "Add a new banned word",
 					"addNewLabel": "Write a new banned word",
 					"addNewButton": "Add a new banned word"
-				}
-			}
-		},
-		"moderation": {
-			"members-rights": {
-				"deleteMessagesByChannel": {
-					"title": "Clear messages sent on behalf of a channel",
-					"description": "The bot will delete messages sent by users on behalf of channels",
-					"accordionTitle": "Advanced settings",
-					"messageAfterDeleteTitle": "Message after deleting a message",
-					"messageAfterDeleteDescription": "The bot will send a message after delete the user's message",
-					"messageAfterDeleteLabel": "Enter a custom greeting"
 				}
 			}
 		}
