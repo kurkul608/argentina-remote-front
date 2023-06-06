@@ -112,11 +112,12 @@ const ChatRules = () => {
 											inputMode: "numeric",
 											pattern: "[0-9]*",
 											min: 1,
+											max: 4094,
 										}}
 										value={values.characterLimit}
 										helperText={touched.characterLimit && errors.characterLimit}
 										fullWidth
-										InputLabelProps={{ shrink: true }}
+										InputLabelProps={{ shrink: !!values.characterLimit }}
 										label={t("limitSymbolsLabel")}
 										type="number"
 									/>
@@ -127,7 +128,7 @@ const ChatRules = () => {
 										value={values.message}
 										helperText={touched.message && errors.message}
 										fullWidth
-										InputLabelProps={{ shrink: true }}
+										InputLabelProps={{ shrink: !!values.message }}
 										label={t("messageLabel")}
 									/>
 								</Box>
