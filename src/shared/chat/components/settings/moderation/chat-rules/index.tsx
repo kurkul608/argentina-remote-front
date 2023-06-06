@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useTranslation } from "react-i18next";
 import { boolean, number, object, string } from "yup";
+import { MessageLimit } from "shared/chat/constants/message-limit";
 
 const selector = (state: IRootState) => ({
 	messageCharacterLimit:
@@ -120,7 +121,7 @@ const ChatRules = () => {
 											inputMode: "numeric",
 											pattern: "[0-9]*",
 											min: 1,
-											max: 4094,
+											max: MessageLimit,
 										}}
 										value={values.characterLimit}
 										helperText={touched.characterLimit && errors.characterLimit}
