@@ -39,33 +39,40 @@ const ChatRules = () => {
 		useAppSelector(selector);
 	const dispatch = useAppDispatch();
 
-	const { submitForm, values, handleChange, handleSubmit, errors, touched } =
-		useFormik({
-			initialValues: {
-				isEnable: messageCharacterLimit?.isEnable,
-				characterLimit: messageCharacterLimit?.characterLimit,
-				message: messageCharacterLimit?.message,
-			},
-			validationSchema: messageLengthLimitSchema,
-			enableReinitialize: true,
-			onSubmit: (values) => {
-				!isLoading &&
-					messageCharacterLimit &&
-					dispatch(
-						updateChatSettingsByIdAsync({
-							token: token!,
-							id: settingsId!,
-							config: {
-								message_character_limit: {
-									is_enable: !!values.isEnable,
-									character_limit: values.characterLimit,
-									message: values.message,
-								},
+	const {
+		submitForm,
+		values,
+		handleChange,
+		handleSubmit,
+		errors,
+		touched,
+		handleBlur,
+	} = useFormik({
+		initialValues: {
+			isEnable: messageCharacterLimit?.isEnable,
+			characterLimit: messageCharacterLimit?.characterLimit,
+			message: messageCharacterLimit?.message,
+		},
+		validationSchema: messageLengthLimitSchema,
+		enableReinitialize: true,
+		onSubmit: (values) => {
+			!isLoading &&
+				messageCharacterLimit &&
+				dispatch(
+					updateChatSettingsByIdAsync({
+						token: token!,
+						id: settingsId!,
+						config: {
+							message_character_limit: {
+								is_enable: !!values.isEnable,
+								character_limit: values.characterLimit,
+								message: values.message,
 							},
-						})
-					);
-			},
-		});
+						},
+					})
+				);
+		},
+	});
 
 	const switchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		handleChange(event);
@@ -117,7 +124,10 @@ const ChatRules = () => {
 										value={values.characterLimit}
 										helperText={touched.characterLimit && errors.characterLimit}
 										fullWidth
-										InputLabelProps={{ shrink: !!values.characterLimit }}
+										onBlur={handleBlur}
+										InputLabelProps={{
+											shrink: !!values.characterLimit,
+										}}
 										label={t("limitSymbolsLabel")}
 										type="number"
 									/>
